@@ -1,0 +1,208 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "GET - Services",
+    "version": "1.0.0",
+    "description": "API to fetch detailed information about the services integrated with Zoho CommandCenter."
+  },
+  "servers": [
+    {
+      "url": "https://commandcenter.zoho.com"
+    }
+  ],
+  "security": [
+    {
+      "iam-oauth2-schema": [
+        "ZohoCommandCenter.settings.service_orgs.READ"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "Service Orgs",
+      "description": "APIs to retrieve service organization configurations."
+    }
+  ],
+  "paths": {
+    "/commandcenter/v1/settings/service_orgs": {
+      "get": {
+        "tags": [
+          "Service Orgs"
+        ],
+        "summary": "Fetch integrated service organizations",
+        "description": "Returns detailed information about services integrated with CommandCenter.",
+        "operationId": "getServiceOrgs",
+        "parameters": [
+          {
+            "name": "X-CC-ORG",
+            "in": "header",
+            "description": "Org ID of Zoho CommandCenter",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ServiceOrgsSuccessResponse"
+          },
+          "204": {
+            "description": "No content"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuthenticatedUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "User name"
+          },
+          "created_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the user was created"
+          },
+          "role": {
+            "type": "string",
+            "description": "Role of the user"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "created_time",
+          "role"
+        ]
+      },
+      "AuthenticatedBy": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User ID who authenticated"
+          },
+          "name": {
+            "type": "string",
+            "description": "User name who authenticated"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "ServiceOrg": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "org_id": {
+            "type": "string"
+          },
+          "org_name": {
+            "type": "string"
+          },
+          "service": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "authenticated_by": {
+            "$ref": "#/components/schemas/AuthenticatedBy"
+          },
+          "authenticated_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publisher_id": {
+            "type": "string"
+          },
+          "authenticatable_users_info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthenticatedUser"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "org_id",
+          "org_name",
+          "service",
+          "status",
+          "authenticated_by",
+          "authenticated_time",
+          "publisher_id",
+          "authenticatable_users_info"
+        ]
+      },
+      "ServiceOrgsResponse": {
+        "type": "object",
+        "properties": {
+          "service_orgs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceOrg"
+            }
+          }
+        },
+        "required": [
+          "service_orgs"
+        ]
+      }
+    },
+    "responses": {
+      "ServiceOrgsSuccessResponse": {
+        "description": "Successful response with service orgs",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ServiceOrgsResponse"
+            },
+            "examples": {
+              "success": {
+                "value": {
+                  "service_orgs": [
+                    {
+                      "id": "15686000000008835",
+                      "org_id": "107231628",
+                      "org_name": "test1",
+                      "service": "ZohoCRM",
+                      "status": "ENABLED",
+                      "authenticated_by": {
+                        "id": "15686000000005001",
+                        "name": "MargaretA"
+                      },
+                      "authenticated_time": "2025-07-01T07:08:40+00:00",
+                      "publisher_id": "22952000000025153",
+                      "authenticatable_users_info": [
+                        {
+                          "id": "15686000000005001",
+                          "name": "MargaretA",
+                          "created_time": "2025-07-01T06:52:26+00:00",
+                          "role": "Administrator"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
