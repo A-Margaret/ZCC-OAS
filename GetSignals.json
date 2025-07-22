@@ -1,0 +1,201 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "GET - Signals API",
+    "version": "1.0.0",
+    "description": "Fetches the list of configured signals from the Command Center settings."
+  },
+  "paths": {
+    "/commandcenter/v1/settings/signals": {
+      "get": {
+        "summary": "Get all signals",
+        "description": "Retrieves all configured signals for the given service org.",
+        "operationId": "getSignals",
+        "parameters": [
+          {
+            "name": "service_org_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the service organization."
+          },
+          {
+          "name": "X-CC-ORG",
+          "in": "header",
+          "description": "Org ID of Zoho CommandCenter",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response containing signal list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignalsResponse"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "signals": [
+                        {
+                          "api_name": "mail_sent",
+                          "display_name": "Outgoing mail sent",
+                          "signal_condition": true,
+                          "service_org": {
+                            "id": "1000000029503",
+                            "name": "Untitled"
+                          },
+                          "signal_props": [
+                            {
+                              "required": true,
+                              "api_name": "module",
+                              "display_name": "module",
+                              "parent_prop": "null",
+                              "data_type": "object"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Missing or invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - Authentication failed"
+          }
+        },
+        "tags": [
+          "Signals"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SignalsResponse": {
+        "type": "object",
+        "properties": {
+          "signals": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "api_name": {
+                  "type": "string",
+                  "description": "Technical identifier for the signal."
+                },
+                "display_name": {
+                  "type": "string",
+                  "description": "Name displayed for the signal."
+                },
+                "signal_condition": {
+                  "type": "boolean",
+                  "description": "Whether the signal uses condition-based logic."
+                },
+                "service_org": {
+                  "$ref": "#/components/schemas/ServiceOrg"
+                },
+                "signal_props": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SignalProp"
+                  }
+                }
+              },
+              "required": [
+                "api_name",
+                "display_name",
+                "signal_condition",
+                "service_org",
+                "signal_props"
+              ]
+            }
+          }
+        },
+        "required": [
+          "signals"
+        ]
+      },
+      "ServiceOrg": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the service organization."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the service organization."
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "SignalProp": {
+        "type": "object",
+        "properties": {
+          "required": {
+            "type": "boolean",
+            "description": "Whether this signal property must be provided."
+          },
+          "api_name": {
+            "type": "string",
+            "description": "Technical name used internally to reference this property."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Human-readable label for this property."
+          },
+          "parent_prop": {
+            "type": "string",
+            "nullable": true,
+            "description": "Parent property this is dependent on, if any."
+          },
+          "data_type": {
+            "type": "string",
+            "description": "Type of value expected (e.g., object, array).",
+            "enum": [
+              "object",
+              "array",
+              "string",
+              "number",
+              "boolean"
+            ]
+          }
+        },
+        "required": [
+          "required",
+          "api_name",
+          "display_name",
+          "data_type"
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "iam-oauth2-schema": [
+        "ZohoCommandCenter.settings.signals.READ"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "Signals",
+      "description": "APIs related to signal configuration and metadata."
+    }
+  ]
+}
