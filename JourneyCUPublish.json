@@ -45,6 +45,32 @@
           }
         }
       }
+    },
+    "/commandcenter/v1/journeys/{journey_id}": {
+      "put": {
+        "summary": "Update a journey by ID",
+        "description": "Updates properties of a specific journey such as name, description, chart data, goal, and deadlines.",
+        "operationId": "updateJourney",
+        "tags": [
+          "Journeys"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateJourneyPayload"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/UpdateJourneyErrorResponse"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -66,11 +92,11 @@
       "JourneyId": {
         "name": "journey_id",
         "in": "path",
+        "description": "The unique identifier of the journey to update.",
         "required": true,
         "schema": {
           "type": "string"
-        },
-        "description": "Unique identifier of the journey"
+        }
       }
     },
     "responses": {
@@ -130,6 +156,38 @@
                 },
                 {
                   "$ref": "#/components/schemas/NotAllowedError"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "UpdateJourneyErrorResponse": {
+        "description": "One of the error responses for updating a journey",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/InvalidDataListError"
+                },
+                {
+                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                },
+                {
+                  "$ref": "#/components/schemas/DuplicateDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "#/components/schemas/NotAllowedError"
+                },
+                {
+                  "$ref": "#/components/schemas/DependentFieldMissingError"
                 }
               ]
             }
@@ -503,33 +561,65 @@
           "status": "error"
         }
       },
-      "CreateJourneyPayload": {
+      "DependentFieldMissingError": {
         "type": "object",
+        "required": [
+          "journeys"
+        ],
         "properties": {
           "journeys": {
             "type": "array",
             "items": {
               "type": "object",
               "required": [
-                "name"
+                "code",
+                "message",
+                "details",
+                "status"
               ],
               "properties": {
-                "name": {
+                "code": {
                   "type": "string",
-                  "description": "The name of the journey"
+                  "enum": [
+                    "DEPENDENT_FIELD_MISSING"
+                  ],
+                  "description": "Error code indicating a required dependent field is missing."
                 },
-                "description": {
+                "message": {
                   "type": "string",
-                  "description": "A short description of the journey"
+                  "description": "Error message indicating what is missing."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/DependentFieldMissingDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "Error status."
                 }
               }
-            },
-            "description": "List of journey-level responses or results."
+            }
           }
         },
-        "required": [
-          "journeys"
-        ]
+        "example": {
+          "journeys": [
+            {
+              "code": "DEPENDENT_FIELD_MISSING",
+              "details": {
+                "dependee": {
+                  "api_name": "stages",
+                  "json_path": "goal.details"
+                },
+                "api_name": "type",
+                "json_path": "$.journeys[0].goal.type"
+              },
+              "message": "The dependent field is missing from the request.",
+              "status": "error"
+            }
+          ]
+        }
       },
       "CommonErrorDetails": {
         "type": "object",
@@ -593,6 +683,370 @@
             "description": "Unique ID of the created or affected resource."
           }
         }
+      },
+      "DependentFieldMissingDetails": {
+        "type": "object",
+        "required": [
+          "api_name",
+          "json_path",
+          "dependee"
+        ],
+        "properties": {
+          "api_name": {
+            "type": "string",
+            "description": "The field with dependency."
+          },
+          "json_path": {
+            "type": "string",
+            "description": "JSON path to the dependent field."
+          },
+          "dependee": {
+            "type": "object",
+            "required": [
+              "api_name",
+              "json_path"
+            ],
+            "properties": {
+              "api_name": {
+                "type": "string",
+                "description": "The missing dependent field name."
+              },
+              "json_path": {
+                "type": "string",
+                "description": "JSON path of the missing field."
+              }
+            }
+          }
+        }
+      },
+      "JourneyGoal": {
+        "type": "object",
+        "description": "Goal configuration for the journey",
+        "required": [
+          "type",
+          "details"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of goal (e.g., reach, time_taken)",
+            "enum": [
+              "time_taken",
+              "reach",
+              "path"
+            ]
+          },
+          "details": {
+            "oneOf": [
+              {
+                "title": "GoalDetailsReach",
+                "description": "Details for reach goal",
+                "$ref": "#/components/schemas/GoalDetailsReach"
+              },
+              {
+                "title": "GoalDetailsTimeTaken",
+                "description": "Details for time_taken goal",
+                "$ref": "#/components/schemas/GoalDetailsTimeTaken"
+              },
+              {
+                "title": "GoalDetailsPath",
+                "description": "Details for path goal",
+                "$ref": "#/components/schemas/GoalDetailsPath"
+              }
+            ]
+          }
+        },
+        "oneOf": [
+          {
+            "title": "GoalReach",
+            "description": "Reach a specific stage",
+            "required": [
+              "type",
+              "details"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "reach"
+                ],
+                "description": "Must be 'reach'"
+              },
+              "details": {
+                "$ref": "#/components/schemas/GoalDetailsReach"
+              }
+            }
+          },
+          {
+            "title": "GoalTimeTaken",
+            "description": "Reach stage within time",
+            "required": [
+              "type",
+              "details"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "time_taken"
+                ],
+                "description": "Must be 'time_taken'"
+              },
+              "details": {
+                "$ref": "#/components/schemas/GoalDetailsTimeTaken"
+              }
+            }
+          },
+          {
+            "title": "GoalPath",
+            "description": "Reach stages in specific order",
+            "required": [
+              "type",
+              "details"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "path"
+                ],
+                "description": "Must be 'path'"
+              },
+              "details": {
+                "$ref": "#/components/schemas/GoalDetailsPath"
+              }
+            }
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "reach": "#/components/schemas/GoalDetailsReach",
+            "time_taken": "#/components/schemas/GoalDetailsTimeTaken",
+            "path": "#/components/schemas/GoalDetailsPath"
+          }
+        }
+      },
+      "DeadlineAction": {
+        "type": "object",
+        "description": "Action triggered at deadline",
+        "required": [
+          "action",
+          "id",
+          "details"
+        ],
+        "properties": {
+          "action": {
+            "type": "string",
+            "description": "Action type",
+            "enum": [
+              "move_to_stage"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "Action identifier"
+          },
+          "details": {
+            "$ref": "#/components/schemas/DeadlineActionDetailsMoveToStage"
+          }
+        }
+      },
+      "JourneyDeadline": {
+        "type": "object",
+        "description": "Deadline configuration for the journey",
+        "required": [
+          "execute_on",
+          "stage",
+          "actions"
+        ],
+        "properties": {
+          "execute_on": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/StageReference"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeadlineAction"
+            }
+          }
+        }
+      },
+      "GoalDetailsReach": {
+        "type": "object",
+        "properties": {
+          "stages": {
+            "$ref": "#/components/schemas/StageArray"
+          }
+        },
+        "required": [
+          "stages"
+        ]
+      },
+      "GoalDetailsTimeTaken": {
+        "type": "object",
+        "required": [
+          "reach_within",
+          "stages"
+        ],
+        "properties": {
+          "reach_within": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "stages": {
+            "$ref": "#/components/schemas/StageArray"
+          }
+        }
+      },
+      "GoalDetailsPath": {
+        "type": "object",
+        "properties": {
+          "stages": {
+            "$ref": "#/components/schemas/StageArray"
+          }
+        },
+        "required": [
+          "stages"
+        ]
+      },
+      "DeadlineActionDetailsMoveToStage": {
+        "type": "object",
+        "required": [
+          "stage"
+        ],
+        "properties": {
+          "stage": {
+            "$ref": "#/components/schemas/StageReference"
+          }
+        }
+      },
+      "DeadlineExecuteOn": {
+        "type": "object",
+        "required": [
+          "period",
+          "time_unit"
+        ],
+        "properties": {
+          "period": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Period after which deadline is triggered"
+          },
+          "time_unit": {
+            "type": "string",
+            "enum": [
+              "minutes",
+              "hours",
+              "days",
+              "weeks"
+            ],
+            "description": "Unit of time for the period"
+          }
+        }
+      },
+      "StageReference": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the stage"
+          }
+        }
+      },
+      "StageArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/StageReference"
+        },
+        "description": "Array of stage references"
+      },
+      "TimePeriod": {
+        "type": "object",
+        "required": [
+          "period",
+          "time_unit"
+        ],
+        "properties": {
+          "period": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Numeric value of the time period"
+          },
+          "time_unit": {
+            "type": "string",
+            "enum": [
+              "minutes",
+              "hours",
+              "days",
+              "weeks"
+            ],
+            "description": "Unit for the period (e.g., days, hours)"
+          }
+        }
+      },
+      "CreateJourneyPayload": {
+        "type": "object",
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the journey"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A short description of the journey"
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "required": [
+          "journeys"
+        ]
+      },
+      "UpdateJourneyPayload": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the journey"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Brief description of the journey"
+                },
+                "goal": {
+                  "$ref": "#/components/schemas/JourneyGoal"
+                },
+                "deadline": {
+                  "$ref": "#/components/schemas/JourneyDeadline"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "requestBodies": {
@@ -608,6 +1062,55 @@
                 {
                   "name": "JJ1",
                   "description": "A valid one"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "UpdateJourneyPayload": {
+        "description": "Payload to update an existing journey",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateJourneyPayload"
+            },
+            "example": {
+              "journeys": [
+                {
+                  "name": "A Journey",
+                  "description": "a brief one",
+                  "deadline": {
+                    "execute_on": {
+                      "period": 5,
+                      "time_unit": "days"
+                    },
+                    "stage": {
+                      "id": "null"
+                    },
+                    "actions": [
+                      {
+                        "action": "move_to_stage",
+                        "id": "1000000024660",
+                        "details": {
+                          "stage": {
+                            "id": "1000000024640"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "goal": {
+                    "type": "reach",
+                    "details": {
+                      "stages": [
+                        {
+                          "id": "1000000024640"
+                        }
+                      ]
+                    }
+                  }
                 }
               ]
             }
