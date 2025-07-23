@@ -4,20 +4,27 @@
     "title": "Combined Journey API",
     "version": "1.0.0"
   },
+  "security": [
+    {
+      "OAuth2": [
+        "ZohoCommandCenter.journeys.ALL"
+      ]
+    }
+  ],
   "paths": {
     "/journeys": {
       "post": {
         "summary": "Create a journey",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateJourneyPayload"
+        },
         "responses": {
           "201": {
             "$ref": "#/components/responses/SuccessResponse"
           },
           "400": {
-            "$ref": "#/components/responses/ErrorResponse"
+            "$ref": "#/components/responses/CreateJourneyErrorResponse"
           }
-        },
-        "requestBody": {
-          "$ref": "#/components/requestBodies/CreateJourneyPayload"
         }
       }
     },
@@ -26,12 +33,7 @@
         "summary": "Publish a journey",
         "parameters": [
           {
-            "name": "journey_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/JourneyId"
           }
         ],
         "responses": {
@@ -39,26 +41,41 @@
             "$ref": "#/components/responses/SuccessResponse"
           },
           "400": {
-            "$ref": "#/components/responses/ErrorResponse"
+            "$ref": "#/components/responses/PublishJourneyErrorResponse"
           }
         }
       }
     }
   },
   "components": {
-    "responses": {
-      "ErrorResponse": {
-        "description": "ErrorResponse response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/ErrorResponse"
+    "securitySchemes": {
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://accounts.zoho.com/oauth/v2/auth",
+            "tokenUrl": "https://accounts.zoho.com/oauth/v2/token",
+            "scopes": {
+              "ZohoCommandCenter.journeys.ALL": "Full access to Journey APIs"
             }
           }
         }
-      },
+      }
+    },
+    "parameters": {
+      "JourneyId": {
+        "name": "journey_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Unique identifier of the journey"
+      }
+    },
+    "responses": {
       "SuccessResponse": {
-        "description": "SuccessResponse response",
+        "description": "Successful response",
         "content": {
           "application/json": {
             "schema": {
@@ -79,107 +96,501 @@
           }
         }
       },
-      "InvalidDataErrorResponse": {
-        "description": "Invalid data provided",
+      "CreateJourneyErrorResponse": {
+        "description": "One of the possible error responses for journey creation",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/ErrorResponse"
-            },
-            "examples": {
-              "InvalidData": {
-                "value": {
-                  "journeys": [
-                    {
-                      "code": "INVALID_DATA",
-                      "details": {
-                        "api_name": "description",
-                        "json_path": "$.journeys[0].description"
-                      },
-                      "message": "Input exceeds maximum length of 1000 characters.",
-                      "status": "error"
-                    }
-                  ]
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataListError"
+                },
+                {
+                  "$ref": "#/components/schemas/DuplicateDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "#/components/schemas/MandatoryNotFoundError"
                 }
-              }
+              ]
             }
           }
         }
       },
-      "NotAllowedErrorResponse": {
-        "description": "Operation not allowed",
+      "PublishJourneyErrorResponse": {
+        "description": "One of the possible error responses for journey publishing",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/ErrorResponse"
-            },
-            "examples": {
-              "NotAllowed": {
-                "value": {
-                  "code": "NOT_ALLOWED",
-                  "message": "Journey doesn't have any transitions, a journey should have at least an transition, please check and configure.",
-                  "details": {
-                    "resource_path_index": "1"
-                  },
-                  "status": "error"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/NotAllowedError"
                 }
-              }
+              ]
             }
           }
         }
+      }
+    },
+    "schemas": {
+      "InvalidDataError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "details",
+          "status"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INVALID_DATA"
+            ],
+            "description": "A short machine-readable code indicating the outcome or error type."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description explaining the status or error."
+          },
+          "details": {
+            "$ref": "#/components/schemas/FlatErrorDetails"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ],
+            "description": "The status of the response: success or error."
+          }
+        },
+        "example": {
+          "code": "INVALID_DATA",
+          "message": "The given field seems to be invalid",
+          "details": {
+            "resource_path_index": "1"
+          },
+          "status": "error"
+        }
       },
-      "DuplicateDataErrorResponse": {
-        "description": "Duplicate journey name found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/ErrorResponse"
-            },
-            "examples": {
-              "DuplicateData": {
-                "value": {
-                  "journeys": [
-                    {
-                      "code": "DUPLICATE_DATA",
-                      "details": {
-                        "api_name": "name",
-                        "json_path": "$.journeys[0].name"
-                      },
-                      "message": "Journey with the same name already exists.",
-                      "status": "error"
-                    }
-                  ]
+      "InvalidDataListError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "INVALID_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/CommonErrorDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
                 }
               }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "example": {
+          "journeys": [
+            {
+              "code": "INVALID_DATA",
+              "message": "The given field is of an invalid data type",
+              "details": {
+                "api_name": "name",
+                "json_path": "$.journeys[0].name"
+              },
+              "status": "error"
             }
+          ]
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "INVALID_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/SuccessDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "example": {
+          "journeys": [
+            {
+              "code": "SUCCESS",
+              "details": {
+                "id": "1000000007733"
+              },
+              "message": "Journey created successfully",
+              "status": "success"
+            }
+          ]
+        }
+      },
+      "DuplicateDataError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "INVALID_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/CommonErrorDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "example": {
+          "journeys": [
+            {
+              "code": "DUPLICATE_DATA",
+              "message": "Journey with the same name already exists.",
+              "details": {
+                "api_name": "name",
+                "json_path": "$.journeys[0].name"
+              },
+              "status": "error"
+            }
+          ]
+        }
+      },
+      "LimitExceededError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "INVALID_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/LimitExceededDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "example": {
+          "journeys": [
+            {
+              "code": "LIMIT_EXCEEDED",
+              "message": "Total journey creation limit exists for this org, please upgrade your license to create more.",
+              "details": {
+                "api_name": "journeys",
+                "limit": "5",
+                "json_path": "$.journeys[0].journeys"
+              },
+              "status": "error"
+            }
+          ]
+        }
+      },
+      "MandatoryNotFoundError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "INVALID_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/CommonErrorDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "example": {
+          "journeys": [
+            {
+              "code": "MANDATORY_NOT_FOUND",
+              "message": "Mandatory field not found",
+              "details": {
+                "api_name": "name",
+                "json_path": "$.journeys[0].name"
+              },
+              "status": "error"
+            }
+          ]
+        }
+      },
+      "NotAllowedError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "status",
+          "details"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "NOT_ALLOWED"
+            ],
+            "description": "A short machine-readable code indicating the outcome or error type."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description explaining the status or error."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ],
+            "description": "The status of the response: success or error."
+          },
+          "details": {
+            "$ref": "#/components/schemas/FlatErrorDetails"
+          }
+        },
+        "example": {
+          "code": "NOT_ALLOWED",
+          "message": "Journey doesn't have any transitions, a journey should have at least an transition, please check and configure.",
+          "details": {
+            "resource_path_index": "1"
+          },
+          "status": "error"
+        }
+      },
+      "CreateJourneyPayload": {
+        "type": "object",
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the journey"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A short description of the journey"
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "required": [
+          "journeys"
+        ]
+      },
+      "CommonErrorDetails": {
+        "type": "object",
+        "required": [
+          "api_name",
+          "json_path"
+        ],
+        "properties": {
+          "api_name": {
+            "type": "string",
+            "description": "The name of the API field causing the issue."
+          },
+          "json_path": {
+            "type": "string",
+            "description": "The JSON path in the payload where the issue was found."
           }
         }
       },
-      "LimitExceededErrorResponse": {
-        "description": "Limit exceeded for journey creation",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/ErrorResponse"
-            },
-            "examples": {
-              "LimitExceeded": {
-                "value": {
-                  "journeys": [
-                    {
-                      "code": "LIMIT_EXCEEDED",
-                      "details": {
-                        "api_name": "journeys",
-                        "limit": "5",
-                        "json_path": "$.journeys[0].journeys"
-                      },
-                      "message": "Total journey creation limit exists for this org, please upgrade your license to create more.",
-                      "status": "error"
-                    }
-                  ]
-                }
-              }
-            }
+      "LimitExceededDetails": {
+        "type": "object",
+        "required": [
+          "api_name",
+          "json_path",
+          "limit"
+        ],
+        "properties": {
+          "api_name": {
+            "type": "string",
+            "description": "The name of the API field causing the issue."
+          },
+          "json_path": {
+            "type": "string",
+            "description": "The JSON path in the payload where the issue was found."
+          },
+          "limit": {
+            "type": "string",
+            "description": "The maximum allowed limit that was exceeded."
+          }
+        }
+      },
+      "FlatErrorDetails": {
+        "type": "object",
+        "required": [
+          "resource_path_index"
+        ],
+        "properties": {
+          "resource_path_index": {
+            "type": "string",
+            "description": "The index of the problematic resource in the input array."
+          }
+        }
+      },
+      "SuccessDetails": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the created or affected resource."
           }
         }
       }
@@ -202,124 +613,6 @@
             }
           }
         }
-      }
-    },
-    "schemas": {
-      "CreateJourneyPayload": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the journey"
-          },
-          "description": {
-            "type": "string",
-            "description": "A short description of the journey"
-          }
-        },
-        "required": [
-          "name"
-        ]
-      },
-      "ErrorResponse": {
-        "type": "object",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/components/responses/InvalidDataErrorResponse"
-            },
-            {
-              "$ref": "#/components/responses/NotAllowedErrorResponse"
-            },
-            {
-              "$ref": "#/components/responses/DuplicateDataErrorResponse"
-            },
-            {
-              "$ref": "#/components/responses/LimitExceededErrorResponse"
-            }
-          ]
-        },
-        "properties": {
-          "code": {
-            "type": "string",
-            "enum": [
-              "INVALID_DATA",
-              "NOT_ALLOWED",
-              "DUPLICATE_DATA",
-              "LIMIT_EXCEEDED"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "details": {
-            "type": "object",
-            "properties": {
-              "api_name": {
-                "type": "string"
-              },
-              "json_path": {
-                "type": "string"
-              },
-              "resource_path_index": {
-                "type": "string"
-              },
-              "limit": {
-                "type": "string"
-              }
-            }
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "error"
-            ]
-          }
-        },
-        "required": [
-          "code",
-          "message",
-          "details",
-          "status"
-        ]
-      },
-      "SuccessResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "enum": [
-              "SUCCESS"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "success"
-            ]
-          },
-          "details": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "description": "Unique ID of the created or affected resource."
-              }
-            },
-            "required": [
-              "id"
-            ]
-          }
-        },
-        "required": [
-          "code",
-          "message",
-          "status",
-          "details"
-        ]
       }
     }
   }
