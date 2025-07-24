@@ -1,0 +1,323 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Examples",
+    "version": "1.0.0"
+  },
+  "components": {
+    "examples": {
+      "SuccessResponse": {
+        "journeys": [
+          {
+            "code": "SUCCESS",
+            "details": {
+              "id": "1000000007733"
+            },
+            "message": "Journey created successfully",
+            "status": "success"
+          }
+        ]
+      },
+      "GetJourneysResponse": {
+        "journeys": [
+          {
+            "id": "988000000005081",
+            "name": "Onboard track",
+            "description": "test journey",
+            "status": "draft",
+            "created_time": "2023-06-23T22:42:26+05:30",
+            "modified_time": "2023-06-23T22:42:56+05:30",
+            "created_by": {
+              "id": "988000000006002",
+              "name": "Madhan Kumar"
+            },
+            "modified_by": {
+              "id": "988000000006001",
+              "name": "Gokul Sankar"
+            },
+            "cloned_from": {
+              "id": "988000000007011",
+              "name": "New Joureny_1"
+            },
+            "records_count": 0,
+            "group_id": "988000000007004",
+            "version": 1
+          }
+        ]
+      },
+      "GetJourneyDetailsResponse": {
+        "journeys": [
+          {
+            "id": "5000000087039",
+            "name": "New Journey 1",
+            "description": "",
+            "goal": {
+              "type": "path",
+              "details": {
+                "stages": [
+                  {
+                    "id": "5000000087594",
+                    "name": "Stage 1"
+                  },
+                  {
+                    "id": "5000000087600",
+                    "name": "Stage 2"
+                  }
+                ]
+              }
+            },
+            "deadline": {
+              "stage": null,
+              "actions": [
+                {
+                  "id": "5000000107086",
+                  "action": "move_to_stage",
+                  "details": {
+                    "stage": {
+                      "id": "5000000087600",
+                      "name": "Stage 2"
+                    }
+                  }
+                }
+              ],
+              "execute_on": {
+                "period": 1,
+                "time_unit": "days"
+              }
+            },
+            "status": "draft",
+            "version": 1,
+            "created_time": "2024-10-12T12:59:58+05:30",
+            "modified_time": "2024-10-16T20:15:44+05:30",
+            "record_condition": false,
+            "chart_data": {
+              "builderPos": {
+                "zoomLevel": 1,
+                "top": 340,
+                "left": 755
+              },
+              "floater": {
+                "top": 10,
+                "left": 30
+              },
+              "nodes": [
+                {
+                  "position": {
+                    "top": -150,
+                    "left": 0
+                  },
+                  "id": "0"
+                },
+                {
+                  "position": {
+                    "top": 50,
+                    "left": 0
+                  },
+                  "id": "5000000087594"
+                },
+                {
+                  "position": {
+                    "top": 164,
+                    "left": -216
+                  },
+                  "id": "5000000087600"
+                }
+              ],
+              "connections": [
+                {
+                  "source": {
+                    "x": 0.5,
+                    "y": 1,
+                    "id": "0"
+                  },
+                  "id": "connection_state_0_state_5000000087594",
+                  "target": {
+                    "x": 0.5,
+                    "y": 0,
+                    "id": "5000000087594"
+                  },
+                  "points": []
+                }
+              ]
+            },
+            "created_by": {
+              "id": "5000000000911",
+              "name": "Gokul"
+            },
+            "modified_by": {
+              "id": "5000000000911",
+              "name": "Gokul"
+            },
+            "cloned_from": null,
+            "records_count": 0,
+            "group_id": "5000000087583"
+          }
+        ]
+      },
+      "InvalidDataError": {
+        "code": "INVALID_DATA",
+        "message": "The given field seems to be invalid",
+        "details": {
+          "resource_path_index": "1"
+        },
+        "status": "error"
+      },
+      "InvalidDataListError": {
+        "journeys": [
+          {
+            "code": "INVALID_DATA",
+            "message": "The given field is of an invalid data type",
+            "details": {
+              "api_name": "name",
+              "json_path": "$.journeys[0].name"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "DuplicateDataError": {
+        "journeys": [
+          {
+            "code": "DUPLICATE_DATA",
+            "message": "Journey with the same name already exists.",
+            "details": {
+              "api_name": "name",
+              "json_path": "$.journeys[0].name"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "LimitExceededError": {
+        "journeys": [
+          {
+            "code": "LIMIT_EXCEEDED",
+            "message": "Total journey creation limit exists for this org, please upgrade your license to create more.",
+            "details": {
+              "api_name": "journeys",
+              "limit": "5",
+              "json_path": "$.journeys[0].journeys"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "MandatoryNotFoundError": {
+        "journeys": [
+          {
+            "code": "MANDATORY_NOT_FOUND",
+            "message": "Mandatory field not found",
+            "details": {
+              "api_name": "name",
+              "json_path": "$.journeys[0].name"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "NotAllowedError": {
+        "code": "NOT_ALLOWED",
+        "message": "Journey doesn't have any transitions, a journey should have at least an transition, please check and configure.",
+        "details": {
+          "resource_path_index": "1"
+        },
+        "status": "error"
+      },
+      "DependentFieldMissingError": {
+        "journeys": [
+          {
+            "code": "DEPENDENT_FIELD_MISSING",
+            "details": {
+              "dependee": {
+                "api_name": "stages",
+                "json_path": "goal.details"
+              },
+              "api_name": "type",
+              "json_path": "$.journeys[0].goal.type"
+            },
+            "message": "The dependent field is missing from the request.",
+            "status": "error"
+          }
+        ]
+      },
+      "GetConfigurableFieldsResponse": {
+        "value": {
+          "configurable_fields": [
+            {
+              "id": "1000000086099",
+              "name": "Owner",
+              "transition": {
+                "id": "1000000085001",
+                "name": "transition 1"
+              },
+              "trigger": {
+                "id": "1000000086097",
+                "name": "RecordUpdate"
+              },
+              "signal": {
+                "id": "2393000000009015",
+                "name": "RecordUpdate",
+                "api_name": "lead_updated"
+              },
+              "api_name": "transition_1_Trigger_RecordUpdate_Lead_Owner",
+              "ui_type": 8,
+              "data_type": "ownerlookup"
+            }
+          ],
+          "info": {
+            "page": 1,
+            "count": 1,
+            "per_page": 200,
+            "more_records": false
+          }
+        }
+      },
+      "CreateJourneyPayload": {
+        "journeys": [
+          {
+            "name": "JJ1",
+            "description": "A valid one"
+          }
+        ]
+      },
+      "UpdateJourneyPayload": {
+        "journeys": [
+          {
+            "name": "A Journey",
+            "description": "a brief one",
+            "deadline": {
+              "execute_on": {
+                "period": 5,
+                "time_unit": "days"
+              },
+              "stage": {
+                "id": "null"
+              },
+              "actions": [
+                {
+                  "action": "move_to_stage",
+                  "id": "1000000024660",
+                  "details": {
+                    "stage": {
+                      "id": "1000000024640"
+                    }
+                  }
+                }
+              ]
+            },
+            "goal": {
+              "type": "reach",
+              "details": {
+                "stages": [
+                  {
+                    "id": "1000000024640"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
