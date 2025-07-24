@@ -1,3 +1,4 @@
+
 {
   "openapi": "3.0.0",
   "info": {
@@ -6,7 +7,7 @@
     "description": "API to fetch configurable fields for transitions."
   },
   "paths": {
-    "/v1/configurable_fields": {
+    "/commandcenter/v1/configurable_fields": {
       "get": {
         "summary": "Get Configurable Fields",
         "operationId": "getConfigurableFields",
