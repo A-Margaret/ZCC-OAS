@@ -1,0 +1,460 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Error Schemas",
+    "version": "1.0.0"
+  },
+  "components": {
+    "schemas": {
+      "InvalidDataError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "details",
+          "status"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INVALID_DATA"
+            ],
+            "description": "A short machine-readable code indicating the outcome or error type."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description explaining the status or error."
+          },
+          "details": {
+            "$ref": "#/components/schemas/FlatErrorDetails"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ],
+            "description": "The status of the response: success or error."
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/InvalidDataError"
+        }
+      },
+      "InvalidDataListError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "INVALID_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/CommonErrorDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/InvalidDataListError"
+        }
+      },
+      "DuplicateDataError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "INVALID_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/CommonErrorDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/DuplicateDataError"
+        }
+      },
+      "LimitExceededError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "INVALID_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/LimitExceededDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/LimitExceededError"
+        }
+      },
+      "MandatoryNotFoundError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "INVALID_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/CommonErrorDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/MandatoryNotFoundError"
+        }
+      },
+      "NotAllowedError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "status",
+          "details"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "NOT_ALLOWED"
+            ],
+            "description": "A short machine-readable code indicating the outcome or error type."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description explaining the status or error."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ],
+            "description": "The status of the response: success or error."
+          },
+          "details": {
+            "$ref": "#/components/schemas/FlatErrorDetails"
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/NotAllowedError"
+        }
+      },
+      "DependentFieldMissingError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "DEPENDENT_FIELD_MISSING"
+                  ],
+                  "description": "Error code indicating a required dependent field is missing."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Error message indicating what is missing."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/DependentFieldMissingDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "Error status."
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/DependentFieldMissingError"
+        }
+      },
+      "CommonErrorDetails": {
+        "type": "object",
+        "required": [
+          "api_name",
+          "json_path"
+        ],
+        "properties": {
+          "api_name": {
+            "type": "string",
+            "description": "The name of the API field causing the issue."
+          },
+          "json_path": {
+            "type": "string",
+            "description": "The JSON path in the payload where the issue was found."
+          }
+        }
+      },
+      "FlatErrorDetails": {
+        "type": "object",
+        "required": [
+          "resource_path_index"
+        ],
+        "properties": {
+          "resource_path_index": {
+            "type": "string",
+            "description": "The index of the problematic resource in the input array."
+          }
+        }
+      },
+      "LimitExceededDetails": {
+        "type": "object",
+        "required": [
+          "api_name",
+          "json_path",
+          "limit"
+        ],
+        "properties": {
+          "api_name": {
+            "type": "string",
+            "description": "The name of the API field causing the issue."
+          },
+          "json_path": {
+            "type": "string",
+            "description": "The JSON path in the payload where the issue was found."
+          },
+          "limit": {
+            "type": "string",
+            "description": "The maximum allowed limit that was exceeded."
+          }
+        }
+      },
+      "SuccessDetails": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the created or affected resource."
+          }
+        }
+      },
+      "DependentFieldMissingDetails": {
+        "type": "object",
+        "required": [
+          "api_name",
+          "json_path",
+          "dependee"
+        ],
+        "properties": {
+          "api_name": {
+            "type": "string",
+            "description": "The field with dependency."
+          },
+          "json_path": {
+            "type": "string",
+            "description": "JSON path to the dependent field."
+          },
+          "dependee": {
+            "type": "object",
+            "required": [
+              "api_name",
+              "json_path"
+            ],
+            "properties": {
+              "api_name": {
+                "type": "string",
+                "description": "The missing dependent field name."
+              },
+              "json_path": {
+                "type": "string",
+                "description": "JSON path of the missing field."
+              }
+            }
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "INVALID_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/SuccessDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/SuccessResponse"
+        }
+      }
+    }
+  }
+}
