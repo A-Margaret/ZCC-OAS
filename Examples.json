@@ -317,6 +317,259 @@
             }
           }
         ]
+      },
+      "LimitExceededExtendedError": {
+        "transitions": [
+          {
+            "code": "LIMIT_EXCEEDED",
+            "details": {
+              "api_name": "type",
+              "limit": "1",
+              "limit_due_to": [
+                {
+                  "api_name": "from_stage",
+                  "json_path": "from_stage"
+                },
+                {
+                  "api_name": "to_stage",
+                  "json_path": "to_stage"
+                }
+              ],
+              "json_path": "$.transitions[0].type"
+            },
+            "message": "Seems, the same type transition is already configured bewtween the stages.",
+            "status": "error"
+          }
+        ]
+      },
+      "GetTransitionDetailsResponseExample": {
+        "transitions": [
+          {
+            "id": "1000000105179",
+            "name": "transition 1",
+            "description": null,
+            "type": "standard",
+            "details": {
+              "triggers": [
+                {
+                  "id": "1000000105475",
+                  "criteria": {
+                    "comparator": "equal",
+                    "configurable_field": {
+                      "api_name": "transition_1_Trigger_OutgoingMailSent_Cc",
+                      "id": "1000000105479"
+                    },
+                    "value": "abc@gmail.com"
+                  },
+                  "signal": {
+                    "api_name": "mail_sent",
+                    "service_org": {
+                      "id": "1000000029503",
+                      "name": "Mark Org1"
+                    }
+                  },
+                  "identifiers": [
+                    {
+                      "id": "1000000105541",
+                      "name": "Converted Account",
+                      "type": "crm_fields",
+                      "api_name": "Leads_Converted_Account"
+                    }
+                  ],
+                  "identifier_outer_meta": [
+                    {
+                      "reference": null,
+                      "field": null,
+                      "lookup": null,
+                      "related_to": null
+                    }
+                  ]
+                },
+                {
+                  "id": "1000000105181",
+                  "criteria": null,
+                  "signal": {
+                    "api_name": "create",
+                    "service_org": {
+                      "id": "1000000029503",
+                      "name": "Mark Org1"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039",
+                        "name": "Leads",
+                        "api_name": "Leads"
+                      },
+                      "layout": {
+                        "id": "16828000000000161",
+                        "name": "Standard",
+                        "api_name": "Standard__s"
+                      },
+                      "type": "specific"
+                    }
+                  },
+                  "identifiers": [
+                    {
+                      "id": "1000000105196",
+                      "name": "Email",
+                      "type": "synced_fields",
+                      "api_name": "transition_1_Trigger_RecordCreate_Email"
+                    }
+                  ],
+                  "identifier_outer_meta": [
+                    {
+                      "reference": null,
+                      "field": null,
+                      "lookup": null,
+                      "related_to": null
+                    }
+                  ]
+                },
+                {
+                  "id": "1000000105182",
+                  "criteria": null,
+                  "signal": {
+                    "api_name": "create",
+                    "service_org": {
+                      "id": "1000000029503",
+                      "name": "Mark Org1"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039",
+                        "name": "Leads",
+                        "api_name": "Leads"
+                      },
+                      "layout": {
+                        "id": "16828000000000161",
+                        "name": "Standard",
+                        "api_name": "Standard__s"
+                      },
+                      "type": "specific"
+                    }
+                  },
+                  "identifiers": [
+                    {
+                      "id": "1000000105237",
+                      "name": "First Name",
+                      "type": "synced_fields",
+                      "api_name": "transition_1_Trigger_RecordCreate_1_First_Name"
+                    }
+                  ],
+                  "identifier_outer_meta": [
+                    {
+                      "reference": null,
+                      "field": null,
+                      "lookup": null,
+                      "related_to": null
+                    }
+                  ]
+                },
+                {
+                  "id": "1000000105183",
+                  "criteria": null,
+                  "signal": {
+                    "api_name": "create",
+                    "service_org": {
+                      "id": "1000000029503",
+                      "name": "Mark Org1"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039",
+                        "name": "Leads",
+                        "api_name": "Leads"
+                      },
+                      "layout": {
+                        "id": "16828000000000161",
+                        "name": "Standard",
+                        "api_name": "Standard__s"
+                      },
+                      "type": "specific"
+                    }
+                  },
+                  "identifiers": [
+                    {
+                      "id": "1000000105286",
+                      "name": "Email",
+                      "type": "synced_fields",
+                      "api_name": "transition_1_Trigger_RecordCreate_2_Email"
+                    }
+                  ],
+                  "identifier_outer_meta": [
+                    {
+                      "reference": null,
+                      "field": null,
+                      "lookup": null,
+                      "related_to": null
+                    }
+                  ]
+                }
+              ],
+              "logs": null,
+              "precedence_order": 1,
+              "transition_criteria": null
+            },
+            "from_stage": {
+              "id": "1000000104882",
+              "name": "Stage 1",
+              "description": null,
+              "type": null,
+              "end_stage": false,
+              "tp_actions": null
+            },
+            "to_stage": {
+              "id": "1000000103102",
+              "name": "Stage 2",
+              "description": null,
+              "type": null,
+              "end_stage": false,
+              "tp_actions": null
+            },
+            "execute_on": null
+          }
+        ]
+      },
+      "GetTransitionsResponseExample": {
+        "transitions": [
+          {
+            "id": "668000000129005",
+            "name": "transition 1",
+            "description": "",
+            "type": "standard",
+            "from_stage": null,
+            "to_stage": {
+              "id": "668000000129001",
+              "name": "stage 1"
+            }
+          },
+          {
+            "id": "668000000135942",
+            "name": "1 Days",
+            "description": "",
+            "type": "wait",
+            "from_stage": {
+              "name": "s4",
+              "id": "668000000135008"
+            },
+            "to_stage": {
+              "name": "s5",
+              "id": "668000000135928"
+            },
+            "details": {
+              "execute_on": {
+                "period": 1,
+                "time_unit": "days"
+              }
+            }
+          }
+        ],
+        "info": {
+          "page": 1,
+          "per_page": 200,
+          "more_records": false,
+          "count": 2
+        }
       }
     }
   }
