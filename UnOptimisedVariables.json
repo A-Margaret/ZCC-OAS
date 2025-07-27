@@ -1,0 +1,1317 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Combined Journey API",
+    "version": "1.0.0"
+  },
+  "security": [
+    {
+      "OAuth2": [
+        "ZohoCommandCenter.journeys.ALL"
+      ]
+    }
+  ],
+  "paths": {
+    "/commandcenter/v1/journeys": {
+      "get": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Get list of journeys",
+        "description": "Retrieves a list of active, draft, and inactive journeys using scope authentication.",
+        "operationId": "getJourneys",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetJourneysResponse"
+          },
+          "204": {
+            "description": "No journeys found"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Create a new journey",
+        "description": "Create a journey with configuration for goal, deadline, and initial settings.",
+        "operationId": "createJourney",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateJourneyPayload"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateJourneyErrorResponse"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ]
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}": {
+      "put": {
+        "summary": "Update a journey by ID",
+        "description": "Updates properties of a specific journey such as name, description, chart data, goal, and deadlines.",
+        "operationId": "updateJourney",
+        "tags": [
+          "Journeys"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateJourneyPayload"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/UpdateJourneyErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Get journey details by ID",
+        "description": "Retrieve detailed data for a specific journey including stages, transitions, chart data, goals, deadlines, and action metadata.",
+        "operationId": "getJourneyDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/IncludeParam"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetJourneyDetailsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Delete a journey",
+        "description": "Delete a journey by specifying its ID.",
+        "operationId": "deleteJourney",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/actions/clone": {
+      "post": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Clone a journey",
+        "description": "Duplicate a journey instead of editing a published one.",
+        "operationId": "cloneJourney",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JourneyActionErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/actions/publish": {
+      "post": {
+        "summary": "Publish a journey",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JourneyActionErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/actions/merge": {
+      "post": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Merge a journey",
+        "description": "Merge an edited journey with the original journey by publishing the changes.",
+        "operationId": "mergeJourney",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JourneyActionErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/actions/activate": {
+      "post": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Activate a journey",
+        "description": "Activate a journey that is currently in a deactivated state.",
+        "operationId": "activateJourney",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JourneyActionErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/actions/deactivate": {
+      "post": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Deactivate a journey",
+        "description": "Pause the execution of a journey by deactivating it.",
+        "operationId": "deactivateJourney",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JourneyActionErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/configurable_fields": {
+      "get": {
+        "summary": "Get Configurable Fields",
+        "operationId": "getConfigurableFields",
+        "tags": [
+          "Configurable Fields"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ConfigurableFieldsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PageParam"
+          },
+          {
+            "$ref": "#/components/parameters/Per_pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/FiltersParam"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ]
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/transitions": {
+      "get": {
+        "summary": "Get all transitions for a journey",
+        "description": "The GET Journey Transitions API allows users to retrieve all configured transitions for a specific journey using the journey ID. It's a read-only operation.",
+        "operationId": "getJourneyTransitions",
+        "tags": [
+          "Transitions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PerPage"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetTransitionsResponse"
+          },
+          "204": {
+            "description": "No transitions found for the specified journey."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_commandcenter_v1_journeys_journey_id_transitions",
+        "summary": "Create a new transition that connects two stages within a journey, triggered either by a signal or after a specified wait time.",
+        "tags": [
+          "Transitions"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateTransitionPayload"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateUpdateResourceErrorResponse"
+          }
+        },
+        "description": "Creates a new transition that connects two stages within a journey. The transition can be triggered either by an incoming signal or after a specified wait time.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ]
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/transitions/{transition_id}": {
+      "put": {
+        "summary": "Update an existing transition in a journey.",
+        "description": "Allows updating a transition’s name, description, stages, wait parameters, triggers, logs, criteria, and identifiers. Bulk updates are not supported.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/TransitionId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateTransitionPayload"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateUpdateResourceErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Transitions"
+        ],
+        "summary": "Get transition details by ID",
+        "description": "The GET Journey Transition Details API allows users to retrieve specific journey's specific transition's all details and configured triggers by using journey and transition ID. It's a read-only operation, typically returning data in JSON.",
+        "operationId": "getTransitionDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/TransitionId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          },
+          {
+            "$ref": "#/components/parameters/IncludeInnerDetailsParam"
+          },
+          {
+            "$ref": "#/components/parameters/IncludeOuterDetailsParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetTransitionDetailsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Transitions"
+        ],
+        "summary": "Delete a transition",
+        "description": "The DELETE Journey Transition API allows users to delete a particular journey's transition by specifying the transition id.",
+        "operationId": "deleteTransition",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/TransitionId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/stages": {
+      "post": {
+        "tags": [
+          "Stages"
+        ],
+        "summary": "Create a new stage",
+        "description": "The POST Journey Stages API is designed for users to create stages within a journey. This operation is write-only, meaning it's used for submitting data rather than retrieving it. Typically, when a stage is successfully created, the API returns a response in JSON format indicating success.",
+        "operationId": "createStage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateStagePayload"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateUpdateResourceErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Stages"
+        ],
+        "summary": "Get all stages for a journey",
+        "description": "The GET Journey Stages API allows users to retrieve a specific journey's all stages. It's a read-only operation, typically returning data in JSON.",
+        "operationId": "getStages",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetStagesResponse"
+          },
+          "204": {
+            "description": "No stages found for the specified journey."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/stages/{stage_id}": {
+      "put": {
+        "tags": [
+          "Stages"
+        ],
+        "summary": "Update an existing stage",
+        "description": "Allows updating properties of a specific stage such as name, description, type, and end_stage.",
+        "operationId": "updateStage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/StageId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateStagePayload"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateUpdateResourceErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Stages"
+        ],
+        "summary": "Get stage details by ID",
+        "description": "The GET Journey Stage Details API allows users to retrieve a specific journey's specific stage's details by using journey and stage ID. It's a read-only operation, typically returning data in JSON.",
+        "operationId": "getStageDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/StageId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetStageDetailsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Stages"
+        ],
+        "summary": "Delete a stage",
+        "description": "The DELETE Journey Stage API allows users to delete a particular journey's stage by specifying stage id.",
+        "operationId": "deleteStage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/StageId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/variables": {
+      "post": {
+        "tags": [
+          "Variables"
+        ],
+        "summary": "Create a new variable",
+        "description": "In journey, we have two types of variables; they are user-defined and system-defined, but through API we can create only user-defined variables. In user defined variables, we can configure two types of user-defined variables like merge and custom. In merge, we can give any field as a value; in custom type, all values will be considered strings.",
+        "operationId": "createVariable",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/requestBodies/CreateVariablePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateVariableErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Variables"
+        ],
+        "summary": "Get all variables for a journey",
+        "description": "The GET Journeys Variables API is designed to fetch a comprehensive list of all variables related to a specific journey, including both user-defined and system-defined variables. To utilize this API, the journey's ID is required. This API performs a read-only operation and typically returns the data in JSON format.",
+        "operationId": "getVariables",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PerPage"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetVariablesResponse"
+          },
+          "204": {
+            "description": "No variables found for the specified journey."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/variables/{variable_id}": {
+      "put": {
+        "tags": [
+          "Variables"
+        ],
+        "summary": "Update an existing variable",
+        "description": "The PUT Journey Variable API enables users to update system-defined variable name and user-defined variable names and values.",
+        "operationId": "updateVariable",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/VariableId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVariablePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateVariableErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Variables"
+        ],
+        "summary": "Get variable details by ID",
+        "description": "The GET Journeys Variable Details API is designed to fetch a comprehensive details of a variable related to a specific journey, including both user-defined and system-defined variables. To utilize this API, the journey and variable ID is required. This API performs a read-only operation and typically returns the data in JSON format.",
+        "operationId": "getVariableDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/VariableId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetVariableDetailsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Variables"
+        ],
+        "summary": "Delete a variable",
+        "description": "The DELETE Journey Variable is used to remove custom variables by specifying the variable Id, but the user is not able to delete system-defined variables.",
+        "operationId": "deleteVariable",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/VariableId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateVariableErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://accounts.zoho.com/oauth/v2/auth",
+            "tokenUrl": "https://accounts.zoho.com/oauth/v2/token",
+            "scopes": {
+              "ZohoCommandCenter.journeys.ALL": "Full access to Journey APIs"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "JourneyId": {
+        "name": "journey_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The unique identifier of the journey."
+      },
+      "IncludeParam": {
+        "name": "include",
+        "in": "query",
+        "description": "Comma-separated list of additional metadata to include (e.g., stages, transitions)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "PageParam": {
+        "name": "page",
+        "in": "query",
+        "description": "The page number to retrieve",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "Per_pageParam": {
+        "name": "per_page",
+        "in": "query",
+        "description": "Number of records per page",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "FiltersParam": {
+        "name": "filters",
+        "in": "query",
+        "description": "Filter expression to narrow down the results. This string must be URL-encoded before sending in the query. Example filter: {\"field\":{\"api_name\":\"transition\"},\"comparator\":\"equal\",\"value\":\"1000000004349\"}",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "TransitionId": {
+        "name": "transition_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The unique identifier of the transition to be retrieved or modified."
+      },
+      "Page": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1
+        },
+        "description": "To specify the current page."
+      },
+      "PerPage": {
+        "name": "per_page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 200
+        },
+        "description": "To specify the number of records per page. Default is 200."
+      },
+      "OrgHeader": {
+        "name": "X-CC-ORG",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Org ID of CommandCenter"
+      },
+      "IncludeInnerDetailsParam": {
+        "name": "include_inner_details",
+        "in": "query",
+        "description": "To get extra details in lookup fields. Possible values: \"triggers.identifiers.ui_type\", \"triggers.identifiers.data_type\", \"triggers.signal.org.type\", \"from_stage.end_stage\", \"to_stage.end_stage\"",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "IncludeOuterDetailsParam": {
+        "name": "include_outer_details",
+        "in": "query",
+        "description": "To get extra outer details about the fields. Possible values: \"identifier_meta\"",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "StageId": {
+        "name": "stage_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The unique identifier of the stage."
+      },
+      "VariableId": {
+        "name": "variable_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The unique identifier of the variable."
+      }
+    },
+    "responses": {
+      "SuccessResponse": {
+        "description": "Successful response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SuccessResponse"
+            }
+          }
+        }
+      },
+      "CreateJourneyErrorResponse": {
+        "description": "One of the possible error responses for journey creation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataListError"
+                },
+                {
+                  "$ref": "#/components/schemas/DuplicateDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "UpdateJourneyErrorResponse": {
+        "description": "One of the error responses for updating a journey",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/InvalidDataListError"
+                },
+                {
+                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                },
+                {
+                  "$ref": "#/components/schemas/DuplicateDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "#/components/schemas/NotAllowedError"
+                },
+                {
+                  "$ref": "#/components/schemas/DependentFieldMissingError"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "GetJourneysResponse": {
+        "description": "List of journeys retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetJourneysResponse"
+            }
+          }
+        }
+      },
+      "GetJourneyDetailsResponse": {
+        "description": "Single journey with full details or an error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetJourneyDetailsSchema"
+            }
+          }
+        }
+      },
+      "InvalidRequestErrorResponse": {
+        "description": "Request payload is invalid or missing required fields",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/InvalidDataError"
+            }
+          }
+        }
+      },
+      "JourneyActionErrorResponse": {
+        "description": "Invalid data or not allowed action for publishing, cloning, or merging a journey.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/NotAllowedError"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "ConfigurableFieldsResponse": {
+        "description": "Successful response with configurable fields",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ConfigurableFieldsResponse"
+            }
+          }
+        }
+      },
+      "CreateUpdateResourceErrorResponse": {
+        "description": "Common error responses for creating or updating resources (e.g., transition, stage).",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataListError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededExtendedError"
+                },
+                {
+                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                },
+                {
+                  "$ref": "#/components/schemas/DuplicateDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "#/components/schemas/NotAllowedError"
+                },
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/DependentFieldMissingError"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "GetTransitionsResponse": {
+        "description": "List of transitions retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetTransitionsResponse"
+            }
+          }
+        }
+      },
+      "GetTransitionDetailsResponse": {
+        "description": "Details of a specific transition retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "transitions": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransitionDetails"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetStagesResponse": {
+        "description": "List of stages retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "stages": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StageArray"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetStageDetailsResponse": {
+        "description": "Details of a specific stage retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "stages": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StageSchema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CreateVariableErrorResponse": {
+        "description": "Error response for creating a variable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "#/components/schemas/InvalidDataListError"
+                },
+                {
+                  "$ref": "#/components/schemas/DuplicateDataError"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "GetVariablesResponse": {
+        "description": "List of variables retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "variables": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "data_type": {
+                        "type": "string"
+                      },
+                      "generated_type": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "info": {
+                  "$ref": "#/components/schemas/PaginationInfo"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetVariableDetailsResponse": {
+        "description": "Details of a specific variable retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "variables": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "data_type": {
+                        "type": "string"
+                      },
+                      "generated_type": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "JourneyGoal": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GoalReach"
+          },
+          {
+            "$ref": "#/components/schemas/GoalTimeTaken"
+          },
+          {
+            "$ref": "#/components/schemas/GoalPath"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "reach": "#/components/schemas/GoalReach",
+            "time_taken": "#/components/schemas/GoalTimeTaken",
+            "path": "#/components/schemas/GoalPath"
+          }
+        }
+      },
+      "DeadlineAction": {
+        "type": "object",
+        "description": "Action triggered at deadline",
+        "required": [
+          "action",
+          "id",
+          "details"
+        ],
+        "properties": {
+          "action": {
+            "type": "string",
+            "description": "Action type",
+            "enum": [
+              "move_to_stage"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "Action identifier"
+          },
+          "details": {
+            "$ref": "#/components/schemas/DeadlineActionDetailsMoveToStage"
+          }
+        }
+      },
+      "JourneyDeadline": {
+        "type": "object",
+        "description": "Deadline configuration for the journey",
+        "required": [
+          "execute_on",
+          "stage",
+          "actions"
+        ],
+        "properties": {
+          "execute_on": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/StageSchema"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeadlineAction"
+            "type": "object",
+            "properties": {
+              "variables": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/CustomVariableValue"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MergeVariableValue"
+                    }
+                  ],
+                  "discriminator": {
+                    "propertyName": "data_type",
+                    "mapping": {
+                      "custom": "#/components/schemas/CustomVariableValue",
+                      "merge": "#/components/schemas/MergeVariableValue"
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "variables"
+            ]
+          }
+        }
+      }
+    },
+    "examples": {}
+  },
+  "servers": [
+    {
+      "url": "https://commandcenter.zoho.com"
+    }
+  ]
+}
