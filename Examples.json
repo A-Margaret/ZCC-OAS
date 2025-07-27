@@ -36,22 +36,255 @@
               "name": "Gokul Sankar"
             },
             "cloned_from": {
-              "id": "988000000005080",
-              "name": "Onboard track"
+              "id": "988000000007011",
+              "name": "New Joureny_1"
             },
-            "records_count": 100,
-            "group_id": "988000000005081",
-            "version": 1,
+            "records_count": 0,
+            "group_id": "988000000007004",
+            "version": 1
+          }
+        ]
+      },
+      "GetJourneyDetailsResponse": {
+        "journeys": [
+          {
+            "id": "5000000087039",
+            "name": "New Journey 1",
+            "description": "",
             "goal": {
-              "type": "reach",
+              "type": "path",
               "details": {
                 "stages": [
                   {
-                    "id": "1000000024640"
+                    "id": "5000000087594",
+                    "name": "Stage 1"
+                  },
+                  {
+                    "id": "5000000087600",
+                    "name": "Stage 2"
                   }
                 ]
               }
             },
+            "deadline": {
+              "stage": null,
+              "actions": [
+                {
+                  "id": "5000000107086",
+                  "action": "move_to_stage",
+                  "details": {
+                    "stage": {
+                      "id": "5000000087600",
+                      "name": "Stage 2"
+                    }
+                  }
+                }
+              ],
+              "execute_on": {
+                "period": 1,
+                "time_unit": "days"
+              }
+            },
+            "status": "draft",
+            "version": 1,
+            "created_time": "2024-10-12T12:59:58+05:30",
+            "modified_time": "2024-10-16T20:15:44+05:30",
+            "record_condition": false,
+            "chart_data": {
+              "builderPos": {
+                "zoomLevel": 1,
+                "top": 340,
+                "left": 755
+              },
+              "floater": {
+                "top": 10,
+                "left": 30
+              },
+              "nodes": [
+                {
+                  "position": {
+                    "top": -150,
+                    "left": 0
+                  },
+                  "id": "0"
+                },
+                {
+                  "position": {
+                    "top": 50,
+                    "left": 0
+                  },
+                  "id": "5000000087594"
+                },
+                {
+                  "position": {
+                    "top": 164,
+                    "left": -216
+                  },
+                  "id": "5000000087600"
+                }
+              ],
+              "connections": [
+                {
+                  "source": {
+                    "x": 0.5,
+                    "y": 1,
+                    "id": "0"
+                  },
+                  "id": "connection_state_0_state_5000000087594",
+                  "target": {
+                    "x": 0.5,
+                    "y": 0,
+                    "id": "5000000087594"
+                  },
+                  "points": []
+                }
+              ]
+            },
+            "created_by": {
+              "id": "5000000000911",
+              "name": "Gokul"
+            },
+            "modified_by": {
+              "id": "5000000000911",
+              "name": "Gokul"
+            },
+            "cloned_from": null,
+            "records_count": 0,
+            "group_id": "5000000087583"
+          }
+        ]
+      },
+      "InvalidDataError": {
+        "code": "INVALID_DATA",
+        "message": "The given field seems to be invalid",
+        "details": {
+          "resource_path_index": "1"
+        },
+        "status": "error"
+      },
+      "InvalidDataListError": {
+        "journeys": [
+          {
+            "code": "INVALID_DATA",
+            "message": "The given field is of an invalid data type",
+            "details": {
+              "api_name": "name",
+              "json_path": "$.journeys[0].name"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "DuplicateDataError": {
+        "journeys": [
+          {
+            "code": "DUPLICATE_DATA",
+            "message": "Journey with the same name already exists.",
+            "details": {
+              "api_name": "name",
+              "json_path": "$.journeys[0].name"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "LimitExceededError": {
+        "journeys": [
+          {
+            "code": "LIMIT_EXCEEDED",
+            "message": "Total journey creation limit exists for this org, please upgrade your license to create more.",
+            "details": {
+              "api_name": "journeys",
+              "limit": "5",
+              "json_path": "$.journeys[0].journeys"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "MandatoryNotFoundError": {
+        "journeys": [
+          {
+            "code": "MANDATORY_NOT_FOUND",
+            "message": "Mandatory field not found",
+            "details": {
+              "api_name": "name",
+              "json_path": "$.journeys[0].name"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "NotAllowedError": {
+        "code": "NOT_ALLOWED",
+        "message": "Journey doesn't have any transitions, a journey should have at least an transition, please check and configure.",
+        "details": {
+          "resource_path_index": "1"
+        },
+        "status": "error"
+      },
+      "DependentFieldMissingError": {
+        "journeys": [
+          {
+            "code": "DEPENDENT_FIELD_MISSING",
+            "details": {
+              "dependee": {
+                "api_name": "stages",
+                "json_path": "goal.details"
+              },
+              "api_name": "type",
+              "json_path": "$.journeys[0].goal.type"
+            },
+            "message": "The dependent field is missing from the request.",
+            "status": "error"
+          }
+        ]
+      },
+      "GetConfigurableFieldsResponse": {
+        "value": {
+          "configurable_fields": [
+            {
+              "id": "1000000086099",
+              "name": "Owner",
+              "transition": {
+                "id": "1000000085001",
+                "name": "transition 1"
+              },
+              "trigger": {
+                "id": "1000000086097",
+                "name": "RecordUpdate"
+              },
+              "signal": {
+                "id": "2393000000009015",
+                "name": "RecordUpdate",
+                "api_name": "lead_updated"
+              },
+              "api_name": "transition_1_Trigger_RecordUpdate_Lead_Owner",
+              "ui_type": 8,
+              "data_type": "ownerlookup"
+            }
+          ],
+          "info": {
+            "page": 1,
+            "count": 1,
+            "per_page": 200,
+            "more_records": false
+          }
+        }
+      },
+      "CreateJourneyPayload": {
+        "journeys": [
+          {
+            "name": "JJ1",
+            "description": "A valid one"
+          }
+        ]
+      },
+      "UpdateJourneyPayload": {
+        "journeys": [
+          {
+            "name": "A Journey",
+            "description": "a brief one",
             "deadline": {
               "execute_on": {
                 "period": 5,
@@ -71,6 +304,16 @@
                   }
                 }
               ]
+            },
+            "goal": {
+              "type": "reach",
+              "details": {
+                "stages": [
+                  {
+                    "id": "1000000024640"
+                  }
+                ]
+              }
             }
           }
         ]
@@ -96,18 +339,6 @@
             },
             "message": "Seems, the same type transition is already configured bewtween the stages.",
             "status": "error"
-          }
-        ]
-      },
-      "GetStageDetailsExample": {
-        "stages": [
-          {
-            "id": "1000000028262",
-            "name": "Stage 1",
-            "description": "",
-            "type": "standard",
-            "end_stage": false,
-            "tp_actions": []
           }
         ]
       },
@@ -148,6 +379,247 @@
             "tp_actions": []
           }
         ]
+      },
+      "GetStageDetailsExample": {
+        "stages": [
+          {
+            "id": "1000000028262",
+            "name": "Stage 1",
+            "description": "",
+            "type": "standard",
+            "end_stage": false,
+            "tp_actions": []
+          }
+        ]
+      },
+      "GetTransitionDetailsResponseExample": {
+        "transitions": [
+          {
+            "id": "1000000105179",
+            "name": "transition 1",
+            "description": null,
+            "type": "standard",
+            "details": {
+              "triggers": [
+                {
+                  "id": "1000000105475",
+                  "criteria": {
+                    "comparator": "equal",
+                    "configurable_field": {
+                      "api_name": "transition_1_Trigger_OutgoingMailSent_Cc",
+                      "id": "1000000105479"
+                    },
+                    "value": "abc@gmail.com"
+                  },
+                  "signal": {
+                    "api_name": "mail_sent",
+                    "service_org": {
+                      "id": "1000000029503",
+                      "name": "Mark Org1"
+                    }
+                  },
+                  "identifiers": [
+                    {
+                      "id": "1000000105541",
+                      "name": "Converted Account",
+                      "type": "crm_fields",
+                      "api_name": "Leads_Converted_Account"
+                    }
+                  ],
+                  "identifier_outer_meta": [
+                    {
+                      "reference": null,
+                      "field": null,
+                      "lookup": null,
+                      "related_to": null
+                    }
+                  ]
+                },
+                {
+                  "id": "1000000105181",
+                  "criteria": null,
+                  "signal": {
+                    "api_name": "create",
+                    "service_org": {
+                      "id": "1000000029503",
+                      "name": "Mark Org1"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039",
+                        "name": "Leads",
+                        "api_name": "Leads"
+                      },
+                      "layout": {
+                        "id": "16828000000000161",
+                        "name": "Standard",
+                        "api_name": "Standard__s"
+                      },
+                      "type": "specific"
+                    }
+                  },
+                  "identifiers": [
+                    {
+                      "id": "1000000105196",
+                      "name": "Email",
+                      "type": "synced_fields",
+                      "api_name": "transition_1_Trigger_RecordCreate_Email"
+                    }
+                  ],
+                  "identifier_outer_meta": [
+                    {
+                      "reference": null,
+                      "field": null,
+                      "lookup": null,
+                      "related_to": null
+                    }
+                  ]
+                },
+                {
+                  "id": "1000000105182",
+                  "criteria": null,
+                  "signal": {
+                    "api_name": "create",
+                    "service_org": {
+                      "id": "1000000029503",
+                      "name": "Mark Org1"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039",
+                        "name": "Leads",
+                        "api_name": "Leads"
+                      },
+                      "layout": {
+                        "id": "16828000000000161",
+                        "name": "Standard",
+                        "api_name": "Standard__s"
+                      },
+                      "type": "specific"
+                    }
+                  },
+                  "identifiers": [
+                    {
+                      "id": "1000000105237",
+                      "name": "First Name",
+                      "type": "synced_fields",
+                      "api_name": "transition_1_Trigger_RecordCreate_1_First_Name"
+                    }
+                  ],
+                  "identifier_outer_meta": [
+                    {
+                      "reference": null,
+                      "field": null,
+                      "lookup": null,
+                      "related_to": null
+                    }
+                  ]
+                },
+                {
+                  "id": "1000000105183",
+                  "criteria": null,
+                  "signal": {
+                    "api_name": "create",
+                    "service_org": {
+                      "id": "1000000029503",
+                      "name": "Mark Org1"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039",
+                        "name": "Leads",
+                        "api_name": "Leads"
+                      },
+                      "layout": {
+                        "id": "16828000000000161",
+                        "name": "Standard",
+                        "api_name": "Standard__s"
+                      },
+                      "type": "specific"
+                    }
+                  },
+                  "identifiers": [
+                    {
+                      "id": "1000000105286",
+                      "name": "Email",
+                      "type": "synced_fields",
+                      "api_name": "transition_1_Trigger_RecordCreate_2_Email"
+                    }
+                  ],
+                  "identifier_outer_meta": [
+                    {
+                      "reference": null,
+                      "field": null,
+                      "lookup": null,
+                      "related_to": null
+                    }
+                  ]
+                }
+              ],
+              "logs": null,
+              "precedence_order": 1,
+              "transition_criteria": null
+            },
+            "from_stage": {
+              "id": "1000000104882",
+              "name": "Stage 1",
+              "description": null,
+              "type": null,
+              "end_stage": false,
+              "tp_actions": null
+            },
+            "to_stage": {
+              "id": "1000000103102",
+              "name": "Stage 2",
+              "description": null,
+              "type": null,
+              "end_stage": false,
+              "tp_actions": null
+            },
+            "execute_on": null
+          }
+        ]
+      },
+      "GetTransitionsResponseExample": {
+        "transitions": [
+          {
+            "id": "668000000129005",
+            "name": "transition 1",
+            "description": "",
+            "type": "standard",
+            "from_stage": null,
+            "to_stage": {
+              "id": "668000000129001",
+              "name": "stage 1"
+            }
+          },
+          {
+            "id": "668000000135942",
+            "name": "1 Days",
+            "description": "",
+            "type": "wait",
+            "from_stage": {
+              "name": "s4",
+              "id": "668000000135008"
+            },
+            "to_stage": {
+              "name": "s5",
+              "id": "668000000135928"
+            },
+            "details": {
+              "execute_on": {
+                "period": 1,
+                "time_unit": "days"
+              }
+            }
+          }
+        ],
+        "info": {
+          "page": 1,
+          "per_page": 200,
+          "more_records": false,
+          "count": 2
+        }
       }
     }
   }
