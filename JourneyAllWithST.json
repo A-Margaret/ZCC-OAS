@@ -1208,7 +1208,8 @@
                 "name": {
                   "type": "string",
                   "description": "The name of the journey",
-                  "pattern": "^[a-zA-Z0-9 ]*$"
+                  "pattern": "^[a-zA-Z0-9 ]*$",
+                  "maxLength": 30
                 },
                 "description": {
                   "type": "string",
@@ -1238,7 +1239,8 @@
                 "name": {
                   "type": "string",
                   "description": "The name of the journey",
-                  "pattern": "^[a-zA-Z0-9 ]*$"
+                  "pattern": "^[a-zA-Z0-9 ]*$",
+                  "maxLength": 30
                 },
                 "description": {
                   "type": "string",
@@ -1967,7 +1969,8 @@
           "name": {
             "type": "string",
             "description": "Display name of the stage.",
-            "pattern": "^[a-zA-Z0-9 ]*$"
+            "pattern": "^[a-zA-Z0-9 ]*$",
+            "maxLength": 30
           },
           "description": {
             "type": [
@@ -1988,7 +1991,7 @@
               "neutral",
               "failure",
               "success",
-              null
+              "null"
             ],
             "default": "standard"
           },
