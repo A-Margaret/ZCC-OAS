@@ -1277,32 +1277,1351 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DeadlineAction"
+            }
+          }
+        }
+      },
+      "GoalDetailsReach": {
+        "type": "object",
+        "properties": {
+          "stages": {
+            "$ref": "#/components/schemas/StageArray"
+          }
+        },
+        "required": [
+          "stages"
+        ]
+      },
+      "GoalDetailsTimeTaken": {
+        "type": "object",
+        "required": [
+          "reach_within",
+          "stages"
+        ],
+        "properties": {
+          "reach_within": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "stages": {
+            "$ref": "#/components/schemas/StageArray"
+          }
+        }
+      },
+      "GoalDetailsPath": {
+        "type": "object",
+        "properties": {
+          "stages": {
+            "$ref": "#/components/schemas/StageArray"
+          }
+        },
+        "required": [
+          "stages"
+        ]
+      },
+      "DeadlineActionDetailsMoveToStage": {
+        "type": "object",
+        "required": [
+          "stage"
+        ],
+        "properties": {
+          "stage": {
+            "$ref": "#/components/schemas/StageSchema"
+          }
+        }
+      },
+      "StageArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/StageSchema"
+        },
+        "description": "Array of stage references"
+      },
+      "TimePeriod": {
+        "type": "object",
+        "properties": {
+          "period": {
+            "type": "integer"
+          },
+          "time_unit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "period",
+          "time_unit"
+        ]
+      },
+      "CreateJourneyPayload": {
+        "type": "object",
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the journey",
+                  "pattern": "^[a-zA-Z0-9 ]*$",
+                  "maxLength": 30
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A short description of the journey",
+                  "maxLength": 1000
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        },
+        "required": [
+          "journeys"
+        ]
+      },
+      "UpdateJourneyPayload": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the journey",
+                  "pattern": "^[a-zA-Z0-9 ]*$",
+                  "maxLength": 30
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Brief description of the journey",
+                  "maxLength": 1000
+                }
+              }
+            }
+          }
+        }
+      },
+      "GoalReach": {
+        "type": "object",
+        "required": [
+          "type",
+          "details"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "reach"
+            ],
+            "description": "Type of goal"
+          },
+          "details": {
+            "$ref": "#/components/schemas/GoalDetailsReach"
+          }
+        }
+      },
+      "GoalTimeTaken": {
+        "type": "object",
+        "required": [
+          "type",
+          "details"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "time_taken"
+            ],
+            "description": "Type of goal"
+          },
+          "details": {
+            "$ref": "#/components/schemas/GoalDetailsTimeTaken"
+          }
+        }
+      },
+      "GoalPath": {
+        "type": "object",
+        "required": [
+          "type",
+          "details"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "path"
+            ],
+            "description": "Type of goal"
+          },
+          "details": {
+            "$ref": "#/components/schemas/GoalDetailsPath"
+          }
+        }
+      },
+      "GetJourneysResponse": {
+        "type": "object",
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "created_time": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "modified_time": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "created_by": {
+                  "$ref": "#/components/schemas/IDAndName"
+                },
+                "modified_by": {
+                  "$ref": "#/components/schemas/IDAndName"
+                },
+                "cloned_from": {
+                  "$ref": "#/components/schemas/IDAndName"
+                },
+                "records_count": {
+                  "type": "integer"
+                },
+                "group_id": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetJourneyDetailsSchema": {
+        "type": "object",
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Detailed journey object with nested metadata (stages, transitions, etc.)",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "created_time": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "modified_time": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "record_condition": {
+                  "type": "boolean"
+                },
+                "chart_data": {
+                  "type": "object"
+                },
+                "created_by": {
+                  "type": "object"
+                },
+                "modified_by": {
+                  "type": "object"
+                },
+                "cloned_from": {
+                  "type": "object"
+                },
+                "records_count": {
+                  "type": "integer"
+                },
+                "group_id": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "integer"
+                },
+                "goal": {
+                  "$ref": "#/components/schemas/JourneyGoal"
+                },
+                "deadline": {
+                  "$ref": "#/components/schemas/JourneyDeadline"
+                },
+                "transitions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "stages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ConfigurableField": {
+        "type": "object",
+        "required": [
+          "id",
+          "api_name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the field."
+          },
+          "api_name": {
+            "type": "string",
+            "description": "API name of the configurable field."
+          }
+        },
+        "description": "Field reference used in criteria for comparisons."
+      },
+      "ConfigurableFieldsResponse": {
+        "type": "object",
+        "properties": {
+          "configurable_fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurableField"
+            }
+          },
+          "info": {
+            "$ref": "#/components/schemas/PaginationInfo"
+          }
+        }
+      },
+      "PaginationInfo": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "Current page number in the paginated response."
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of records returned in the current page."
+          },
+          "per_page": {
+            "type": "integer",
+            "description": "Maximum number of records per page."
+          },
+          "more_records": {
+            "type": "boolean",
+            "description": "Indicates if more records are available beyond the current page."
+          }
+        }
+      },
+      "IDAndName": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name"
+          }
+        }
+      },
+      "CreateTransition": {
+        "type": "object",
+        "properties": {
+          "transitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transition"
+            },
+            "description": "List of transition objects to be created. Currently, only one transition can be created per request."
+          }
+        }
+      },
+      "Transition": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/StandardTransition"
+          },
+          {
+            "$ref": "#/components/schemas/CreateWaitTransition"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "standard": "#/components/schemas/StandardTransition",
+            "wait": "#/components/schemas/CreateWaitTransition"
+          }
+        }
+      },
+      "SignalTrigger": {
+        "type": "object",
+        "properties": {
+          "signal": {
             "type": "object",
             "properties": {
-              "variables": {
+              "api_name": {
+                "type": "string"
+              },
+              "service_org": {
+                "$ref": "#/components/schemas/ServiceOrg"
+              },
+              "signal_props": {
+                "$ref": "#/components/schemas/SignalProperties"
+              }
+            },
+            "required": [
+              "api_name",
+              "service_org"
+            ]
+          }
+        },
+        "required": [
+          "signal"
+        ]
+      },
+      "StandardTransition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UnifiedTransitionBase"
+          }
+        ],
+        "required": [
+          "name",
+          "type",
+          "from_stage",
+          "to_stage"
+        ]
+      },
+      "WaitTransition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UnifiedTransitionBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "details": {
+                "type": "object",
+                "required": [
+                  "execute_on"
+                ],
+                "properties": {
+                  "execute_on": {
+                    "$ref": "#/components/schemas/TimePeriod"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "CreateWaitTransition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/WaitTransition"
+          }
+        ],
+        "required": [
+          "name",
+          "type",
+          "from_stage",
+          "to_stage"
+        ]
+      },
+      "UpdateTransition": {
+        "type": "object",
+        "properties": {
+          "transitions": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/UpdateTransitionSchema"
+            },
+            "description": "Transitions."
+          }
+        }
+      },
+      "StandardUpdateTransition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UnifiedTransitionBase"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "details": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StandardTransitionDetailsBaseProperties"
+              }
+            ],
+            "properties": {
+              "triggers": {
                 "type": "array",
                 "items": {
+                  "$ref": "#/components/schemas/TransitionTrigger"
+                },
+                "nullable": true
+              }
+            }
+          }
+        }
+      },
+      "UpdateTransitionSchema": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/StandardUpdateTransition"
+          },
+          {
+            "$ref": "#/components/schemas/WaitTransition"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "standard": "#/components/schemas/StandardUpdateTransition",
+            "wait": "#/components/schemas/WaitTransition"
+          }
+        }
+      },
+      "TransitionTrigger": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TriggerBase"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "_delete": {
+            "type": "boolean",
+            "description": "If true, deletes the object it is associated with. Requires the 'id' field."
+          },
+          "add_identifiers_to_similar_triggers": {
+            "type": "boolean",
+            "description": "If true, identifiers will be added to similar triggers sharing the same criteria."
+          }
+        }
+      },
+      "TriggerBase": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the object or entity."
+          },
+          "criteria": {
+            "type": "object",
+            "properties": {
+              "criteria": {
+                "$ref": "#/components/schemas/Criteria",
+                "description": "Defines the logical structure of conditions used to evaluate a trigger. Set to null to delete."
+              }
+            },
+            "description": "Defines the logical structure of conditions used to evaluate a trigger. Set to null to delete."
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Identifier"
+            },
+            "description": "List of identifiers used to map data between CRM and system."
+          },
+          "signal": {
+            "$ref": "#/components/schemas/SignalTrigger"
+          }
+        }
+      },
+      "Criteria": {
+        "type": "object",
+        "properties": {
+          "group_operator": {
+            "type": "string",
+            "enum": [
+              "AND",
+              "OR"
+            ],
+            "description": "Logical operator (AND/OR) used when defining criteria for multiple fields. This field is required only when more than one condition is grouped."
+          },
+          "group": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldCondition"
+            },
+            "description": "An array of conditions or nested groups. Should be used only when criteria involve multiple fields."
+          }
+        },
+        "description": "Defines conditional logic for triggers or transition criteria. Use a single condition object when only one field is involved. Use 'group_operator' and 'group' when multiple field-based conditions need to be evaluated together."
+      },
+      "TransitionLogEntry": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CustomValue"
+          },
+          {
+            "$ref": "#/components/schemas/MergeValue"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "custom": "#/components/schemas/CustomValue",
+            "merge": "#/components/schemas/MergeValue"
+          }
+        },
+        "description": "Log action entry definition."
+      },
+      "UnifiedTransitionBase": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of a transition",
+            "pattern": "^[a-zA-Z0-9 ]*$",
+            "maxLength": 30
+          },
+          "description": {
+            "type": "string",
+            "description": "A brief description about the transition",
+            "maxLength": 1000
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "wait"
+            ],
+            "description": ""
+          },
+          "from_stage": {
+            "$ref": "#/components/schemas/StageSchema",
+            "nullable": true,
+            "description": "ID reference to the starting stage of the transition. Nullable except for WaitTransition and WaitUpdateTransition."
+          },
+          "to_stage": {
+            "$ref": "#/components/schemas/StageSchema"
+          }
+        },
+        "description": "Base schema for both Create and Update transitions. Required fields vary by operation."
+      },
+      "Identifier": {
+        "type": "object",
+        "description": "Defines identifiers associated with a trigger, used for CRM or synced field mappings. Required fields depend on context.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Required when deleting the identifier (`_delete: true`) or when `type` is `synced_fields`."
+          },
+          "api_name": {
+            "type": "string",
+            "description": "API name of the field or object being identified."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "crm_fields",
+              "synced_fields"
+            ],
+            "description": "The source type of the identifier. Use `synced_fields` for system-synced fields and `crm_fields` for user-defined fields."
+          },
+          "_delete": {
+            "type": "boolean",
+            "description": "Set to `true` to delete the identifier. When true, `id` must be provided."
+          },
+          "ui_type": {
+            "type": "integer"
+          },
+          "data_type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "api_name",
+          "type"
+        ]
+      },
+      "FieldCondition": {
+        "type": "object",
+        "required": [
+          "comparator",
+          "value",
+          "configurable_field"
+        ],
+        "properties": {
+          "comparator": {
+            "type": "string",
+            "description": "Operator used to compare the value of a field (e.g., equal, not_equal)."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value to be compared or logged."
+          },
+          "configurable_field": {
+            "$ref": "#/components/schemas/ConfigurableField"
+          }
+        }
+      },
+      "CustomValue": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TransitionLogBase"
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "value"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "custom"
+                ],
+                "description": "Log type for custom value."
+              },
+              "value": {
+                "type": "string",
+                "description": "Value for custom type. Any string is allowed.",
+                "example": "any string"
+              }
+            }
+          }
+        ]
+      },
+      "MergeValue": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TransitionLogBase"
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "value"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "merge"
+                ],
+                "description": "Log type for merge value."
+              },
+              "value": {
+                "type": "string",
+                "pattern": "\\$\\{(journeys)\\(id=\\d+\\)\\.(configurable_fields)\\(id=\\d+\\)\\}",
+                "description": "Must match merge pattern.",
+                "example": "${journeys(id=12345).configurable_fields(id=67890)}"
+              }
+            }
+          }
+        ]
+      },
+      "TransitionLogBase": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the log entry. Required only when updating or deleting an existing log."
+          },
+          "_delete": {
+            "type": "boolean",
+            "description": "Set to true to delete this log entry. Requires 'id' to be specified."
+          },
+          "name": {
+            "type": "string",
+            "description": "Descriptive name of the log entry. Used when creating or updating a log."
+          }
+        },
+        "description": "Base schema for transition log entries. Common fields shared by all log types. Use 'id' and '_delete' only when deleting a log. For creating a new log, only 'name', 'type', and 'value' are required and sufficient."
+      },
+      "GetTransitionsResponse": {
+        "type": "object",
+        "properties": {
+          "transitions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "allOf": [
+                {
                   "oneOf": [
                     {
-                      "$ref": "#/components/schemas/CustomVariableValue"
+                      "$ref": "#/components/schemas/StandardTransition"
                     },
                     {
-                      "$ref": "#/components/schemas/MergeVariableValue"
+                      "$ref": "#/components/schemas/WaitTransition"
                     }
                   ],
                   "discriminator": {
-                    "propertyName": "data_type",
+                    "propertyName": "type",
                     "mapping": {
-                      "custom": "#/components/schemas/CustomVariableValue",
-                      "merge": "#/components/schemas/MergeVariableValue"
+                      "standard": "#/components/schemas/StandardTransition",
+                      "wait": "#/components/schemas/WaitTransition"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "info": {
+            "$ref": "#/components/schemas/PaginationInfo"
+          }
+        }
+      },
+      "StageSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the stage."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the stage.",
+            "pattern": "^[a-zA-Z0-9 ]*$",
+            "maxLength": 30
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Optional description of the stage.",
+            "maxLength": 1000
+          },
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Type of the stage.",
+            "enum": [
+              "standard",
+              "neutral",
+              "failure",
+              "success",
+              "null"
+            ],
+            "default": "standard"
+          },
+          "end_stage": {
+            "type": "boolean",
+            "description": "Indicates if this is the final stage.",
+            "default": false
+          },
+          "tp_actions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "nullable": true,
+            "description": "This field is currently not supported in version 1 of the API."
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "CreateStageSchema": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/StageSchema"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "description": "ID is generated by the server upon creation and should not be provided in the payload."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateStageSchema": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/StageSchema"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "description": "The unique identifier of the stage. This field is read-only and should not be provided in the payload as it's a path parameter.",
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "TransitionDetails": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/StandardTransitionDetails"
+          },
+          {
+            "$ref": "#/components/schemas/WaitTransition"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "standard": "#/components/schemas/StandardTransitionDetails",
+            "wait": "#/components/schemas/WaitTransition"
+          }
+        }
+      },
+      "StandardTransitionDetails": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UnifiedTransitionBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "details": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/StandardTransitionDetailsBaseProperties"
+                  }
+                ],
+                "properties": {
+                  "triggers": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TriggerDetails"
                     }
                   }
                 }
               }
-            },
-            "required": [
-              "variables"
+            }
+          }
+        ]
+      },
+      "TriggerDetails": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TriggerBase"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "identifier_outer_meta": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentifierOuterMeta"
+            }
+          }
+        }
+      },
+      "IdentifierOuterMeta": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string"
+          },
+          "field": {
+            "type": [
+              "string",
+              "null"
             ]
+          },
+          "lookup": {
+            "$ref": "#/components/schemas/LookUpSchema"
+          },
+          "related_to": {
+            "$ref": "#/components/schemas/LookUpSchema"
+          }
+        }
+      },
+      "SignalProperties": {
+        "type": "object",
+        "properties": {
+          "module": {
+            "$ref": "#/components/schemas/ParentProperties"
+          },
+          "layout": {
+            "$ref": "#/components/schemas/ParentProperties"
+          },
+          "field": {
+            "$ref": "#/components/schemas/ParentProperties"
+          },
+          "from_module": {
+            "$ref": "#/components/schemas/ParentProperties"
+          },
+          "to_module": {
+            "$ref": "#/components/schemas/ParentProperties"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "any",
+              "specific"
+            ],
+            "description": "Layout behavior type — must be 'any' or 'specific' if layout is present."
+          }
+        }
+      },
+      "ServiceOrg": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "org_id": {
+            "type": "string"
+          },
+          "org_name": {
+            "type": "string"
+          },
+          "service": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "authenticated_by": {
+            "$ref": "#/components/schemas/IDAndName"
+          },
+          "authenticated_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publisher_id": {
+            "type": "string"
+          },
+          "authenticatable_users_info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthenticatedUserInfo"
+            }
+          }
+        }
+      },
+      "AuthenticatedUserInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      },
+      "ParentProperties": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "api_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "LookUpSchema": {
+        "type": "object",
+        "properties": {
+          "module": {
+            "type": "object",
+            "properties": {
+              "api_name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "StandardTransitionDetailsBaseProperties": {
+        "type": "object",
+        "properties": {
+          "precedence_order": {
+            "type": "integer",
+            "description": "Defines the execution order for this transition relative to others."
+          },
+          "logs": {
+            "type": "array",
+            "description": "Contains log actions to be executed with this transition. Each log must include a name, type, and value.",
+            "items": {
+              "$ref": "#/components/schemas/TransitionLogEntry"
+            },
+            "nullable": true
+          },
+          "transition_criteria": {
+            "type": "object",
+            "description": "This field is currently not supported in version 1 of the API.",
+            "properties": {
+              "criteria": {
+                "$ref": "#/components/schemas/Criteria"
+              }
+            },
+            "nullable": true
+          }
+        }
+      },
+      "VariableSchema": {
+        "type": "object",
+        "properties": {
+          "variables": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CustomVariableValue"
+                },
+                {
+                  "$ref": "#/components/schemas/MergeVariableValue"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "data_type",
+                "mapping": {
+                  "custom": "#/components/schemas/CustomVariableValue",
+                  "merge": "#/components/schemas/MergeVariableValue"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "variables"
+        ]
+      },
+      "CustomVariableValue": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "data_type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the variable.",
+            "maxLength": 30
+          },
+          "value": {
+            "type": "string",
+            "description": "The custom string value of the variable.",
+            "maxLength": 1000
+          },
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "custom"
+            ],
+            "description": "The type of the variable: 'custom'."
+          }
+        }
+      },
+      "MergeVariableValue": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "data_type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the variable.",
+            "maxLength": 30
+          },
+          "value": {
+            "type": "string",
+            "pattern": "\\$\\{(journeys)\\(id=\\d+\\)\\.(configurable_fields)\\(id=\\d+\\)\\}",
+            "description": "The merge field value of the variable. Must match the merge pattern.",
+            "maxLength": 1000
+          },
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "merge"
+            ],
+            "description": "The type of the variable: 'merge'."
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "CreateJourneyPayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CreateJourneyPayload"
+            }
+          }
+        }
+      },
+      "UpdateJourneyPayload": {
+        "description": "Payload to update an existing journey",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateJourneyPayload"
+            }
+          }
+        }
+      },
+      "UpdateTransitionPayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateTransition"
+            }
+          }
+        }
+      },
+      "CreateTransitionPayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CreateTransition"
+            }
+          }
+        }
+      },
+      "CreateStagePayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "stages": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CreateStageSchema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "UpdateStagePayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "stages": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UpdateStageSchema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CreateVariablePayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/VariableSchema"
+            }
+          }
+        }
+      },
+      "UpdateVariablePayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "variables": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/CustomVariableValue"
+                      },
+                      {
+                        "$ref": "#/components/schemas/MergeVariableValue"
+                      }
+                    ],
+                    "discriminator": {
+                      "propertyName": "data_type",
+                      "mapping": {
+                        "custom": "#/components/schemas/CustomVariableValue",
+                        "merge": "#/components/schemas/MergeVariableValue"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "variables"
+              ]
+            }
           }
         }
       }
