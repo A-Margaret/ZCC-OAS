@@ -1,0 +1,4951 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Combined Journey API",
+    "version": "1.0.0"
+  },
+  "security": [
+    {
+      "OAuth2": [
+        "ZohoCommandCenter.journeys.ALL",
+        "ZohoCommandCenter.settings.signals.READ",
+        "ZohoCommandCenter.settings.service_orgs.READ"
+      ]
+    }
+  ],
+  "paths": {
+    "/commandcenter/v1/journeys": {
+      "get": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Get list of journeys",
+        "description": "Retrieves a list of active, draft, and inactive journeys using scope authentication.",
+        "operationId": "getJourneys",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetJourneysResponse"
+          },
+          "204": {
+            "description": "No journeys found"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Create a new journey",
+        "description": "Create a journey with configuration for goal, deadline, and initial settings.",
+        "operationId": "createJourney",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateJourneyPayload"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateJourneyErrorResponse"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ]
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}": {
+      "put": {
+        "summary": "Update a journey by ID",
+        "description": "Updates properties of a specific journey such as name, description, chart data, goal, and deadlines.",
+        "operationId": "updateJourney",
+        "tags": [
+          "Journeys"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateJourneyPayload"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/UpdateJourneyErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Get journey details by ID",
+        "description": "Retrieve detailed data for a specific journey including stages, transitions, chart data, goals, deadlines, and action metadata.",
+        "operationId": "getJourneyDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/IncludeParam"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetJourneyDetailsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Delete a journey",
+        "description": "Delete a journey by specifying its ID.",
+        "operationId": "deleteJourney",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/actions/clone": {
+      "post": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Clone a journey",
+        "description": "Duplicate a journey instead of editing a published one.",
+        "operationId": "cloneJourney",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JourneyActionErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/actions/publish": {
+      "post": {
+        "summary": "Publish a journey",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JourneyActionErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/actions/merge": {
+      "post": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Merge a journey",
+        "description": "Merge an edited journey with the original journey by publishing the changes.",
+        "operationId": "mergeJourney",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JourneyActionErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/actions/activate": {
+      "post": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Activate a journey",
+        "description": "Activate a journey that is currently in a deactivated state.",
+        "operationId": "activateJourney",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JourneyActionErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/actions/deactivate": {
+      "post": {
+        "tags": [
+          "Journeys"
+        ],
+        "summary": "Deactivate a journey",
+        "description": "Pause the execution of a journey by deactivating it.",
+        "operationId": "deactivateJourney",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200":
+          {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JourneyActionErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/configurable_fields": {
+      "get": {
+        "summary": "Get Configurable Fields",
+        "operationId": "getConfigurableFields",
+        "tags": [
+          "Configurable Fields"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ConfigurableFieldsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PageParam"
+          },
+          {
+            "$ref": "#/components/parameters/Per_pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/FiltersParam"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ]
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/transitions": {
+      "get": {
+        "summary": "Get all transitions for a journey",
+        "description": "The GET Journey Transitions API allows users to retrieve all configured transitions for a specific journey using the journey ID. It's a read-only operation.",
+        "operationId": "getJourneyTransitions",
+        "tags": [
+          "Transitions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PerPage"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetTransitionsResponse"
+          },
+          "204": {
+            "description": "No transitions found for the specified journey."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_commandcenter_v1_journeys_journey_id_transitions",
+        "summary": "Create a new transition that connects two stages within a journey, triggered either by a signal or after a specified wait time.",
+        "tags": [
+          "Transitions"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateTransitionPayload"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateUpdateResourceErrorResponse"
+          }
+        },
+        "description": "Creates a new transition that connects two stages within a journey. The transition can be triggered either by an incoming signal or after a specified wait time.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ]
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/transitions/{transition_id}": {
+      "put": {
+        "summary": "Update an existing transition in a journey.",
+        "description": "Allows updating a transition’s name, description, stages, wait parameters, triggers, logs, criteria, and identifiers. Bulk updates are not supported.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/TransitionId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateTransitionPayload"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateUpdateResourceErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Transitions"
+        ],
+        "summary": "Get transition details by ID",
+        "description": "The GET Journey Transition Details API allows users to retrieve specific journey's specific transition's all details and configured triggers by using journey and transition ID. It's a read-only operation, typically returning data in JSON.",
+        "operationId": "getTransitionDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/TransitionId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          },
+          {
+            "$ref": "#/components/parameters/IncludeInnerDetailsParam"
+          },
+          {
+            "$ref": "#/components/parameters/IncludeOuterDetailsParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetTransitionDetailsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Transitions"
+        ],
+        "summary": "Delete a transition",
+        "description": "The DELETE Journey Transition API allows users to delete a particular journey's transition by specifying the transition id.",
+        "operationId": "deleteTransition",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/TransitionId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/stages": {
+      "post": {
+        "tags": [
+          "Stages"
+        ],
+        "summary": "Create a new stage",
+        "description": "The POST Journey Stages API is designed for users to create stages within a journey. This operation is write-only, meaning it's used for submitting data rather than retrieving it. Typically, when a stage is successfully created, the API returns a response in JSON format indicating success.",
+        "operationId": "createStage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateStagePayload"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateUpdateResourceErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Stages"
+        ],
+        "summary": "Get all stages for a journey",
+        "description": "The GET Journey Stages API allows users to retrieve a specific journey's all stages. It's a read-only operation, typically returning data in JSON.",
+        "operationId": "getStages",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetStagesResponse"
+          },
+          "204": {
+            "description": "No stages found for the specified journey."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/stages/{stage_id}": {
+      "put": {
+        "tags": [
+          "Stages"
+        ],
+        "summary": "Update an existing stage",
+        "description": "Allows updating properties of a specific stage such as name, description, type, and end_stage.",
+        "operationId": "updateStage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/StageId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateStagePayload"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateUpdateResourceErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Stages"
+        ],
+        "summary": "Get stage details by ID",
+        "description": "The GET Journey Stage Details API allows users to retrieve a specific journey's specific stage's details by using journey and stage ID. It's a read-only operation, typically returning data in JSON.",
+        "operationId": "getStageDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/StageId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetStageDetailsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Stages"
+        ],
+        "summary": "Delete a stage",
+        "description": "The DELETE Journey Stage API allows users to delete a particular journey's stage by specifying stage id.",
+        "operationId": "deleteStage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/StageId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/variables": {
+      "post": {
+        "tags": [
+          "Variables"
+        ],
+        "summary": "Create a new variable",
+        "description": "In journey, we have two types of variables; they are user-defined and system-defined, but through API we can create only user-defined variables. In user defined variables, we can configure two types of user-defined variables like merge and custom. In merge, we can give any field as a value; in custom type, all values will be considered strings.",
+        "operationId": "createVariable",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateVariablePayload"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "207": {
+            "description": "Partial success or multi-status response for variable creation. This code may be returned if some variables were created successfully while others failed due to specific constraints (e.g., duplicates, invalid data)."
+          },
+          "400": {
+            "$ref": "#/components/responses/CreateVariableErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Variables"
+        ],
+        "summary": "Get all variables for a journey",
+        "description": "The GET Journeys Variables API is designed to fetch a comprehensive list of all variables related to a specific journey, including both user-defined and system-defined variables. To utilize this API, the journey's ID is required. This API performs a read-only operation and typically returns the data in JSON format.",
+        "operationId": "getVariables",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PerPage"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetVariablesResponse"
+          },
+          "204": {
+            "description": "No variables found for the specified journey."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/journeys/{journey_id}/variables/{variable_id}": {
+      "put": {
+        "tags": [
+          "Variables"
+        ],
+        "summary": "Update an existing variable",
+        "description": "The PUT Journey Variable API enables users to update system-defined variable name and user-defined variable names and values.",
+        "operationId": "updateVariable",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/VariableId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateVariablePayload"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/UpdateVariableErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Variables"
+        ],
+        "summary": "Get variable details by ID",
+        "description": "The GET Journeys Variable Details API is designed to fetch a comprehensive details of a variable related to a specific journey, including both user-defined and system-defined variables. To utilize this API, the journey and variable ID is required. This API performs a read-only operation and typically returns the data in JSON format.",
+        "operationId": "getVariableDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/VariableId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetVariableDetailsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Variables"
+        ],
+        "summary": "Delete a variable",
+        "description": "The DELETE Journey Variable is used to remove custom variables by specifying the variable Id, but the user is not able to delete system-defined variables.",
+        "operationId": "deleteVariable",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/JourneyId"
+          },
+          {
+            "$ref": "#/components/parameters/VariableId"
+          },
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/service_orgs": {
+      "get": {
+        "tags": [
+          "Service Organizations"
+        ],
+        "summary": "Get list of service organizations",
+        "description": "Retrieves a list of all service organizations.",
+        "operationId": "getServiceOrgs",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetServiceOrgsResponse"
+          },
+          "204": {
+            "description": "No service organizations found."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    },
+    "/commandcenter/v1/signals": {
+      "get": {
+        "tags": [
+          "Signals"
+        ],
+        "summary": "Get list of signals",
+        "description": "Retrieves a list of all available signals.",
+        "operationId": "getSignals",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetSignalsResponse"
+          },
+          "204": {
+            "description": "No signals found."
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequestErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://accounts.zoho.com/oauth/v2/auth",
+            "tokenUrl": "https://accounts.zoho.com/oauth/v2/token",
+            "scopes": {
+              "ZohoCommandCenter.journeys.ALL": "Full access to Journey APIs",
+              "ZohoCommandCenter.settings.signals.READ": "Read signals settings",
+              "ZohoCommandCenter.settings.service_orgs.READ": "Read service organizations settings"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "JourneyId": {
+        "name": "journey_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The unique identifier of the journey."
+      },
+      "IncludeParam": {
+        "name": "include",
+        "in": "query",
+        "description": "Comma-separated list of additional metadata to include (e.g., stages, transitions)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "PageParam": {
+        "name": "page",
+        "in": "query",
+        "description": "The page number to retrieve",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "Per_pageParam": {
+        "name": "per_page",
+        "in": "query",
+        "description": "Number of records per page",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "FiltersParam": {
+        "name": "filters",
+        "in": "query",
+        "description": "Filter expression to narrow down the results. This string must be URL-encoded before sending in the query. Example filter: {\"field\":{\"api_name\":\"transition\"},\"comparator\":\"equal\",\"value\":\"1000000004349\"}",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "TransitionId": {
+        "name": "transition_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The unique identifier of the transition to be retrieved or modified."
+      },
+      "Page": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1
+        },
+        "description": "To specify the current page."
+      },
+      "PerPage": {
+        "name": "per_page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 200
+        },
+        "description": "To specify the number of records per page. Default is 200."
+      },
+      "OrgHeader": {
+        "name": "X-CC-ORG",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Org ID of CommandCenter"
+      },
+      "IncludeInnerDetailsParam": {
+        "name": "include_inner_details",
+        "in": "query",
+        "description": "To get extra details in lookup fields. Possible values: \"triggers.identifiers.ui_type\", \"triggers.identifiers.data_type\", \"triggers.signal.org.type\", \"from_stage.end_stage\", \"to_stage.end_stage\"",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "IncludeOuterDetailsParam": {
+        "name": "include_outer_details",
+        "in": "query",
+        "description": "To get extra outer details about the fields. Possible values: \"identifier_meta\"",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "StageId": {
+        "name": "stage_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The unique identifier of the stage."
+      },
+      "VariableId": {
+        "name": "variable_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The unique identifier of the variable."
+      }
+    },
+    "responses": {
+      "SuccessResponse": {
+        "description": "Successful response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SuccessResponse"
+            },
+            "example": {
+              "journeys": [
+                {
+                  "code": "SUCCESS",
+                  "details": {
+                    "id": "1000000007733"
+                  },
+                  "message": "Journey created successfully",
+                  "status": "success"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "CreateJourneyErrorResponse": {
+        "description": "One of the possible error responses for journey creation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataListError"
+                },
+                {
+                  "$ref": "#/components/schemas/DuplicateDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                }
+              ]
+            },
+            "examples": {
+              "LimitExceededError": {
+                "$ref": "#/components/examples/LimitExceededError"
+              },
+              "MandatoryNotFoundError": {
+                "$ref": "#/components/examples/MandatoryNotFoundError"
+              },
+              "InvalidDataListError": {
+                "$ref": "#/components/examples/InvalidDataListError"
+              },
+              "DuplicateDataError": {
+                "$ref": "#/components/examples/DuplicateDataError"
+              }
+            }
+          }
+        }
+      },
+      "UpdateJourneyErrorResponse": {
+        "description": "One of the error responses for updating a journey",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/InvalidDataListError"
+                },
+                {
+                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                },
+                {
+                  "$ref": "#/components/schemas/DuplicateDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "#/components/schemas/NotAllowedError"
+                },
+                {
+                  "$ref": "#/components/schemas/DependentFieldMissingError"
+                }
+              ]
+            },
+            "examples": {
+              "LimitExceededError": {
+                "$ref": "#/components/examples/LimitExceededError"
+              },
+              "MandatoryNotFoundError": {
+                "$ref": "#/components/examples/MandatoryNotFoundError"
+              },
+              "InvalidDataError": {
+                "$ref": "#/components/examples/InvalidDataError"
+              },
+              "InvalidDataListError": {
+                "$ref": "#/components/examples/InvalidDataListError"
+              },
+              "DuplicateDataError": {
+                "$ref": "#/components/examples/DuplicateDataError"
+              },
+              "NotAllowedError": {
+                "$ref": "#/components/examples/NotAllowedError"
+              },
+              "DependentFieldMissingError": {
+                "$ref": "#/components/examples/DependentFieldMissingError"
+              }
+            }
+          }
+        }
+      },
+      "GetJourneysResponse": {
+        "description": "List of journeys retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetJourneysResponse"
+            },
+            "example": {
+              "$ref": "#/components/examples/GetJourneysResponse"
+            }
+          }
+        }
+      },
+      "GetJourneyDetailsResponse": {
+        "description": "Single journey with full details or an error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetJourneyDetailsSchema"
+            },
+            "example": {
+              "$ref": "#/components/examples/GetJourneyDetailsResponseExample"
+            }
+          }
+        }
+      },
+      "InvalidRequestErrorResponse": {
+        "description": "Request payload is invalid or missing required fields",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                }
+              ]
+            },
+            "examples": {
+              "InvalidDataError": {
+                "$ref": "#/components/examples/InvalidDataError"
+              },
+              "LimitExceededError": {
+                "$ref": "#/components/examples/LimitExceededError"
+              },
+              "MandatoryNotFoundError": {
+                "$ref": "#/components/examples/MandatoryNotFoundError"
+              }
+            }
+          }
+        }
+      },
+      "JourneyActionErrorResponse": {
+        "description": "Invalid data or not allowed action for publishing, cloning, or merging a journey.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/NotAllowedError"
+                }
+              ]
+            },
+            "examples": {
+              "InvalidDataError": {
+                "$ref": "#/components/examples/InvalidDataError"
+              },
+              "NotAllowedError": {
+                "$ref": "#/components/examples/NotAllowedError"
+              }
+            }
+          }
+        }
+      },
+      "ConfigurableFieldsResponse": {
+        "description": "Successful response with configurable fields",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ConfigurableFieldsResponse"
+            },
+            "example": {
+              "$ref": "#/components/examples/ConfigurableFieldsResponseExample"
+            }
+          }
+        }
+      },
+      "CreateUpdateResourceErrorResponse": {
+        "description": "Common error responses for creating or updating resources (e.g., transition, stage).",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataListError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededExtendedError"
+                },
+                {
+                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                },
+                {
+                  "$ref": "#/components/schemas/DuplicateDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "#/components/schemas/NotAllowedError"
+                },
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/DependentFieldMissingError"
+                }
+              ]
+            },
+            "examples": {
+              "LimitExceededError": {
+                "$ref": "#/components/examples/LimitExceededError"
+              },
+              "MandatoryNotFoundError": {
+                "$ref": "#/components/examples/MandatoryNotFoundError"
+              },
+              "InvalidDataListError": {
+                "$ref": "#/components/examples/InvalidDataListError"
+              },
+              "LimitExceededExtendedError": {
+                "$ref": "#/components/examples/LimitExceededExtendedError"
+              },
+              "DuplicateDataError": {
+                "$ref": "#/components/examples/DuplicateDataError"
+              },
+              "NotAllowedError": {
+                "$ref": "#/components/examples/NotAllowedError"
+              },
+              "InvalidDataError": {
+                "$ref": "#/components/examples/InvalidDataError"
+              },
+              "DependentFieldMissingError": {
+                "$ref": "#/components/examples/DependentFieldMissingError"
+              }
+            }
+          }
+        }
+      },
+      "GetTransitionsResponse": {
+        "description": "List of transitions retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetTransitionsResponse"
+            },
+            "example": {
+              "$ref": "#/components/examples/GetTransitionsResponseExample"
+            }
+          }
+        }
+      },
+      "GetTransitionDetailsResponse": {
+        "description": "Details of a specific transition retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "transitions": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransitionDetails"
+                  }
+                }
+              }
+            },
+            "example": {
+              "$ref": "#/components/examples/GetTransitionDetailsResponseExample"
+            }
+          }
+        }
+      },
+      "GetStagesResponse": {
+        "description": "List of stages retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "stages": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StageArray"
+                  }
+                }
+              }
+            },
+            "example": {
+              "$ref": "#/components/examples/GetStagesResponseExample"
+            }
+          }
+        }
+      },
+      "GetStageDetailsResponse": {
+        "description": "Details of a specific stage retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "stages": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StageSchema"
+                  }
+                }
+              }
+            },
+            "example": {
+              "$ref": "#/components/examples/GetStageDetailsResponseExample"
+            }
+          }
+        }
+      },
+      "CreateVariableErrorResponse": {
+        "description": "Error response for creating a variable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                },
+                {
+                  "$ref": "#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "#/components/schemas/InvalidDataListError"
+                },
+                {
+                  "$ref": "#/components/schemas/DuplicateDataError"
+                }
+              ]
+            },
+            "examples": {
+              "LimitExceededError": {
+                "$ref": "#/components/examples/LimitExceededError"
+              },
+              "MandatoryNotFoundError": {
+                "$ref": "#/components/examples/MandatoryNotFoundError"
+              },
+              "InvalidDataError": {
+                "$ref": "#/components/examples/InvalidDataError"
+              },
+              "InvalidDataListError": {
+                "$ref": "#/components/examples/InvalidDataListError"
+              },
+              "DuplicateDataError": {
+                "$ref": "#/components/examples/DuplicateDataError"
+              }
+            }
+          }
+        }
+      },
+      "GetVariablesResponse": {
+        "description": "List of variables retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "variables": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VariableDetails"
+                  }
+                },
+                "info": {
+                  "$ref": "#/components/schemas/PaginationInfo"
+                  }
+              }
+            },
+            "example": {
+              "$ref": "#/components/examples/GetVariablesResponseExample"
+            }
+          }
+        }
+      },
+      "GetVariableDetailsResponse": {
+        "description": "Details of a specific variable retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "variables": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VariableDetails"
+                  }
+                }
+              }
+            },
+            "example": {
+              "$ref": "#/components/examples/GetVariableDetailsResponseExample"
+            }
+          }
+        }
+      },
+      "UpdateVariableErrorResponse": {
+        "description": "Error response for updating a variable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "#/components/schemas/InvalidDataListError"
+                },
+                {
+                  "$ref": "#/components/schemas/DuplicateDataError"
+                }
+              ]
+            },
+            "examples": {
+              "InvalidDataError": {
+                "$ref": "#/components/examples/InvalidDataError"
+              },
+              "DuplicateDataError": {
+                "$ref": "#/components/examples/DuplicateDataError"
+              },
+              "InvalidDataListError": {
+                "$ref": "#/components/examples/InvalidDataListError"
+              }
+            }
+          }
+        }
+      },
+      "GetServiceOrgsResponse": {
+        "description": "List of service organizations retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "service_orgs": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceOrg"
+                  }
+                }
+              },
+              "required": [
+                "service_orgs"
+              ]
+            },
+            "example": {
+              "$ref": "#/components/examples/GetServiceOrgsResponseExample"
+            }
+          }
+        }
+      },
+      "GetSignalsResponse": {
+        "description": "List of signals retrieved successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SignalsResponse"
+            },
+            "example": {
+              "$ref": "#/components/examples/GetSignalsResponseExample"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "JourneyGoal": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GoalReach"
+          },
+          {
+            "$ref": "#/components/schemas/GoalTimeTaken"
+          },
+          {
+            "$ref": "#/components/schemas/GoalPath"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "reach": "#/components/schemas/GoalReach",
+            "time_taken": "#/components/schemas/GoalTimeTaken",
+            "path": "#/components/schemas/GoalPath"
+          }
+        }
+      },
+      "DeadlineAction": {
+        "type": "object",
+        "description": "Action triggered at deadline",
+        "required": [
+          "action",
+          "id",
+          "details"
+        ],
+        "properties": {
+          "action": {
+            "type": "string",
+            "description": "Action type",
+            "enum": [
+              "move_to_stage"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "Action identifier"
+          },
+          "details": {
+            "$ref": "#/components/schemas/DeadlineActionDetailsMoveToStage"
+          }
+        }
+      },
+      "JourneyDeadline": {
+        "type": "object",
+        "description": "Deadline configuration for the journey",
+        "required": [
+          "execute_on",
+          "stage",
+          "actions"
+        ],
+        "properties": {
+          "execute_on": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/StageSchema"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeadlineAction"
+            }
+          }
+        }
+      },
+      "GoalDetailsReach": {
+        "type": "object",
+        "required": [
+          "stages"
+        ],
+        "properties": {
+          "stages": {
+            "$ref": "#/components/schemas/StageArray"
+          }
+        }
+      },
+      "GoalDetailsTimeTaken": {
+        "type": "object",
+        "required": [
+          "reach_within",
+          "stages"
+        ],
+        "properties": {
+          "reach_within": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "stages": {
+            "$ref": "#/components/schemas/StageArray"
+          }
+        }
+      },
+      "GoalDetailsPath": {
+        "type": "object",
+        "required": [
+          "stages"
+        ],
+        "properties": {
+          "stages": {
+            "$ref": "#/components/schemas/StageArray"
+          }
+        }
+      },
+      "DeadlineActionDetailsMoveToStage": {
+        "type": "object",
+        "required": [
+          "stage"
+        ],
+        "properties": {
+          "stage": {
+            "$ref": "#/components/schemas/StageSchema"
+          }
+        }
+      },
+      "StageArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/StageSchema"
+        },
+        "description": "Array of stage references"
+      },
+      "TimePeriod": {
+        "type": "object",
+        "required": [
+          "period",
+          "time_unit"
+        ],
+        "properties": {
+          "period": {
+            "type": "integer"
+          },
+          "time_unit": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateJourneyPayload": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the journey",
+                  "pattern": "^[a-zA-Z0-9 ]*$",
+                  "maxLength": 30
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A short description of the journey",
+                  "maxLength": 1000
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        }
+      },
+      "UpdateJourneyPayload": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the journey",
+                  "pattern": "^[a-zA-Z0-9 ]*$",
+                  "maxLength": 30
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Brief description of the journey",
+                  "maxLength": 1000
+                }
+              }
+            }
+          }
+        }
+      },
+      "GoalReach": {
+        "type": "object",
+        "required": [
+          "type",
+          "details"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "reach"
+            ],
+            "description": "Type of goal"
+          },
+          "details": {
+            "$ref": "#/components/schemas/GoalDetailsReach"
+          }
+        }
+      },
+      "GoalTimeTaken": {
+        "type": "object",
+        "required": [
+          "type",
+          "details"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "time_taken"
+            ],
+            "description": "Type of goal"
+          },
+          "details": {
+            "$ref": "#/components/schemas/GoalDetailsTimeTaken"
+          }
+        }
+      },
+      "GoalPath": {
+        "type": "object",
+        "required": [
+          "type",
+          "details"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "path"
+            ],
+            "description": "Type of goal"
+          },
+          "details": {
+            "$ref": "#/components/schemas/GoalDetailsPath"
+          }
+        }
+      },
+      "GetJourneysResponse": {
+        "type": "object",
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "created_time": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "modified_time": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "created_by": {
+                  "$ref": "#/components/schemas/IDAndName"
+                },
+                "modified_by": {
+                  "$ref": "#/components/schemas/IDAndName"
+                },
+                "cloned_from": {
+                  "$ref": "#/components/schemas/IDAndName"
+                },
+                "records_count": {
+                  "type": "integer"
+                },
+                "group_id": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetJourneyDetailsSchema": {
+        "type": "object",
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Detailed journey object with nested metadata (stages, transitions, etc.)",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "created_time": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "modified_time": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "record_condition": {
+                  "type": "boolean"
+                },
+                "chart_data": {
+                  "type": "object"
+                },
+                "created_by": {
+                  "type": "object"
+                },
+                "modified_by": {
+                  "type": "object"
+                },
+                "cloned_from": {
+                  "type": "object"
+                },
+                "records_count": {
+                  "type": "integer"
+                },
+                "group_id": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "integer"
+                },
+                "goal": {
+                  "$ref": "#/components/schemas/JourneyGoal"
+                },
+                "deadline": {
+                  "$ref": "#/components/schemas/JourneyDeadline"
+                },
+                "transitions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "stages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ConfigurableField": {
+        "type": "object",
+        "required": [
+          "id",
+          "api_name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the field."
+          },
+          "api_name": {
+            "type": "string",
+            "description": "API name of the configurable field."
+          }
+        }
+      },
+      "ConfigurableFieldsResponse": {
+        "type": "object",
+        "properties": {
+          "configurable_fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurableField"
+            }
+          },
+          "info": {
+            "$ref": "#/components/schemas/PaginationInfo"
+          }
+        }
+      },
+      "PaginationInfo": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "Current page number in the paginated response."
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of records returned in the current page."
+          },
+          "per_page": {
+            "type": "integer",
+            "description": "Maximum number of records per page."
+          },
+          "more_records": {
+            "type": "boolean",
+            "description": "Indicates if more records are available beyond the current page."
+          }
+        }
+      },
+      "IDAndName": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateTransition": {
+        "type": "object",
+        "properties": {
+          "transitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transition"
+            },
+            "description": "List of transition objects to be created. Currently, only one transition can be created per request."
+          }
+        }
+      },
+      "Transition": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/StandardTransition"
+          },
+          {
+            "$ref": "#/components/schemas/CreateWaitTransition"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "standard": "#/components/schemas/StandardTransition",
+            "wait": "#/components/schemas/CreateWaitTransition"
+          }
+        }
+      },
+      "SignalTrigger": {
+        "type": "object",
+        "required": [
+          "signal"
+        ],
+        "properties": {
+          "signal": {
+            "type": "object",
+            "required": [
+              "api_name",
+              "service_org"
+            ],
+            "properties": {
+              "api_name": {
+                "type": "string"
+              },
+              "service_org": {
+                "$ref": "#/components/schemas/ServiceOrg"
+              },
+              "signal_props": {
+                "$ref": "#/components/schemas/SignalProperties"
+              }
+            }
+          }
+        }
+      },
+      "StandardTransition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UnifiedTransitionBase"
+          }
+        ],
+        "required": [
+          "name",
+          "type",
+          "from_stage",
+          "to_stage"
+        ]
+      },
+      "WaitTransition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UnifiedTransitionBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "details": {
+                "type": "object",
+                "required": [
+                  "execute_on"
+                ],
+                "properties": {
+                  "execute_on": {
+                    "$ref": "#/components/schemas/TimePeriod"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "CreateWaitTransition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/WaitTransition"
+          }
+        ],
+        "required": [
+          "name",
+          "type",
+          "from_stage",
+          "to_stage"
+        ]
+      },
+      "UpdateTransition": {
+        "type": "object",
+        "properties": {
+          "transitions": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/UpdateTransitionSchema"
+            },
+            "description": "Transitions."
+          }
+        }
+      },
+      "StandardUpdateTransition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UnifiedTransitionBase"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "details": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StandardTransitionDetailsBaseProperties"
+              }
+            ],
+            "properties": {
+              "triggers": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TransitionTrigger"
+                },
+                "nullable": true
+              }
+            }
+          }
+        }
+      },
+      "UpdateTransitionSchema": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/StandardUpdateTransition"
+          },
+          {
+            "$ref": "#/components/schemas/WaitTransition"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "standard": "#/components/schemas/StandardUpdateTransition",
+            "wait": "#/components/schemas/WaitTransition"
+          }
+        }
+      },
+      "TransitionTrigger": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TriggerBase"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "_delete": {
+            "type": "boolean",
+            "description": "If true, deletes the object it is associated with. Requires the 'id' field."
+          },
+          "add_identifiers_to_similar_triggers": {
+            "type": "boolean",
+            "description": "If true, identifiers will be added to similar triggers sharing the same criteria."
+          }
+        }
+      },
+      "TriggerBase": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the object or entity."
+          },
+          "criteria": {
+            "type": "object",
+            "description": "Defines the logical structure of conditions used to evaluate a trigger. Set to null to delete.",
+            "properties": {
+              "criteria": {
+                "$ref": "#/components/schemas/Criteria",
+                "description": "Defines the logical structure of conditions used to evaluate a trigger. Set to null to delete."
+              }
+            }
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Identifier"
+            },
+            "description": "List of identifiers used to map data between CRM and system."
+          },
+          "signal": {
+            "$ref": "#/components/schemas/SignalTrigger"
+          }
+        }
+      },
+      "Criteria": {
+        "type": "object",
+        "description": "Defines conditional logic for triggers or transition criteria. Use a single condition object when only one field is involved. Use 'group_operator' and 'group' when multiple field-based conditions need to be evaluated together.",
+        "properties": {
+          "group_operator": {
+            "type": "string",
+            "enum": [
+              "AND",
+              "OR"
+            ],
+            "description": "Logical operator (AND/OR) used when defining criteria for multiple fields. This field is required only when more than one condition is grouped."
+          },
+          "group": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldCondition"
+            },
+            "description": "An array of conditions or nested groups. Should be used only when criteria involve multiple fields."
+          }
+        }
+      },
+      "TransitionLogEntry": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CustomValue"
+          },
+          {
+            "$ref": "#/components/schemas/MergeValue"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "custom": "#/components/schemas/CustomValue",
+            "merge": "#/components/schemas/MergeValue"
+          }
+        },
+        "description": "Log action entry definition."
+      },
+      "UnifiedTransitionBase": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of a transition",
+            "pattern": "^[a-zA-Z0-9 ]*$",
+            "maxLength": 30
+          },
+          "description": {
+            "type": "string",
+            "description": "A brief description about the transition",
+            "maxLength": 1000
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "wait"
+            ],
+            "description": ""
+          },
+          "from_stage": {
+            "$ref": "#/components/schemas/StageSchema",
+            "nullable": true,
+            "description": "ID reference to the starting stage of the transition. Nullable except for WaitTransition and WaitUpdateTransition."
+          },
+          "to_stage": {
+            "$ref": "#/components/schemas/StageSchema"
+          }
+        },
+        "description": "Base schema for both Create and Update transitions. Required fields vary by operation."
+      },
+      "Identifier": {
+        "type": "object",
+        "required": [
+          "api_name",
+          "type"
+        ],
+        "description": "Defines identifiers associated with a trigger, used for CRM or synced field mappings. Required fields depend on context.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Required when deleting the identifier (`_delete: true`) or when `type` is `synced_fields`."
+          },
+          "api_name": {
+            "type": "string",
+            "description": "API name of the field or object being identified."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "crm_fields",
+              "synced_fields"
+            ],
+            "description": "The source type of the identifier. Use `synced_fields` for system-synced fields and `crm_fields` for user-defined fields."
+          },
+          "_delete": {
+            "type": "boolean",
+            "description": "Set to `true` to delete the identifier. When true, `id` must be provided."
+          },
+          "ui_type": {
+            "type": "integer"
+          },
+          "data_type": {
+            "type": "string"
+          }
+        }
+      },
+      "FieldCondition": {
+        "type": "object",
+        "required": [
+          "comparator",
+          "value",
+          "configurable_field"
+        ],
+        "properties": {
+          "comparator": {
+            "type": "string",
+            "description": "Operator used to compare the value of a field (e.g., equal, not_equal)."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value to be compared or logged."
+          },
+          "configurable_field": {
+            "$ref": "#/components/schemas/ConfigurableField"
+          }
+        }
+      },
+      "CustomValue": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TransitionLogBase"
+          }
+        ],
+        "type": "object",
+        "required": [
+          "type",
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "custom"
+            ],
+            "description": "Log type for custom value."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value for custom type. Any string is allowed.",
+            "example": "any string"
+          }
+        }
+      },
+      "MergeValue": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TransitionLogBase"
+          }
+        ],
+        "type": "object",
+        "required": [
+          "type",
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "merge"
+            ],
+            "description": "Log type for merge value."
+          },
+          "value": {
+            "type": "string",
+            "pattern": "\\$\\{(journeys)\\(id=\\d+\\)\\.(configurable_fields)\\(id=\\d+\\)\\}",
+            "description": "Must match merge pattern.",
+            "example": "${journeys(id=12345).configurable_fields(id=67890)}"
+          }
+        }
+      },
+      "TransitionLogBase": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the log entry. Required only when updating or deleting an existing log."
+          },
+          "_delete": {
+            "type": "boolean",
+            "description": "Set to true to delete this log entry. Requires 'id' to be specified."
+          },
+          "name": {
+            "type": "string",
+            "description": "Descriptive name of the log entry. Used when creating or updating a log."
+          }
+        },
+        "description": "Base schema for transition log entries. Common fields shared by all log types. Use 'id' and '_delete' only when deleting a log. For creating a new log, only 'name', 'type', and 'value' are required and sufficient."
+      },
+      "GetTransitionsResponse": {
+        "type": "object",
+        "properties": {
+          "transitions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "allOf": [
+                {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/StandardTransition"
+                    },
+                    {
+                      "$ref": "#/components/schemas/WaitTransition"
+                    }
+                  ],
+                  "discriminator": {
+                    "propertyName": "type",
+                    "mapping": {
+                      "standard": "#/components/schemas/StandardTransition",
+                      "wait": "#/components/schemas/WaitTransition"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "info": {
+            "$ref": "#/components/schemas/PaginationInfo"
+          }
+        }
+      },
+      "StageSchema": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the stage."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the stage.",
+            "pattern": "^[a-zA-Z0-9 ]*$",
+            "maxLength": 30
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional description of the stage.",
+            "maxLength": 1000
+          },
+          "type": {
+            "type": "string",
+            "nullable": true,
+            "description": "Type of the stage.",
+            "enum": [
+              "standard",
+              "neutral",
+              "failure",
+              "success"
+            ],
+            "default": "standard"
+          },
+          "end_stage": {
+            "type": "boolean",
+            "description": "Indicates if this is the final stage.",
+            "default": false
+          },
+          "tp_actions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "nullable": true,
+            "description": "This field is currently not supported in version 1 of the API."
+          }
+        }
+      },
+      "CreateStageSchema": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/StageSchema"
+          }
+        ],
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "description": "ID is generated by the server upon creation and should not be provided in the payload."
+          }
+        }
+      },
+      "UpdateStageSchema": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/StageSchema"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "description": "The unique identifier of the stage. This field is read-only and should not be provided in the payload as it's a path parameter.",
+            "type": "string"
+          }
+        }
+      },
+      "TransitionDetails": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/StandardTransitionDetails"
+          },
+          {
+            "$ref": "#/components/schemas/WaitTransition"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "standard": "#/components/schemas/StandardTransitionDetails",
+            "wait": "#/components/schemas/WaitTransition"
+          }
+        }
+      },
+      "StandardTransitionDetails": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UnifiedTransitionBase"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "details": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StandardTransitionDetailsBaseProperties"
+              }
+            ],
+            "properties": {
+              "triggers": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TriggerDetails"
+                },
+                "nullable": true
+              }
+            }
+          }
+        }
+      },
+      "TriggerDetails": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TriggerBase"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "identifier_outer_meta": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentifierOuterMeta"
+            "
+            }
+          }
+        }
+      },
+      "IdentifierOuterMeta": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string"
+          },
+          "field": {
+            "type": "string",
+            "nullable": true
+          },
+          "lookup": {
+            "type": "object",
+            "properties": {
+              "module": {
+                "type": "object",
+                "properties": {
+                  "api_name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "related_to": {
+            "type": "object",
+            "properties": {
+              "module": {
+                "type": "object",
+                "properties": {
+                  "api_name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "SignalProperties": {
+        "type": "object",
+        "properties": {
+          "module": {
+            "$ref": "#/components/schemas/ParentProperties"
+          },
+          "layout": {
+            "$ref": "#/components/schemas/ParentProperties"
+          },
+          "field": {
+            "$ref": "#/components/schemas/ParentProperties"
+          },
+          "from_module": {
+            "$ref": "#/components/schemas/ParentProperties"
+          },
+          "to_module": {
+            "$ref": "#/components/schemas/ParentProperties"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "any",
+              "specific"
+            ],
+            "description": "Layout behavior type — must be 'any' or 'specific' if layout is present."
+          }
+        }
+      },
+      "ServiceOrg": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "org_id": {
+            "type": "string"
+          },
+          "org_name": {
+            "type": "string"
+          },
+          "service": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "authenticated_by": {
+            "$ref": "#/components/schemas/IDAndName"
+          },
+          "authenticated_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publisher_id": {
+            "type": "string"
+          },
+          "authenticatable_users_info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthenticatedUserInfo"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the service organization."
+          }
+        }
+      },
+      "AuthenticatedUserInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      },
+      "ParentProperties": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "api_name": {
+            "type": "string"
+          }
+        }
+      },
+      "LookUpSchema": {
+        "type": "object",
+        "properties": {
+          "module": {
+            "type": "object",
+            "properties": {
+              "api_name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "StandardTransitionDetailsBaseProperties": {
+        "type": "object",
+        "properties": {
+          "precedence_order": {
+            "type": "integer",
+            "description": "Defines the execution order for this transition relative to others."
+          },
+          "logs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransitionLogEntry"
+            },
+            "nullable": true,
+            "description": "Contains log actions to be executed with this transition. Each log must include a name, type, and value."
+          },
+          "transition_criteria": {
+            "type": "object",
+            "nullable": true,
+            "description": "This field is currently not supported in version 1 of the API.",
+            "properties": {
+              "criteria": {
+                "$ref": "#/components/schemas/Criteria"
+              }
+            }
+          }
+        }
+      },
+      "VariableBaseProperties": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 30,
+            "pattern": "^[a-zA-Z0-9 ]*$"
+          }
+        }
+      },
+      "CustomVariableProperties": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VariableBaseProperties"
+          }
+        ],
+        "type": "object",
+        "required": [
+          "data_type",
+          "value"
+        ],
+        "properties": {
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "custom"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        }
+      },
+      "MergeVariableProperties": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VariableBaseProperties"
+          }
+        ],
+        "type": "object",
+        "required": [
+          "data_type",
+          "value"
+        ],
+        "properties": {
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "merge"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "pattern": "\\$\\{(journeys)\\(id=\\d+\\)\\.(configurable_fields)\\(id=\\d+\\)\\}",
+            "description": "Must match merge pattern.",
+            "example": "${journeys(id=12345).configurable_fields(id=67890)}"
+          }
+        }
+      },
+      "VariableItem": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CustomVariableProperties"
+          },
+          {
+            "$ref": "#/components/schemas/MergeVariableProperties"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "data_type"
+        }
+      },
+      "VariableDetails": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VariableItem"
+          }
+        ],
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the variable."
+          },
+          "generated_type": {
+            "type": "string",
+            "enum": [
+              "system",
+              "custom"
+            ],
+            "description": "Indicates if the variable is system-defined or user-defined."
+          }
+        }
+      },
+      "CreateVariableSchema": {
+        "type": "object",
+        "required": [
+          "variables"
+        ],
+        "properties": {
+          "variables": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/VariableItem"
+                }
+              ],
+              "required": [
+                "name",
+                "data_type",
+                "value"
+              ],
+              "properties": {
+                "id": {
+                  "readOnly": true,
+                  "nullable": true
+                },
+                "generated_type": {
+                  "readOnly": true,
+                  "nullable": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "UpdateVariableSchema": {
+        "type": "object",
+        "required": [
+          "variables"
+        ],
+        "properties": {
+          "variables": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/VariableItem"
+                }
+              ],
+              "description": "Properties to update for a variable. 'id' is a path parameter and not included here. All fields are optional for update.",
+              "properties": {
+                "id": {
+                  "readOnly": true,
+                  "nullable": true
+                },
+                "generated_type": {
+                  "readOnly": true,
+                  "nullable": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "SignalsResponse": {
+        "type": "object",
+        "properties": {
+          "signals": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "api_name": {
+                  "type": "string",
+                  "description": "Technical identifier for the signal."
+                },
+                "display_name": {
+                  "type": "string",
+                  "description": "Name displayed for the signal."
+                },
+                "signal_condition": {
+                  "type": "boolean",
+                  "description": "Whether the signal uses condition-based logic."
+                },
+                "service_org": {
+                  "$ref": "#/components/schemas/ServiceOrg"
+                },
+                "signal_props": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SignalProp"
+                  }
+                }
+              },
+              "required": [
+                "api_name",
+                "display_name",
+                "signal_condition",
+                "service_org",
+                "signal_props"
+              ]
+            }
+          }
+        },
+        "required": [
+          "signals"
+        ]
+      },
+      "SignalProp": {
+        "type": "object",
+        "properties": {
+          "required": {
+            "type": "boolean",
+            "description": "Whether this signal property must be provided."
+          },
+          "api_name": {
+            "type": "string",
+            "description": "Technical name used internally to reference this property."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Human-readable label for this property."
+          },
+          "parent_prop": {
+            "type": "string",
+            "nullable": true,
+            "description": "Parent property this is dependent on, if any."
+          },
+          "data_type": {
+            "type": "string",
+            "description": "Type of value expected (e.g., object, array).",
+            "enum": [
+              "object",
+              "array",
+              "string",
+              "number",
+              "boolean"
+            ]
+          }
+        },
+        "required": [
+          "required",
+          "api_name",
+          "display_name",
+          "data_type"
+        ]
+      },
+      "InvalidDataError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "details",
+          "status"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INVALID_DATA"
+            ],
+            "description": "A short machine-readable code indicating the outcome or error type."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description explaining the status or error."
+          },
+          "details": {
+            "$ref": "#/components/schemas/FlatErrorDetails"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ],
+            "description": "The status of the response: success or error."
+          }
+        }
+      },
+      "InvalidDataListError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "INVALID_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/CommonErrorDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        }
+      },
+      "DuplicateDataError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "DUPLICATE_DATA"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/CommonErrorDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        }
+      },
+      "LimitExceededError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "LIMIT_EXCEEDED"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/LimitExceededDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        }
+      },
+      "MandatoryNotFoundError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "MANDATORY_NOT_FOUND"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/CommonErrorDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        }
+      },
+      "NotAllowedError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "status",
+          "details"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "NOT_ALLOWED"
+            ],
+            "description": "A short machine-readable code indicating the outcome or error type."
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description explaining the status or error."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ],
+            "description": "The status of the response: success or error."
+          },
+          "details": {
+            "$ref": "#/components/schemas/FlatErrorDetails"
+          }
+        }
+      },
+      "DependentFieldMissingError": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "DEPENDENT_FIELD_MISSING"
+                  ],
+                  "description": "Error code indicating a required dependent field is missing."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Error message indicating what is missing."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/DependentFieldMissingDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "error"
+                  ],
+                  "description": "Error status."
+                }
+              }
+            }
+          }
+        }
+      },
+      "CommonErrorDetails": {
+        "type": "object",
+        "required": [
+          "api_name",
+          "json_path"
+        ],
+        "properties": {
+          "api_name": {
+            "type": "string",
+            "description": "The name of the API field causing the issue."
+          },
+          "json_path": {
+            "type": "string",
+            "description": "The JSON path in the payload where the issue was found."
+          }
+        }
+      },
+      "FlatErrorDetails": {
+        "type": "object",
+        "required": [
+          "resource_path_index"
+        ],
+        "properties": {
+          "resource_path_index": {
+            "type": "string",
+            "description": "The index of the problematic resource in the input array."
+          }
+        }
+      },
+      "LimitExceededDetails": {
+        "type": "object",
+        "required": [
+          "api_name",
+          "json_path",
+          "limit"
+        ],
+        "properties": {
+          "api_name": {
+            "type": "string",
+            "description": "The name of the API field causing the issue."
+          },
+          "json_path": {
+            "type": "string",
+            "description": "The JSON path in the payload where the issue was found."
+          },
+          "limit": {
+            "type": "string",
+            "description": "The maximum allowed limit that was exceeded."
+          }
+        }
+      },
+      "SuccessDetails": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the created or affected resource."
+          }
+        }
+      },
+      "DependentFieldMissingDetails": {
+        "type": "object",
+        "required": [
+          "api_name",
+          "json_path",
+          "dependee"
+        ],
+        "properties": {
+          "api_name": {
+            "type": "string"
+          },
+          "json_path": {
+            "type": "string"
+          },
+          "dependee": {
+            "type": "object",
+            "required": [
+              "api_name",
+              "json_path"
+            ],
+            "properties": {
+              "api_name": {
+                "type": "string"
+              },
+              "json_path": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "required": [
+          "journeys"
+        ],
+        "properties": {
+          "journeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message",
+                "details",
+                "status"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "SUCCESS"
+                  ],
+                  "description": "A short machine-readable code indicating the outcome or error type."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Human-readable description explaining the status or error."
+                },
+                "details": {
+                  "$ref": "#/components/schemas/SuccessDetails"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "success"
+                  ],
+                  "description": "The status of the response: success or error."
+                }
+              }
+            },
+            "description": "List of journey-level responses or results."
+          }
+        }
+      },
+      "LimitExceededExtendedError": {
+        "type": "object",
+        "properties": {
+          "transitions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "LIMIT_EXCEEDED"
+                  ]
+                },
+                "details": {
+                  "$ref": "#/components/schemas/LimitExceededExtendedDetails"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "LimitExceededExtendedDetails": {
+        "type": "object",
+        "properties": {
+          "api_name": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "string"
+          },
+          "limit_due_to": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "api_name": {
+                  "type": "string"
+                },
+                "json_path": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "json_path": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "CreateJourneyPayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CreateJourneyPayload"
+            },
+            "example": {
+              "$ref": "#/components/examples/CreateJourneyPayloadExample"
+            }
+          }
+        }
+      },
+      "UpdateJourneyPayload": {
+        "description": "Payload to update an existing journey",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateJourneyPayload"
+            },
+            "example": {
+              "$ref": "#/components/examples/UpdateJourneyPayload"
+            }
+          }
+        }
+      },
+      "UpdateTransitionPayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateTransition"
+            },
+            "examples": {
+              "UpdateStandardTransitionPayload": {
+                "$ref": "#/components/examples/UpdateStandardTransitionPayload"
+              },
+              "UpdateWaitTransitionPayload": {
+                "$ref": "#/components/examples/UpdateWaitTransitionPayload"
+              }
+            }
+          }
+        }
+      },
+      "CreateTransitionPayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CreateTransition"
+            },
+            "examples": {
+              "CreateStandardTransitionPayload": {
+                "$ref": "#/components/examples/CreateStandardTransitionPayload"
+              },
+              "CreateWaitTransitionPayload": {
+                "$ref": "#/components/examples/CreateWaitTransitionPayload"
+              }
+            }
+          }
+        }
+      },
+      "CreateStagePayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "stages"
+              ],
+              "properties": {
+                "stages": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CreateStageSchema"
+                  }
+                }
+              }
+            },
+            "example": {
+              "$ref": "#/components/examples/CreateStagePayloadExample"
+            }
+          }
+        }
+      },
+      "UpdateStagePayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "stages"
+              ],
+              "properties": {
+                "stages": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UpdateStageSchema"
+                  }
+                }
+              }
+            },
+            "example": {
+              "$ref": "#/components/examples/UpdateStagePayloadExample"
+            }
+          }
+        }
+      },
+      "CreateVariablePayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CreateVariableSchema"
+            },
+            "example": {
+              "$ref": "#/components/examples/CreateVariablePayloadExample"
+            }
+          }
+        }
+      },
+      "UpdateVariablePayload": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateVariableSchema"
+            },
+            "example": {
+              "$ref": "#/components/examples/UpdateVariablePayloadExample"
+            }
+          }
+        }
+      }
+    },
+    "examples": {
+      "GetJourneysResponse": {
+        "journeys": [
+          {
+            "id": "988000000005081",
+            "name": "Onboard track",
+            "description": "test journey",
+            "status": "draft",
+            "created_time": "2023-06-23T22:42:26+05:30",
+            "modified_time": "2023-06-23T22:42:56+05:30",
+            "created_by": {
+              "id": "988000000006002",
+              "name": "Madhan Kumar"
+            },
+            "modified_by": {
+              "id": "988000000006001",
+              "name": "Gokul Sankar"
+            },
+            "cloned_from": {
+              "id": "988000000007011",
+              "name": "New Joureny_1"
+            },
+            "records_count": 0,
+            "group_id": "988000000007004",
+            "version": 1
+          }
+        ]
+      },
+      "GetJourneyDetailsResponseExample": {
+        "journeys": [
+          {
+            "id": "5000000087039",
+            "name": "New Journey 1",
+            "description": "",
+            "goal": {
+              "type": "path",
+              "details": {
+                "stages": [
+                  {
+                    "id": "5000000087594",
+                    "name": "Stage 1"
+                  },
+                  {
+                    "id": "5000000087600",
+                    "name": "Stage 2"
+                  }
+                ]
+              }
+            },
+            "deadline": {
+              "stage": null,
+              "actions": [
+                {
+                  "id": "5000000107086",
+                  "action": "move_to_stage",
+                  "details": {
+                    "stage": {
+                      "id": "5000000024640"
+                    }
+                  }
+                }
+              ],
+              "execute_on": {
+                "period": 1,
+                "time_unit": "days"
+              }
+            },
+            "status": "draft",
+            "version": 1,
+            "created_time": "2024-10-12T12:59:58+05:30",
+            "modified_time": "2024-10-16T20:15:44+05:30",
+            "record_condition": false,
+            "chart_data": {
+              "builderPos": {
+                "zoomLevel": 1,
+                "top": 340,
+                "left": 755
+              },
+              "floater": {
+                "top": 10,
+                "left": 30
+              },
+              "nodes": [
+                {
+                  "position": {
+                    "top": -150,
+                    "left": 0
+                  },
+                  "id": "0"
+                },
+                {
+                  "position": {
+                    "top": 50,
+                    "left": 0
+                  },
+                  "id": "5000000087594"
+                },
+                {
+                  "position": {
+                    "top": 164,
+                    "left": -216
+                  },
+                  "id": "5000000087600"
+                }
+              ],
+              "connections": [
+                {
+                  "source": {
+                    "x": 0.5,
+                    "y": 1,
+                    "id": "0"
+                  },
+                  "id": "connection_state_0_state_5000000087594",
+                  "target": {
+                    "x": 0.5,
+                    "y": 0,
+                    "id": "5000000087594"
+                  },
+                  "points": []
+                }
+              ]
+            },
+            "created_by": {
+              "id": "5000000000911",
+              "name": "Gokul"
+            },
+            "modified_by": {
+              "id": "5000000000911",
+              "name": "Gokul"
+            },
+            "cloned_from": null,
+            "records_count": 0,
+            "group_id": "5000000087583"
+          }
+        ]
+      },
+      "GetTransitionsResponseExample": {
+        "transitions": [
+          {
+            "id": "668000000129005",
+            "name": "transition 1",
+            "description": "",
+            "type": "standard",
+            "from_stage": null,
+            "to_stage": {
+              "id": "668000000129001",
+              "name": "stage 1"
+            }
+          },
+          {
+            "id": "668000000135942",
+            "name": "1 Days",
+            "description": "",
+            "type": "wait",
+            "from_stage": {
+              "name": "s4",
+              "id": "668000000135008"
+            },
+            "to_stage": {
+              "name": "s5",
+              "id": "668000000135928"
+            },
+            "details": {
+              "execute_on": {
+                "period": 1,
+                "time_unit": "days"
+              }
+            }
+          }
+        ],
+        "info": {
+          "page": 1,
+          "per_page": 200,
+          "more_records": false,
+          "count": 2
+        }
+      },
+      "GetTransitionDetailsResponseExample": {
+        "transitions": [
+          {
+            "id": "1000000105179",
+            "name": "transition 1",
+            "description": null,
+            "type": "standard",
+            "details": {
+              "triggers": [
+                {
+                  "id": "1000000105475",
+                  "criteria": {
+                    "comparator": "equal",
+                    "configurable_field": {
+                      "api_name": "transition_1_Trigger_OutgoingMailSent_Cc",
+                      "id": "1000000105479"
+                    },
+                    "value": "abc@gmail.com"
+                  },
+                  "signal": {
+                    "api_name": "mail_sent",
+                    "service_org": {
+                      "id": "1000000029503",
+                      "name": "Mark Org1"
+                    }
+                  },
+                  "identifiers": [
+                    {
+                      "id": "1000000105541",
+                      "name": "Converted Account",
+                      "type": "crm_fields",
+                      "api_name": "Leads_Converted_Account"
+                    }
+                  ],
+                  "identifier_outer_meta": [
+                    {
+                      "reference": null,
+                      "field": null,
+                      "lookup": null,
+                      "related_to": null
+                    }
+                  ]
+                },
+                {
+                  "id": "1000000105181",
+                  "criteria": null,
+                  "signal": {
+                    "api_name": "create",
+                    "service_org": {
+                      "id": "1000000029503",
+                      "name": "Mark Org1"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039",
+                        "name": "Leads",
+                        "api_name": "Leads"
+                      },
+                      "layout": {
+                        "id": "16828000000000161",
+                        "name": "Standard",
+                        "api_name": "Standard__s"
+                      },
+                      "type": "specific"
+                    }
+                  },
+                  "identifiers": [
+                    {
+                      "id": "1000000105196",
+                      "name": "Email",
+                      "type": "synced_fields",
+                      "api_name": "transition_1_Trigger_RecordCreate_Email"
+                    }
+                  ],
+                  "identifier_outer_meta": [
+                    {
+                      "reference": null,
+                      "field": null,
+                      "lookup": null,
+                      "related_to": null
+                    }
+                  ]
+                },
+                {
+                  "id": "1000000105182",
+                  "criteria": null,
+                  "signal": {
+                    "api_name": "create",
+                    "service_org": {
+                      "id": "1000000029503",
+                      "name": "Mark Org1"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039",
+                        "name": "Leads",
+                        "api_name": "Leads"
+                      },
+                      "layout": {
+                        "id": "16828000000000161",
+                        "name": "Standard",
+                        "api_name": "Standard__s"
+                      },
+                      "type": "specific"
+                    }
+                  },
+                  "identifiers": [
+                    {
+                      "id": "1000000105286",
+                      "name": "Email",
+                      "type": "synced_fields",
+                      "api_name": "transition_1_Trigger_RecordCreate_2_Email"
+                    }
+                  ],
+                  "identifier_outer_meta": [
+                    {
+                      "reference": null,
+                      "field": null,
+                      "lookup": null,
+                      "related_to": null
+                    }
+                  ]
+                }
+              ],
+              "logs": null,
+              "precedence_order": 1,
+              "transition_criteria": null
+            },
+            "from_stage": {
+              "id": "1000000104882",
+              "name": "Stage 1",
+              "description": null,
+              "type": null,
+              "end_stage": false,
+              "tp_actions": null
+            },
+            "to_stage": {
+              "id": "1000000103102",
+              "name": "Stage 2",
+              "description": null,
+              "type": null,
+              "end_stage": false,
+              "tp_actions": null
+            },
+            "execute_on": null
+          }
+        ]
+      },
+      "GetStagesResponseExample": {
+        "stages": [
+          {
+            "id": "1000000027051",
+            "name": "Stage 34",
+            "description": "",
+            "type": "standard",
+            "end_stage": false,
+            "tp_actions": []
+          },
+          {
+            "id": "1000000027013",
+            "name": "Stage 15",
+            "description": "",
+            "type": "standard",
+            "end_stage": false,
+            "tp_actions": []
+          },
+          {
+            "id": "1000000027057",
+            "name": "Stage 37",
+            "description": "",
+            "type": "standard",
+            "end_stage": false,
+            "tp_actions": []
+          }
+        ]
+      },
+      "GetStageDetailsResponseExample": {
+        "stages": [
+          {
+            "id": "1000000028262",
+            "name": "Stage 1",
+            "description": "",
+            "type": "standard",
+            "end_stage": false,
+            "tp_actions": []
+          }
+        ]
+      },
+      "CreateStagePayloadExample": {
+        "stages": [
+          {
+            "name": "M Stage abc",
+            "description": "Valid description",
+            "type": "success",
+            "end_stage": true
+          }
+        ]
+      },
+      "UpdateStagePayloadExample": {
+        "stages": [
+          {
+            "name": "Updated Stage Name",
+            "description": "This stage has been updated.",
+            "type": "success",
+            "end_stage": true
+          }
+        ]
+      },
+      "CreateVariablePayloadExample": {
+        "variables": [
+          {
+            "name": "var 1",
+            "value": "helllo",
+            "data_type": "custom"
+          },
+          {
+            "name": "var 1",
+            "value": "${journeys(id=1000000028918).configurable_fields(id=5000000189203)}",
+            "data_type": "merge"
+          }
+        ]
+      },
+      "UpdateVariablePayloadExample": {
+        "variables": [
+          {
+            "name": "email",
+            "value": "test123@test.com",
+            "data_type": "custom"
+          }
+        ]
+      },
+      "GetVariablesResponseExample": {
+        "variables": [
+          {
+            "id": "668000000122564",
+            "name": "id",
+            "data_type": "{string || merge}",
+            "generated_type": "{system || custom}",
+            "value": "${journeys(id=1000000000868).configurable_fields(id=100000000129001)}"
+          },
+          {
+            "id": "668000000122562",
+            "name": "name",
+            "data_type": "merge",
+            "generated_type": "system",
+            "value": "${journeys(id=1000000000868).configurable_fields(id=100000000129002)}"
+          },
+          {
+            "id": "668000000129998",
+            "name": "limit",
+            "data_type": "string",
+            "generated_type": "custom",
+            "value": "200"
+          }
+        ],
+        "info": {
+          "page": 1,
+          "per_page": 200,
+          "more_records": false,
+          "count": 2
+        }
+      },
+      "GetVariableDetailsResponseExample": {
+        "variables": [
+          {
+            "id": "1000000036044",
+            "name": "v1",
+            "value": "abc",
+            "data_type": "custom",
+            "generated_type": "custom"
+          }
+        ]
+      },
+      "LimitExceededError": {
+        "journeys": [
+          {
+            "code": "LIMIT_EXCEEDED",
+            "message": "Total journey creation limit exists for this org, please upgrade your license to create more.",
+            "details": {
+              "api_name": "journeys",
+              "limit": "5",
+              "json_path": "$.journeys[0].journeys"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "MandatoryNotFoundError": {
+        "journeys": [
+          {
+            "code": "MANDATORY_NOT_FOUND",
+            "message": "Mandatory field not found",
+            "details": {
+              "api_name": "name",
+              "json_path": "$.journeys[0].name"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "InvalidDataError": {
+        "code": "INVALID_DATA",
+        "message": "The given field seems to be invalid",
+        "details": {
+          "resource_path_index": "1"
+        },
+        "status": "error"
+      },
+      "NotAllowedError": {
+        "code": "NOT_ALLOWED",
+        "message": "Journey doesn't have any transitions, a journey should have at least an transition, please check and configure.",
+        "details": {
+          "resource_path_index": "1"
+        },
+        "status": "error"
+      },
+      "DuplicateDataError": {
+        "journeys": [
+          {
+            "code": "DUPLICATE_DATA",
+            "message": "Journey with the same name already exists.",
+            "details": {
+              "api_name": "name",
+              "json_path": "$.journeys[0].name"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "ConfigurableFieldsResponseExample": {
+        "configurable_fields": [
+          {
+            "id": "1000000086099",
+            "name": "Owner",
+            "transition": {
+              "id": "1000000085001",
+              "name": "transition 1"
+            },
+            "trigger": {
+              "id": "1000000086097",
+              "name": "RecordUpdate"
+            },
+            "signal": {
+              "id": "2393000000009015",
+              "name": "RecordUpdate",
+              "api_name": "lead_updated"
+            },
+            "ui_type": 8,
+            "data_type": "ownerlookup"
+          }
+        ],
+        "info": {
+          "page": 1,
+          "count": 1,
+          "per_page": 200,
+          "more_records": false
+        }
+      },
+      "GetServiceOrgsResponseExample": {
+        "services": [
+          {
+            "id": "15506000000005047",
+            "org_id": "107231628",
+            "org_name": "test1",
+            "service": "ZohoCRM",
+            "status": "ENABLED",
+            "authenticated_by": {
+              "id": "15506000000005001",
+              "name": "MargaretA"
+            },
+            "authenticated_time": "2025-07-07T08:43:11+00:00",
+            "publisher_id": "23324000000025038",
+            "authenticatable_users_info": [
+              {
+                "id": "15506000000005001",
+                "name": "MargaretA",
+                "created_time": "2025-07-07T08:43:07+00:00",
+                "role": "Administrator"
+              }
+            ]
+          },
+          {
+            "id": "15506000000009569",
+            "org_id": "107486932",
+            "org_name": "test1",
+            "service": "ZohoMeeting",
+            "status": "ENABLED",
+            "authenticated_by": {
+              "id": "15506000000005001",
+              "name": "MargaretA"
+            },
+            "authenticated_time": "2025-07-07T08:50:08+00:00",
+            "publisher_id": "23324000000025810",
+            "authenticatable_users_info": [
+              {
+                "id": "15506000000005001",
+                "name": "MargaretA",
+                "created_time": "2025-07-07T08:43:07+00:00",
+                "role": "Administrator"
+              }
+            ]
+          },
+          {
+            "id": "15506000000009573",
+            "org_id": "107490192",
+            "org_name": "apitestbackstage",
+            "service": "zohobackstage",
+            "status": "ENABLED",
+            "authenticated_by": {
+              "id": "15506000000005001",
+              "name": "MargaretA"
+            },
+            "authenticated_time": "2025-07-07T08:52:09+00:00",
+            "publisher_id": "23324000000025937",
+            "authenticatable_users_info": [
+              {
+                "id": "15506000000005001",
+                "name": "MargaretA",
+                "created_time": "2025-07-07T08:43:07+00:00",
+                "role": "Administrator"
+              }
+            ]
+          },
+          {
+            "id": "15506000000009577",
+            "org_id": "107489331",
+            "org_name": "test1",
+            "service": "ZohoSupport",
+            "status": "ENABLED",
+            "authenticated_by": {
+              "id": "15506000000005001",
+              "name": "MargaretA"
+            },
+            "authenticated_time": "2025-07-07T08:53:19+00:00",
+            "publisher_id": "23324000000024074",
+            "authenticatable_users_info": [
+              {
+                "id": "15506000000005001",
+                "name": "MargaretA",
+                "created_time": "2025-07-07T08:43:07+00:00",
+                "role": "Administrator"
+              }
+            ]
+          },
+          {
+            "id": "15506000000009581",
+            "org_id": "107489332",
+            "org_name": "apitestsurvey",
+            "service": "ZohoSurvey",
+            "status": "ENABLED",
+            "authenticated_by": {
+              "id": "15506000000005001",
+              "name": "MargaretA"
+            },
+            "authenticated_time": "2025-07-07T08:54:05+00:00",
+            "publisher_id": "23324000000024210",
+            "authenticatable_users_info": [
+              {
+                "id": "15506000000005001",
+                "name": "MargaretA",
+                "created_time": "2025-07-07T08:43:07+00:00",
+                "role": "Administrator"
+              }
+            ]
+          },
+          {
+            "id": "15506000000009585",
+            "org_id": "107489334",
+            "org_name": "test1",
+            "service": "ZohoCampaigns",
+            "status": "DISABLED",
+            "authenticated_by": null,
+            "authenticated_time": null,
+            "publisher_id": null,
+            "authenticatable_users_info": [
+              {
+                "id": "15506000000005001",
+                "name": "MargaretA",
+                "created_time": "2025-07-07T08:43:07+00:00",
+                "role": "Administrator"
+              }
+            ]
+          },
+          {
+            "id": "15506000000022002",
+            "org_id": "107489332",
+            "org_name": "apitestsurvey",
+            "service": "ZohoSurvey",
+            "status": "DISABLED",
+            "authenticated_by": null,
+            "authenticated_time": null,
+            "publisher_id": null,
+            "authenticatable_users_info": [
+              {
+                "id": "15506000000005001",
+                "name": "MargaretA",
+                "created_time": "2025-07-07T08:43:07+00:00",
+                "role": "Administrator"
+              }
+            ]
+          },
+          {
+            "id": "15506000000022004",
+            "org_id": "107489331",
+            "org_name": "test1",
+            "service": "ZohoSupport",
+            "status": "DISABLED",
+            "authenticated_by": null,
+            "authenticated_time": null,
+            "publisher_id": null,
+            "authenticatable_users_info": [
+              {
+                "id": "15506000000005001",
+                "name": "MargaretA",
+                "created_time": "2025-07-07T08:43:07+00:00",
+                "role": "Administrator"
+              }
+            ]
+          },
+          {
+            "id": "15506000000022006",
+            "org_id": "107490192",
+            "org_name": "apitestbackstage",
+            "service": "zohobackstage",
+            "status": "DISABLED",
+            "authenticated_by": null,
+            "authenticated_time": null,
+            "publisher_id": null,
+            "authenticatable_users_info": [
+              {
+                "id": "155060000005001",
+                "name": "MargaretA",
+                "created_time": "2025-07-07T08:43:07+00:00",
+                "role": "Administrator"
+              }
+            ]
+          },
+          {
+            "id": "15506000000022008",
+            "org_id": "107486932",
+            "org_name": "test1",
+            "service": "ZohoMeeting",
+            "status": "DISABLED",
+            "authenticated_by": null,
+            "authenticated_time": null,
+            "publisher_id": null,
+            "authenticatable_users_info": [
+              {
+                "id": "155060000005001",
+                "name": "MargaretA",
+                "created_time": "2025-07-07T08:43:07+00:00",
+                "role": "Administrator"
+              }
+            ]
+          }
+        ]
+      },
+      "GetSignalsResponseExample": {
+        "signals": [
+          {
+            "api_name": "mail_opened_notreplied",
+            "display_name": "Outgoing mail opened not replied",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "mail_sent_notopened",
+            "display_name": "Outgoing mail sent not opened",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "outgoing_call_left_unattended",
+            "display_name": "Outgoing call unattended",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "edit",
+            "display_name": "Record update",
+            "signal_condition": false,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "layout",
+                "display_name": "layout",
+                "parent_prop": "module",
+                "data_type": "object"
+              },
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "receiving_incoming_call",
+            "display_name": "Receiving incoming call",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "convert",
+            "display_name": "Record convert",
+            "signal_condition": false,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "to_module",
+                "display_name": "to_module",
+                "parent_prop": "from_module",
+                "data_type": "object"
+              },
+              {
+                "required": true,
+                "api_name": "from_module",
+                "display_name": "from_module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "mail_sent_opened",
+            "display_name": "Outgoing mail opened",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "date_or_datetime",
+            "display_name": "Date or date time field",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": false,
+                "api_name": "field",
+                "display_name": "field",
+                "parent_prop": "module",
+                "data_type": "object"
+              },
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "mail_sent_clicked",
+            "display_name": "Outgoing mail clicked",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "mail_unsubscribed",
+            "display_name": "Email unsubscribed",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "scheduled_call_overdue",
+            "display_name": "Scheduled call overdue",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              },
+              {
+                "required": true,
+                "api_name": "execute_on",
+                "display_name": "execute_on",
+                "parent_prop": "module",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "approve",
+            "display_name": "Record approve",
+            "signal_condition": false,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "approval_process",
+                "display_name": "approval_process",
+                "parent_prop": "module",
+                "data_type": "array"
+              },
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "reject",
+            "display_name": "Record reject",
+            "signal_condition": false,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "approval_process",
+                "display_name": "approval_process",
+                "parent_prop": "module",
+                "data_type": "array"
+              },
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "mail_sent_notreplied",
+            "display_name": "Outgoing mail sent not replied",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "webform_submit",
+            "display_name": "Webform submit",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "webforms",
+                "display_name": "webforms",
+                "parent_prop": "module",
+                "data_type": "array"
+              },
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "create",
+            "display_name": "Record create",
+            "signal_condition": false,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "layout",
+                "display_name": "layout",
+                "parent_prop": "module",
+                "data_type": "object"
+              },
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "mail_received",
+            "display_name": "Email received",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "mail_resubscribed",
+            "display_name": "Email resubscribed",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "mail_sent_bounced",
+            "display_name": "Outgoing mail bounced",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          },
+          {
+            "api_name": "mail_sent",
+            "display_name": "Outgoing mail sent",
+            "signal_condition": true,
+            "service_org": {
+              "id": "1000000029503",
+              "name": "Untitled"
+            },
+            "signal_props": [
+              {
+                "required": true,
+                "api_name": "module",
+                "display_name": "module",
+                "parent_prop": "null",
+                "data_type": "object"
+              }
+            ]
+          }
+        ]
+      },
+      "CreateStandardTransitionPayload": {
+        "transitions": [
+          {
+            "name": "transition 4",
+            "from_stage": {
+              "id": "1000000075554"
+            },
+            "to_stage": {
+              "id": "1000000076317"
+            },
+            "type": "standard",
+            "details": {
+              "triggers": [
+                {
+                  "signal": {
+                    "api_name": "create",
+                    "service_org": {
+                      "id": "1000000029503"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039"
+                      },
+                      "layout": {
+                        "id": "16828000000000161"
+                      },
+                      "type": "any"
+                    }
+                  }
+                },
+                {
+                  "signal": {
+                    "api_name": "create",
+                    "service_org": {
+                      "id": "1000000029503"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039"
+                      },
+                      "layout": {
+                        "id": "16828000000000161"
+                      },
+                      "type": "any"
+                    }
+                  }
+                },
+                {
+                  "signal": {
+                    "api_name": "create",
+                    "service_org": {
+                      "id": "1000000029503"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039"
+                      },
+                      "layout": {
+                        "id": "16828000000000161"
+                      },
+                      "type": "any"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "CreateWaitTransitionPayload": {
+        "transitions": [
+          {
+            "name": "1 Days",
+            "description": "sample",
+            "type": "wait",
+            "from_stage": {
+              "id": "668000000135008"
+            },
+            "to_stage": {
+              "id": "668000000135928"
+            },
+            "details": {
+              "execute_on": {
+                "period": 1,
+                "time_unit": "days"
+              }
+            }
+          }
+        ]
+      },
+      "UpdateStandardTransitionPayload": {
+        "transitions": [
+          {
+            "details": {
+              "triggers": [
+                {
+                  "id": "1000000078072",
+                  "criteria": {
+                    "group_operator": "AND",
+                    "group": [
+                      {
+                        "comparator": "equal",
+                        "configurable_field": {
+                          "api_name": "Transition_2_Trigger_OutgoingMailSent_Cc"
+                        },
+                        "value": "San Frekaros"
+                      },
+                      {
+                        "comparator": "equal",
+                        "configurable_field": {
+                          "api_name": "Transition_2_Trigger_OutgoingMailSent_Module"
+                        },
+                        "value": "12312"
+                      }
+                    ]
+                  },
+                  "identifiers": [
+                    {
+                      "type": "synced_fields",
+                      "id": "1000000077964",
+                      "api_name": "Transition_2_Trigger_RecordUpdate_Full_Name"
+                    }
+                  ]
+                },
+                {
+                  "signal": {
+                    "api_name": "webform_submit",
+                    "service_org": {
+                      "id": "1000000029503"
+                    },
+                    "signal_props": {
+                      "module": {
+                        "id": "16828000000000039"
+                      }
+                    }
+                  }
+                }
+              ],
+              "logs": [
+                {
+                  "name": "hello 1",
+                  "type": "custom",
+                  "value": "1231312"
+                },
+                {
+                  "name": "hello 1",
+                  "type": "merge",
+                  "value": "${journeys(id=1000000087855).configurable_fields(id=5000000175024)}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "UpdateWaitTransitionPayload": {
+        "transitions": [
+          {
+            "name": "9 days",
+            "description": "Sample Description",
+            "to_stage": {
+              "name": "s5",
+              "id": "668000000135928"
+            },
+            "details": {
+              "period": 1,
+              "time_unit": "9"
+            }
+          }
+        ]
+      },
+      "InvalidDataListError": {
+        "journeys": [
+          {
+            "code": "INVALID_DATA",
+            "message": "The given field is of an invalid data type",
+            "details": {
+              "api_name": "name",
+              "json_path": "$.journeys[0].name"
+            },
+            "status": "error"
+          }
+        ]
+      },
+      "DependentFieldMissingError": {
+        "journeys": [
+          {
+            "code": "DEPENDENT_FIELD_MISSING",
+            "details": {
+              "dependee": {
+                "api_name": "stages",
+                "json_path": "goal.details"
+              },
+              "api_name": "type",
+              "json_path": "$.journeys[0].goal.type"
+            },
+            "message": "The dependent field is missing from the request.",
+            "status": "error"
+          }
+        ]
+      },
+      "LimitExceededExtendedError": {
+        "transitions": [
+          {
+            "code": "LIMIT_EXCEEDED",
+            "details": {
+              "api_name": "type",
+              "limit": "1",
+              "limit_due_to": [
+                {
+                  "api_name": "from_stage",
+                  "json_path": "from_stage"
+                },
+                {
+                  "api_name": "to_stage",
+                  "json_path": "to_stage"
+                }
+              ],
+              "json_path": "$.transitions[0].type",
+              "error_message": "Seems, the same type transition is already configured bewtween the stages."
+            },
+            "message": "Seems, the same type transition is already configured bewtween the stages.",
+            "status": "error"
+          }
+        ]
+      },
+      "CreateJourneyPayloadExample": {
+        "journeys": [
+          {
+            "name": "JJ1",
+            "description": "A valid one"
+          }
+        ]
+      },
+      "UpdateJourneyPayload": {
+        "journeys": [
+          {
+            "name": "A Journey",
+            "description": "a brief one",
+            "deadline": {
+              "execute_on": {
+                "period": 5,
+                "time_unit": "days"
+              },
+              "stage": {
+                "id": "null"
+              },
+              "actions": [
+                {
+                  "action": "move_to_stage",
+                  "id": "1000000024660",
+                  "details": {
+                    "stage": {
+                      "id": "1000000024640"
+                    }
+                  }
+                }
+              ]
+            },
+            "goal": {
+              "type": "reach",
+              "details": {
+                "stages": [
+                  {
+                    "id": "1000000024640"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://commandcenter.zoho.com"
+    }
+  ]
+}
