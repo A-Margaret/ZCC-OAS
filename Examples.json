@@ -74,8 +74,7 @@
                   "action": "move_to_stage",
                   "details": {
                     "stage": {
-                      "id": "5000000087600",
-                      "name": "Stage 2"
+                      "id": "5000000024640"
                     }
                   }
                 }
@@ -335,60 +334,11 @@
                   "json_path": "to_stage"
                 }
               ],
-              "json_path": "$.transitions[0].type"
+              "json_path": "$.transitions[0].type",
+              "error_message": "Seems, the same type transition is already configured bewtween the stages."
             },
             "message": "Seems, the same type transition is already configured bewtween the stages.",
             "status": "error"
-          }
-        ]
-      },
-      "CreateUpdateStagePayload": {
-        "stages": [
-          {
-            "name": "M Stage abc",
-            "description": "Valid description",
-            "type": "success",
-            "end_stage": "true"
-          }
-        ]
-      },
-      "GetStagesResponse": {
-        "stages": [
-          {
-            "id": "1000000027051",
-            "name": "Stage 34",
-            "description": "",
-            "type": "standard",
-            "end_stage": false,
-            "tp_actions": []
-          },
-          {
-            "id": "1000000027013",
-            "name": "Stage 15",
-            "description": "",
-            "type": "standard",
-            "end_stage": false,
-            "tp_actions": []
-          },
-          {
-            "id": "1000000027057",
-            "name": "Stage 37",
-            "description": "",
-            "type": "standard",
-            "end_stage": false,
-            "tp_actions": []
-          }
-        ]
-      },
-      "GetStageDetailsExample": {
-        "stages": [
-          {
-            "id": "1000000028262",
-            "name": "Stage 1",
-            "description": "",
-            "type": "standard",
-            "end_stage": false,
-            "tp_actions": []
           }
         ]
       },
@@ -620,6 +570,121 @@
           "more_records": false,
           "count": 2
         }
+      },
+      "CreateVariablePayload": {
+        "variables": [
+          {
+            "name": "var 1",
+            "value": "helllo",
+            "data_type": "custom"
+          },
+          {
+            "name": "var 1",
+            "value": "${journeys(id=1000000028918).configurable_fields(id=5000000189203)}",
+            "data_type": "merge"
+          }
+        ]
+      },
+      "GetVariablesResponse": {
+        "variables": [
+          {
+            "id": "668000000122564",
+            "name": "id",
+            "data_type": "{string || merge}",
+            "generated_type": "{system || custom}",
+            "value": "${journeys(id=1000000000868).configurable_fields(id=100000000129001)}"
+          },
+          {
+            "id": "668000000122562",
+            "name": "name",
+            "data_type": "merge",
+            "generated_type": "system",
+            "value": "${journeys(id=1000000000868).configurable_fields(id=100000000129002)}"
+          },
+          {
+            "id": "668000000129998",
+            "name": "limit",
+            "data_type": "string",
+            "generated_type": "custom",
+            "value": "200"
+          }
+        ],
+        "info": {
+          "page": 1,
+          "per_page": 200,
+          "more_records": false,
+          "count": 2
+        }
+      },
+      "UpdateVariablePayload": {
+        "variables": [
+          {
+            "name": "var df1",
+            "value": "helllo",
+            "data_type": "custom"
+          }
+        ]
+      },
+      "GetVariableDetailsResponse": {
+        "variables": [
+          {
+            "id": "1000000036044",
+            "name": "v1",
+            "value": "abc",
+            "data_type": "custom",
+            "generated_type": "custom"
+          }
+        ]
+      },
+      "CreateUpdateStagePayload": {
+        "stages": [
+          {
+            "name": "M Stage abc",
+            "description": "Valid description",
+            "type": "success",
+            "end_stage": true
+          }
+        ]
+      },
+      "GetStageDetailsExample": {
+        "stages": [
+          {
+            "id": "1000000028262",
+            "name": "Stage 1",
+            "description": "",
+            "type": "standard",
+            "end_stage": false,
+            "tp_actions": []
+          }
+        ]
+      },
+      "GetStagesResponse": {
+        "stages": [
+          {
+            "id": "1000000027051",
+            "name": "Stage 34",
+            "description": "",
+            "type": "standard",
+            "end_stage": false,
+            "tp_actions": []
+          },
+          {
+            "id": "1000000027013",
+            "name": "Stage 15",
+            "description": "",
+            "type": "standard",
+            "end_stage": false,
+            "tp_actions": []
+          },
+          {
+            "id": "1000000027057",
+            "name": "Stage 37",
+            "description": "",
+            "type": "standard",
+            "end_stage": false,
+            "tp_actions": []
+          }
+        ]
       }
     }
   }
