@@ -960,7 +960,6 @@
           {
             "api_name": "scheduled_call_overdue",
             "display_name": "Scheduled call overdue",
-            "display_name": "Scheduled call overdue",
             "signal_condition": true,
             "service_org": {
               "id": "1000000029503",
