@@ -604,14 +604,7 @@
           }
         ],
         "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/requestBodies/CreateVariablePayload"
-              }
-            }
-          }
+          "$ref": "#/components/requestBodies/CreateVariablePayload"
         },
         "responses": {
           "201": {
@@ -679,14 +672,7 @@
           }
         ],
         "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/requestBodies/UpdateVariablePayload"
-              }
-            }
-          }
+          "$ref": "#/components/requestBodies/UpdateVariablePayload"
         },
         "responses": {
           "200": {
@@ -898,7 +884,10 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/SuccessResponse"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/SuccessResponse"
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/SuccessResponse"
             }
           }
         }
@@ -910,18 +899,26 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/InvalidDataListError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataListError"
                 },
                 {
-                  "$ref": "#/components/schemas/DuplicateDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DuplicateDataError"
                 },
                 {
-                  "$ref": "#/components/schemas/LimitExceededError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededError"
                 },
                 {
-                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/MandatoryNotFoundError"
                 }
               ]
+            },
+            "examples": {
+              "LimitExceededError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededError"
+              },
+              "MandatoryNotFoundError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/MandatoryNotFoundError"
+              }
             }
           }
         }
@@ -933,27 +930,35 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/InvalidDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
                 },
                 {
-                  "$ref": "#/components/schemas/InvalidDataListError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataListError"
                 },
                 {
-                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/MandatoryNotFoundError"
                 },
                 {
-                  "$ref": "#/components/schemas/DuplicateDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DuplicateDataError"
                 },
                 {
-                  "$ref": "#/components/schemas/LimitExceededError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededError"
                 },
                 {
-                  "$ref": "#/components/schemas/NotAllowedError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/NotAllowedError"
                 },
                 {
-                  "$ref": "#/components/schemas/DependentFieldMissingError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DependentFieldMissingError"
                 }
               ]
+            },
+            "examples": {
+              "LimitExceededError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededError"
+              },
+              "MandatoryNotFoundError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/MandatoryNotFoundError"
+              }
             }
           }
         }
@@ -964,6 +969,9 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/GetJourneysResponse"
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetJourneysResponse"
             }
           }
         }
@@ -974,6 +982,9 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/GetJourneyDetailsSchema"
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetJourneyDetailsResponseExample"
             }
           }
         }
@@ -983,7 +994,28 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/InvalidDataError"
+              "oneOf": [
+                {
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
+                },
+                {
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededError"
+                },
+                {
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/MandatoryNotFoundError"
+                }
+              ]
+            },
+            "examples": {
+              "InvalidDataError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataError"
+              },
+              "LimitExceededError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededError"
+              },
+              "MandatoryNotFoundError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/MandatoryNotFoundError"
+              }
             }
           }
         }
@@ -995,12 +1027,20 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/InvalidDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
                 },
                 {
-                  "$ref": "#/components/schemas/NotAllowedError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/NotAllowedError"
                 }
               ]
+            },
+            "examples": {
+              "InvalidDataError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataError"
+              },
+              "NotAllowedError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/NotAllowedError"
+              }
             }
           }
         }
@@ -1011,6 +1051,9 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ConfigurableFieldsResponse"
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/ConfigurableFieldsResponseExample"
             }
           }
         }
@@ -1022,30 +1065,38 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/InvalidDataListError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataListError"
                 },
                 {
-                  "$ref": "#/components/schemas/LimitExceededExtendedError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededExtendedError"
                 },
                 {
-                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/MandatoryNotFoundError"
                 },
                 {
-                  "$ref": "#/components/schemas/DuplicateDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DuplicateDataError"
                 },
                 {
-                  "$ref": "#/components/schemas/LimitExceededError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededError"
                 },
                 {
-                  "$ref": "#/components/schemas/NotAllowedError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/NotAllowedError"
                 },
                 {
-                  "$ref": "#/components/schemas/InvalidDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
                 },
                 {
-                  "$ref": "#/components/schemas/DependentFieldMissingError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DependentFieldMissingError"
                 }
               ]
+            },
+            "examples": {
+              "LimitExceededError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededError"
+              },
+              "MandatoryNotFoundError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/MandatoryNotFoundError"
+              }
             }
           }
         }
@@ -1056,6 +1107,9 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/GetTransitionsResponse"
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetTransitionsResponseExample"
             }
           }
         }
@@ -1074,6 +1128,9 @@
                   }
                 }
               }
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetTransitionDetailsResponseExample"
             }
           }
         }
@@ -1092,6 +1149,9 @@
                   }
                 }
               }
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetStagesResponseExample"
             }
           }
         }
@@ -1110,6 +1170,9 @@
                   }
                 }
               }
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetStageDetailsResponseExample"
             }
           }
         }
@@ -1121,21 +1184,29 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/InvalidDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
                 },
                 {
-                  "$ref": "#/components/schemas/MandatoryNotFoundError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/MandatoryNotFoundError"
                 },
                 {
-                  "$ref": "#/components/schemas/LimitExceededError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededError"
                 },
                 {
-                  "$ref": "#/components/schemas/InvalidDataListError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataListError"
                 },
                 {
-                  "$ref": "#/components/schemas/DuplicateDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DuplicateDataError"
                 }
               ]
+            },
+            "examples": {
+              "LimitExceededError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededError"
+              },
+              "MandatoryNotFoundError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/MandatoryNotFoundError"
+              }
             }
           }
         }
@@ -1155,8 +1226,11 @@
                 },
                 "info": {
                   "$ref": "#/components/schemas/PaginationInfo"
-                }
+                  }
               }
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetVariablesResponseExample"
             }
           }
         }
@@ -1175,6 +1249,9 @@
                   }
                 }
               }
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetVariableDetailsResponseExample"
             }
           }
         }
@@ -1186,15 +1263,23 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/InvalidDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
                 },
                 {
-                  "$ref": "#/components/schemas/InvalidDataListError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataListError"
                 },
                 {
-                  "$ref": "#/components/schemas/DuplicateDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DuplicateDataError"
                 }
               ]
+            },
+            "examples": {
+              "InvalidDataError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataError"
+              },
+              "DuplicateDataError": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/DuplicateDataError"
+              }
             }
           }
         }
@@ -1272,14 +1357,14 @@
       },
       "GoalDetailsReach": {
         "type": "object",
+        "required": [
+          "stages"
+        ],
         "properties": {
           "stages": {
             "$ref": "#/components/schemas/StageArray"
           }
-        },
-        "required": [
-          "stages"
-        ]
+        }
       },
       "GoalDetailsTimeTaken": {
         "type": "object",
@@ -1298,14 +1383,14 @@
       },
       "GoalDetailsPath": {
         "type": "object",
+        "required": [
+          "stages"
+        ],
         "properties": {
           "stages": {
             "$ref": "#/components/schemas/StageArray"
           }
-        },
-        "required": [
-          "stages"
-        ]
+        }
       },
       "DeadlineActionDetailsMoveToStage": {
         "type": "object",
@@ -1327,6 +1412,10 @@
       },
       "TimePeriod": {
         "type": "object",
+        "required": [
+          "period",
+          "time_unit"
+        ],
         "properties": {
           "period": {
             "type": "integer"
@@ -1334,14 +1423,13 @@
           "time_unit": {
             "type": "string"
           }
-        },
-        "required": [
-          "period",
-          "time_unit"
-        ]
+        }
       },
       "CreateJourneyPayload": {
         "type": "object",
+        "required": [
+          "journeys"
+        ],
         "properties": {
           "journeys": {
             "type": "array",
@@ -1366,10 +1454,7 @@
             },
             "description": "List of journey-level responses or results."
           }
-        },
-        "required": [
-          "journeys"
-        ]
+        }
       },
       "UpdateJourneyPayload": {
         "type": "object",
@@ -1597,8 +1682,7 @@
             "type": "string",
             "description": "API name of the configurable field."
           }
-        },
-        "description": "Field reference used in criteria for comparisons."
+        }
       },
       "ConfigurableFieldsResponse": {
         "type": "object",
@@ -1639,12 +1723,10 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "description": "Unique identifier"
+            "type": "string"
           },
           "name": {
-            "type": "string",
-            "description": "Display name"
+            "type": "string"
           }
         }
       },
@@ -1679,9 +1761,16 @@
       },
       "SignalTrigger": {
         "type": "object",
+        "required": [
+          "signal"
+        ],
         "properties": {
           "signal": {
             "type": "object",
+            "required": [
+              "api_name",
+              "service_org"
+            ],
             "properties": {
               "api_name": {
                 "type": "string"
@@ -1692,16 +1781,9 @@
               "signal_props": {
                 "$ref": "#/components/schemas/SignalProperties"
               }
-            },
-            "required": [
-              "api_name",
-              "service_org"
-            ]
+            }
           }
-        },
-        "required": [
-          "signal"
-        ]
+        }
       },
       "StandardTransition": {
         "allOf": [
@@ -1836,13 +1918,13 @@
           },
           "criteria": {
             "type": "object",
+            "description": "Defines the logical structure of conditions used to evaluate a trigger. Set to null to delete.",
             "properties": {
               "criteria": {
                 "$ref": "#/components/schemas/Criteria",
                 "description": "Defines the logical structure of conditions used to evaluate a trigger. Set to null to delete."
               }
-            },
-            "description": "Defines the logical structure of conditions used to evaluate a trigger. Set to null to delete."
+            }
           },
           "identifiers": {
             "type": "array",
@@ -1858,6 +1940,7 @@
       },
       "Criteria": {
         "type": "object",
+        "description": "Defines conditional logic for triggers or transition criteria. Use a single condition object when only one field is involved. Use 'group_operator' and 'group' when multiple field-based conditions need to be evaluated together.",
         "properties": {
           "group_operator": {
             "type": "string",
@@ -1874,8 +1957,7 @@
             },
             "description": "An array of conditions or nested groups. Should be used only when criteria involve multiple fields."
           }
-        },
-        "description": "Defines conditional logic for triggers or transition criteria. Use a single condition object when only one field is involved. Use 'group_operator' and 'group' when multiple field-based conditions need to be evaluated together."
+        }
       },
       "TransitionLogEntry": {
         "oneOf": [
@@ -1930,6 +2012,10 @@
       },
       "Identifier": {
         "type": "object",
+        "required": [
+          "api_name",
+          "type"
+        ],
         "description": "Defines identifiers associated with a trigger, used for CRM or synced field mappings. Required fields depend on context.",
         "properties": {
           "id": {
@@ -1958,11 +2044,7 @@
           "data_type": {
             "type": "string"
           }
-        },
-        "required": [
-          "api_name",
-          "type"
-        ]
+        }
       },
       "FieldCondition": {
         "type": "object",
@@ -1989,58 +2071,54 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/TransitionLogBase"
-          },
-          {
-            "type": "object",
-            "required": [
-              "type",
-              "value"
-            ],
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "custom"
-                ],
-                "description": "Log type for custom value."
-              },
-              "value": {
-                "type": "string",
-                "description": "Value for custom type. Any string is allowed.",
-                "example": "any string"
-              }
-            }
           }
-        ]
+        ],
+        "type": "object",
+        "required": [
+          "type",
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "custom"
+            ],
+            "description": "Log type for custom value."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value for custom type. Any string is allowed.",
+            "example": "any string"
+          }
+        }
       },
       "MergeValue": {
         "allOf": [
           {
             "$ref": "#/components/schemas/TransitionLogBase"
-          },
-          {
-            "type": "object",
-            "required": [
-              "type",
-              "value"
-            ],
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "merge"
-                ],
-                "description": "Log type for merge value."
-              },
-              "value": {
-                "type": "string",
-                "pattern": "\\$\\{(journeys)\\(id=\\d+\\)\\.(configurable_fields)\\(id=\\d+\\)\\}",
-                "description": "Must match merge pattern.",
-                "example": "${journeys(id=12345).configurable_fields(id=67890)}"
-              }
-            }
           }
-        ]
+        ],
+        "type": "object",
+        "required": [
+          "type",
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "merge"
+            ],
+            "description": "Log type for merge value."
+          },
+          "value": {
+            "type": "string",
+            "pattern": "\\$\\{(journeys)\\(id=\\d+\\)\\.(configurable_fields)\\(id=\\d+\\)\\}",
+            "description": "Must match merge pattern.",
+            "example": "${journeys(id=12345).configurable_fields(id=67890)}"
+          }
+        }
       },
       "TransitionLogBase": {
         "type": "object",
@@ -2100,6 +2178,9 @@
       },
       "StageSchema": {
         "type": "object",
+        "required": [
+          "id"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -2112,25 +2193,20 @@
             "maxLength": 30
           },
           "description": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": "string",
+            "nullable": true,
             "description": "Optional description of the stage.",
             "maxLength": 1000
           },
           "type": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": "string",
+            "nullable": true,
             "description": "Type of the stage.",
             "enum": [
               "standard",
               "neutral",
               "failure",
-              "success",
-              "null"
+              "success"
             ],
             "default": "standard"
           },
@@ -2147,10 +2223,7 @@
             "nullable": true,
             "description": "This field is currently not supported in version 1 of the API."
           }
-        },
-        "required": [
-          "id"
-        ]
+        }
       },
       "CreateStageSchema": {
         "allOf": [
@@ -2159,15 +2232,15 @@
           }
         ],
         "type": "object",
+        "required": [
+          "name"
+        ],
         "properties": {
           "id": {
             "readOnly": true,
             "description": "ID is generated by the server upon creation and should not be provided in the payload."
           }
-        },
-        "required": [
-          "name"
-        ]
+        }
       },
       "UpdateStageSchema": {
         "allOf": [
@@ -2182,8 +2255,7 @@
             "description": "The unique identifier of the stage. This field is read-only and should not be provided in the payload as it's a path parameter.",
             "type": "string"
           }
-        },
-        "required": []
+        }
       },
       "TransitionDetails": {
         "oneOf": [
@@ -2206,28 +2278,27 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/UnifiedTransitionBase"
-          },
-          {
-            "type": "object",
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "details": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StandardTransitionDetailsBaseProperties"
+              }
+            ],
             "properties": {
-              "details": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/StandardTransitionDetailsBaseProperties"
-                  }
-                ],
-                "properties": {
-                  "triggers": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/TriggerDetails"
-                    }
-                  }
-                }
+              "triggers": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TriggerDetails"
+                },
+                "nullable": true
               }
             }
           }
-        ]
+        }
       },
       "TriggerDetails": {
         "allOf": [
@@ -2252,10 +2323,8 @@
             "type": "string"
           },
           "field": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string",
+            "nullable": true
           },
           "lookup": {
             "$ref": "#/components/schemas/LookUpSchema"
@@ -2352,6 +2421,9 @@
       },
       "ParentProperties": {
         "type": "object",
+        "required": [
+          "id"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -2362,10 +2434,7 @@
           "api_name": {
             "type": "string"
           }
-        },
-        "required": [
-          "id"
-        ]
+        }
       },
       "LookUpSchema": {
         "type": "object",
@@ -2389,21 +2458,21 @@
           },
           "logs": {
             "type": "array",
-            "description": "Contains log actions to be executed with this transition. Each log must include a name, type, and value.",
             "items": {
               "$ref": "#/components/schemas/TransitionLogEntry"
             },
-            "nullable": true
+            "nullable": true,
+            "description": "Contains log actions to be executed with this transition. Each log must include a name, type, and value."
           },
           "transition_criteria": {
             "type": "object",
+            "nullable": true,
             "description": "This field is currently not supported in version 1 of the API.",
             "properties": {
               "criteria": {
                 "$ref": "#/components/schemas/Criteria"
               }
-            },
-            "nullable": true
+            }
           }
         }
       },
@@ -2424,6 +2493,10 @@
           }
         ],
         "type": "object",
+        "required": [
+          "data_type",
+          "value"
+        ],
         "properties": {
           "data_type": {
             "type": "string",
@@ -2435,11 +2508,7 @@
             "type": "string",
             "maxLength": 1000
           }
-        },
-        "required": [
-          "data_type",
-          "value"
-        ]
+        }
       },
       "MergeVariableProperties": {
         "allOf": [
@@ -2448,6 +2517,10 @@
           }
         ],
         "type": "object",
+        "required": [
+          "data_type",
+          "value"
+        ],
         "properties": {
           "data_type": {
             "type": "string",
@@ -2460,11 +2533,7 @@
             "pattern": "\\$\\{(journeys)\\(id=\\d+\\)\\.(configurable_fields)\\(id=\\d+\\)\\}",
             "maxLength": 1000
           }
-        },
-        "required": [
-          "data_type",
-          "value"
-        ]
+        }
       },
       "VariableItem": {
         "oneOf": [
@@ -2486,6 +2555,9 @@
           }
         ],
         "type": "object",
+        "required": [
+          "id"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -2499,10 +2571,78 @@
             ],
             "description": "Indicates if the variable is system-defined or user-defined."
           }
-        },
+        }
+      },
+      "CreateVariableSchema": {
+        "type": "object",
         "required": [
-          "id"
-        ]
+          "variables"
+        ],
+        "properties": {
+          "variables": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/VariableItem"
+                }
+              ],
+              "required": [
+                "name",
+                "data_type",
+                "value"
+              ],
+              "properties": {
+                "id": {
+                  "readOnly": true,
+                  "nullable": true
+                },
+                "generated_type": {
+                  "readOnly": true,
+                  "nullable": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "UpdateVariableSchema": {
+        "type": "object",
+        "required": [
+          "variables"
+        ],
+        "properties": {
+          "variables": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/VariableItem"
+                }
+              ],
+              "description": "Properties to update for a variable. 'id' is a path parameter and not included here. All fields are optional for update.",
+              "properties": {
+                "id": {
+                  "readOnly": true,
+                  "nullable": true
+                },
+                "generated_type": {
+                  "readOnly": true,
+                  "nullable": true
+                },
+                "name": {
+                  "readOnly": false
+                },
+                "value": {
+                  "readOnly": false
+                },
+                "data_type": {
+                  "readOnly": false
+                }
+              }
+            }
+          }
+        }
       }
     },
     "requestBodies": {
@@ -2512,6 +2652,9 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/CreateJourneyPayload"
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/CreateJourneyPayloadExample"
             }
           }
         }
@@ -2523,6 +2666,9 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/UpdateJourneyPayload"
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/UpdateJourneyPayload"
             }
           }
         }
@@ -2533,6 +2679,9 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/UpdateTransition"
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/UpdateTransitionPayloadExample"
             }
           }
         }
@@ -2543,6 +2692,9 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/CreateTransition"
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/CreateTransitionPayloadExample"
             }
           }
         }
@@ -2553,6 +2705,9 @@
           "application/json": {
             "schema": {
               "type": "object",
+              "required": [
+                "stages"
+              ],
               "properties": {
                 "stages": {
                   "type": "array",
@@ -2561,6 +2716,9 @@
                   }
                 }
               }
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/CreateStagePayloadExample"
             }
           }
         }
@@ -2571,6 +2729,9 @@
           "application/json": {
             "schema": {
               "type": "object",
+              "required": [
+                "stages"
+              ],
               "properties": {
                 "stages": {
                   "type": "array",
@@ -2579,6 +2740,9 @@
                   }
                 }
               }
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/UpdateStagePayloadExample"
             }
           }
         }
@@ -2588,37 +2752,10 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "variables": {
-                  "type": "array",
-                  "items": {
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/VariableItem"
-                      }
-                    ],
-                    "properties": {
-                      "id": {
-                        "readOnly": true,
-                        "nullable": true
-                      },
-                      "generated_type": {
-                        "readOnly": true,
-                        "nullable": true
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "data_type",
-                      "value"
-                    ]
-                  }
-                }
-              },
-              "required": [
-                "variables"
-              ]
+              "$ref": "#/components/schemas/CreateVariableSchema"
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/CreateVariablePayloadExample"
             }
           }
         }
@@ -2628,49 +2765,15 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "variables": {
-                  "type": "array",
-                  "items": {
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/VariableItem"
-                      }
-                    ],
-                    "properties": {
-                      "id": {
-                        "readOnly": true,
-                        "nullable": true
-                      },
-                      "generated_type": {
-                        "readOnly": true,
-                        "nullable": true
-                      },
-                      "name": {
-                        "readOnly": false
-                      },
-                      "value": {
-                        "readOnly": false
-                      },
-                      "data_type": {
-                        "readOnly": false
-                      }
-                    },
-                    "required": [],
-                    "description": "Properties to update for a variable. 'id' is a path parameter and not included here. All fields are optional for update."
-                  }
-                }
-              },
-              "required": [
-                "variables"
-              ]
+              "$ref": "#/components/schemas/UpdateVariableSchema"
+            },
+            "example": {
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/UpdateVariablePayloadExample"
             }
           }
         }
       }
-    },
-    "examples": {}
+    }
   },
   "servers": [
     {
