@@ -38,7 +38,7 @@
           }
         },
         "example": {
-          "$ref": "#/components/examples/InvalidDataError"
+          "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataError"
         }
       },
       "InvalidDataListError": {
@@ -85,7 +85,7 @@
           }
         },
         "example": {
-          "$ref": "#/components/examples/InvalidDataListError"
+          "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataListError"
         }
       },
       "DuplicateDataError": {
@@ -108,7 +108,7 @@
                 "code": {
                   "type": "string",
                   "enum": [
-                    "INVALID_DATA"
+                    "DUPLICATE_DATA"
                   ],
                   "description": "A short machine-readable code indicating the outcome or error type."
                 },
@@ -132,7 +132,7 @@
           }
         },
         "example": {
-          "$ref": "#/components/examples/DuplicateDataError"
+          "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/DuplicateDataError"
         }
       },
       "LimitExceededError": {
@@ -155,7 +155,7 @@
                 "code": {
                   "type": "string",
                   "enum": [
-                    "INVALID_DATA"
+                    "LIMIT_EXCEEDED"
                   ],
                   "description": "A short machine-readable code indicating the outcome or error type."
                 },
@@ -179,7 +179,7 @@
           }
         },
         "example": {
-          "$ref": "#/components/examples/LimitExceededError"
+          "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededError"
         }
       },
       "MandatoryNotFoundError": {
@@ -202,7 +202,7 @@
                 "code": {
                   "type": "string",
                   "enum": [
-                    "INVALID_DATA"
+                    "MANDATORY_NOT_FOUND"
                   ],
                   "description": "A short machine-readable code indicating the outcome or error type."
                 },
@@ -226,7 +226,7 @@
           }
         },
         "example": {
-          "$ref": "#/components/examples/MandatoryNotFoundError"
+          "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/MandatoryNotFoundError"
         }
       },
       "NotAllowedError": {
@@ -261,7 +261,7 @@
           }
         },
         "example": {
-          "$ref": "#/components/examples/NotAllowedError"
+          "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/NotAllowedError"
         }
       },
       "DependentFieldMissingError": {
@@ -307,7 +307,7 @@
           }
         },
         "example": {
-          "$ref": "#/components/examples/DependentFieldMissingError"
+          "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/DependentFieldMissingError"
         }
       },
       "CommonErrorDetails": {
@@ -397,12 +397,10 @@
             ],
             "properties": {
               "api_name": {
-                "type": "string",
-                "description": "The missing dependent field name."
+                "type": "string"
               },
               "json_path": {
-                "type": "string",
-                "description": "JSON path of the missing field."
+                "type": "string"
               }
             }
           }
@@ -428,7 +426,7 @@
                 "code": {
                   "type": "string",
                   "enum": [
-                    "INVALID_DATA"
+                    "SUCCESS"
                   ],
                   "description": "A short machine-readable code indicating the outcome or error type."
                 },
@@ -442,7 +440,7 @@
                 "status": {
                   "type": "string",
                   "enum": [
-                    "error"
+                    "success"
                   ],
                   "description": "The status of the response: success or error."
                 }
@@ -452,7 +450,66 @@
           }
         },
         "example": {
-          "$ref": "#/components/examples/SuccessResponse"
+          "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/SuccessResponse"
+        }
+      },
+      "LimitExceededExtendedError": {
+        "type": "object",
+        "properties": {
+          "transitions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "LIMIT_EXCEEDED"
+                  ]
+                },
+                "details": {
+                  "$ref": "#/components/schemas/LimitExceededExtendedDetails"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededExtendedError"
+        }
+      },
+      "LimitExceededExtendedDetails": {
+        "type": "object",
+        "properties": {
+          "api_name": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "string"
+          },
+          "limit_due_to": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "api_name": {
+                  "type": "string"
+                },
+                "json_path": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "json_path": {
+            "type": "string"
+          }
         }
       }
     }
