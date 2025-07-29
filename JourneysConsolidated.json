@@ -1056,8 +1056,10 @@
             "schema": {
               "$ref": "#/components/schemas/GetJourneysResponse"
             },
-            "example": {
-              "$ref": "#/components/examples/GetJourneysResponse"
+            "examples": {
+              "GetJourneysResponse": {
+                "$ref": "#/components/examples/GetJourneysResponse"
+              }
             }
           }
         }
@@ -1069,8 +1071,10 @@
             "schema": {
               "$ref": "#/components/schemas/GetJourneyDetailsSchema"
             },
-            "example": {
-              "$ref": "#/components/examples/GetJourneyDetailsResponseExample"
+            "examples": {
+              "GetJourneyDetailsResponseExample": {
+                "$ref": "#/components/examples/GetJourneyDetailsResponseExample"
+              }
             }
           }
         }
@@ -1138,8 +1142,10 @@
             "schema": {
               "$ref": "#/components/schemas/ConfigurableFieldsResponse"
             },
-            "example": {
-              "$ref": "#/components/examples/ConfigurableFieldsResponseExample"
+            "examples": {
+              "ConfigurableFieldsResponseExample": {
+                "$ref": "#/components/examples/ConfigurableFieldsResponseExample"
+              }
             }
           }
         }
@@ -1212,8 +1218,10 @@
             "schema": {
               "$ref": "#/components/schemas/GetTransitionsResponse"
             },
-            "example": {
-              "$ref": "#/components/examples/GetTransitionsResponseExample"
+            "examples": {
+              "GetTransitionsResponseExample": {
+                "$ref": "#/components/examples/GetTransitionsResponseExample"
+              }
             }
           }
         }
@@ -1233,8 +1241,10 @@
                 }
               }
             },
-            "example": {
-              "$ref": "#/components/examples/GetTransitionDetailsResponseExample"
+            "examples": {
+              "GetTransitionDetailsResponseExample": {
+                "$ref": "#/components/examples/GetTransitionDetailsResponseExample"
+              }
             }
           }
         }
@@ -1254,8 +1264,10 @@
                 }
               }
             },
-            "example": {
-              "$ref": "#/components/examples/GetStagesResponseExample"
+            "examples": {
+              "GetStagesResponseExample": {
+                "$ref": "#/components/examples/GetStagesResponseExample"
+              }
             }
           }
         }
@@ -1275,8 +1287,10 @@
                 }
               }
             },
-            "example": {
-              "$ref": "#/components/examples/GetStageDetailsResponseExample"
+            "examples": {
+              "GetStageDetailsResponseExample": {
+                "$ref": "#/components/examples/GetStageDetailsResponseExample"
+              }
             }
           }
         }
@@ -1342,8 +1356,10 @@
                 }
               }
             },
-            "example": {
-              "$ref": "#/components/examples/GetVariablesResponseExample"
+            "examples": {
+              "GetVariablesResponseExample": {
+                "$ref": "#/components/examples/GetVariablesResponseExample"
+              }
             }
           }
         }
@@ -1363,8 +1379,10 @@
                 }
               }
             },
-            "example": {
-              "$ref": "#/components/examples/GetVariableDetailsResponseExample"
+            "examples": {
+              "GetVariableDetailsResponseExample": {
+                "$ref": "#/components/examples/GetVariableDetailsResponseExample"
+              }
             }
           }
         }
@@ -1418,8 +1436,10 @@
                 "service_orgs"
               ]
             },
-            "example": {
-              "$ref": "#/components/examples/GetServiceOrgsResponseExample"
+            "examples": {
+              "GetServiceOrgsResponseExample": {
+                "$ref": "#/components/examples/GetServiceOrgsResponseExample"
+              }
             }
           }
         }
@@ -1431,8 +1451,10 @@
             "schema": {
               "$ref": "#/components/schemas/SignalsResponse"
             },
-            "example": {
-              "$ref": "#/components/examples/GetSignalsResponseExample"
+            "examples": {
+              "GetSignalsResponseExample": {
+                "$ref": "#/components/examples/GetSignalsResponseExample"
+              }
             }
           }
         }
@@ -3383,6 +3405,11 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/CreateJourneyPayload"
+            },
+            "examples": {
+              "CreateJourneyPayloadExample": {
+                "$ref": "#/components/examples/CreateJourneyPayloadExample"
+              }
             }
           }
         }
@@ -3394,6 +3421,11 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/UpdateJourneyPayload"
+            },
+            "examples": {
+              "UpdateJourneyPayload": {
+                "$ref": "#/components/examples/UpdateJourneyPayload"
+              }
             }
           }
         }
@@ -3450,8 +3482,13 @@
                     "$ref": "#/components/schemas/CreateStageSchema"
                   }
                 }
+              }             
+            },
+             "examples": {
+                "CreateStagePayloadExample": {
+                  "$ref": "#/components/examples/CreateStagePayloadExample"
+                }
               }
-            }
           }
         }
       },
@@ -3472,6 +3509,11 @@
                   }
                 }
               }
+            },
+            "examples": {
+              "UpdateStagePayloadExample": {
+                "$ref": "#/components/examples/UpdateStagePayloadExample"
+              }
             }
           }
         }
@@ -3482,6 +3524,11 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/CreateVariableSchema"
+            },
+            "examples": {
+              "CreateVariablePayloadExample": {
+                "$ref": "#/components/examples/CreateVariablePayloadExample"
+              }
             }
           }
         }
@@ -3492,6 +3539,11 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/UpdateVariableSchema"
+            },
+            "examples": {
+              "UpdateVariablePayloadExample": {
+                "$ref": "#/components/examples/UpdateVariablePayloadExample"
+              }
             }
           }
         }
@@ -4932,7 +4984,7 @@
       },
       "CreateJourneyPayloadExample": {
         "value": {
-          "transitions": [
+          "journeys": [
             {
               "name": "JJ1",
               "description": "A valid one"
