@@ -257,8 +257,7 @@
           }
         ],
         "responses": {
-          "200":
-          {
+          "200": {
             "$ref": "#/components/responses/SuccessResponse"
           },
           "400": {
@@ -943,8 +942,10 @@
             "schema": {
               "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/SuccessResponse"
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/SuccessResponse"
+            "examples": {
+              "SuccessResponse": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/SuccessResponse"
+              }
             }
           }
         }
@@ -1048,8 +1049,10 @@
             "schema": {
               "$ref": "#/components/schemas/GetJourneysResponse"
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetJourneysResponse"
+            "examples": {
+              "GetJourneysResponse": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetJourneysResponse"
+              }
             }
           }
         }
@@ -1061,8 +1064,10 @@
             "schema": {
               "$ref": "#/components/schemas/GetJourneyDetailsSchema"
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetJourneyDetailsResponseExample"
+            "examples": {
+              "GetJourneyDetailsResponseExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetJourneyDetailsResponseExample"
+              }
             }
           }
         }
@@ -1072,27 +1077,11 @@
         "content": {
           "application/json": {
             "schema": {
-              "oneOf": [
-                {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataError"
-                },
-                {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/LimitExceededError"
-                },
-                {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/MandatoryNotFoundError"
-                }
-              ]
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataError"
             },
             "examples": {
               "InvalidDataError": {
                 "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataError"
-              },
-              "LimitExceededError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/LimitExceededError"
-              },
-              "MandatoryNotFoundError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/MandatoryNotFoundError"
               }
             }
           }
@@ -1130,8 +1119,10 @@
             "schema": {
               "$ref": "#/components/schemas/ConfigurableFieldsResponse"
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetConfigurableFieldsResponse"
+            "examples": {
+              "ConfigurableFieldsResponseExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/ConfigurableFieldsResponseExample"
+              }
             }
           }
         }
@@ -1204,8 +1195,10 @@
             "schema": {
               "$ref": "#/components/schemas/GetTransitionsResponse"
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetTransitionsResponseExample"
+            "examples": {
+              "GetTransitionsResponseExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetTransitionsResponseExample"
+              }
             }
           }
         }
@@ -1225,8 +1218,10 @@
                 }
               }
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetTransitionDetailsResponseExample"
+            "examples": {
+              "GetTransitionDetailsResponseExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetTransitionDetailsResponseExample"
+              }
             }
           }
         }
@@ -1246,8 +1241,10 @@
                 }
               }
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetStagesResponseExample"
+            "examples": {
+              "GetStagesResponseExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetStagesResponseExample"
+              }
             }
           }
         }
@@ -1267,8 +1264,10 @@
                 }
               }
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetStageDetailsResponseExample"
+            "examples": {
+              "GetStageDetailsResponseExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetStageDetailsResponseExample"
+              }
             }
           }
         }
@@ -1331,11 +1330,13 @@
                 },
                 "info": {
                   "$ref": "#/components/schemas/PaginationInfo"
-                  }
+                }
               }
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetVariablesResponseExample"
+            "examples": {
+              "GetVariablesResponseExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetVariablesResponseExample"
+              }
             }
           }
         }
@@ -1355,8 +1356,10 @@
                 }
               }
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetVariableDetailsResponseExample"
+            "examples": {
+              "GetVariableDetailsResponseExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetVariableDetailsResponseExample"
+              }
             }
           }
         }
@@ -1410,8 +1413,10 @@
                 "service_orgs"
               ]
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetServiceOrgsResponseExample"
+            "examples": {
+              "GetServiceOrgsResponseExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetServiceOrgsResponseExample"
+              }
             }
           }
         }
@@ -1423,8 +1428,10 @@
             "schema": {
               "$ref": "#/components/schemas/SignalsResponse"
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetSignalsResponseExample"
+            "examples": {
+              "GetSignalsResponseExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetSignalsResponseExample"
+              }
             }
           }
         }
@@ -2062,7 +2069,7 @@
             "description": "Unique identifier of the object or entity."
           },
           "criteria": {
-              "$ref": "#/components/schemas/Criteria"                       
+            "$ref": "#/components/schemas/Criteria"
           },
           "identifiers": {
             "type": "array",
@@ -2138,7 +2145,7 @@
             "description": ""
           },
           "from_stage": {
-            "$ref": "#/components/schemas/StageSchema"           
+            "$ref": "#/components/schemas/StageSchema"
           },
           "to_stage": {
             "$ref": "#/components/schemas/StageSchema"
@@ -2869,8 +2876,10 @@
             "schema": {
               "$ref": "#/components/schemas/CreateJourneyPayload"
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/CreateJourneyPayloadExample"
+            "examples": {
+              "CreateJourneyPayloadExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/CreateJourneyPayloadExample"
+              }
             }
           }
         }
@@ -2883,8 +2892,10 @@
             "schema": {
               "$ref": "#/components/schemas/UpdateJourneyPayload"
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/UpdateJourneyPayload"
+            "examples": {
+              "UpdateJourneyPayload": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/UpdateJourneyPayload"
+              }
             }
           }
         }
@@ -2943,8 +2954,10 @@
                 }
               }
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/CreateStagePayloadExample"
+            "examples": {
+              "CreateStagePayloadExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/CreateStagePayloadExample"
+              }
             }
           }
         }
@@ -2967,8 +2980,10 @@
                 }
               }
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/UpdateStagePayloadExample"
+            "examples": {
+              "UpdateStagePayloadExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/UpdateStagePayloadExample"
+              }
             }
           }
         }
@@ -2980,8 +2995,10 @@
             "schema": {
               "$ref": "#/components/schemas/CreateVariableSchema"
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/CreateVariablePayloadExample"
+            "examples": {
+              "CreateVariablePayloadExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/CreateVariablePayloadExample"
+              }
             }
           }
         }
@@ -2993,8 +3010,10 @@
             "schema": {
               "$ref": "#/components/schemas/UpdateVariableSchema"
             },
-            "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/UpdateVariablePayloadExample"
+            "examples": {
+              "CreateVariablePayloadExample": {
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/UpdateVariablePayloadExample"
+              }
             }
           }
         }
