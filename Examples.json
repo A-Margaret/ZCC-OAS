@@ -1,15 +1,17 @@
 {
   "SuccessResponse": {
-    "journeys": [
-      {
-        "code": "SUCCESS",
-        "details": {
-          "id": "1000000007733"
-        },
-        "message": "Journey created successfully",
-        "status": "success"
-      }
-    ]
+    "value": {
+      "journeys": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "1000000007733"
+          },
+          "message": "Journey created successfully",
+          "status": "success"
+        }
+      ]
+    }
   },
   "GetJourneysResponse": {
     "value": {
@@ -41,482 +43,514 @@
     }
   },
   "GetJourneyDetailsResponseExample": {
-    "journeys": [
-      {
-        "id": "5000000087039",
-        "name": "New Journey 1",
-        "description": "",
-        "goal": {
-          "type": "path",
-          "details": {
-            "stages": [
+    "value": {
+      "journeys": [
+        {
+          "id": "5000000087039",
+          "name": "New Journey 1",
+          "description": "",
+          "goal": {
+            "type": "path",
+            "details": {
+              "stages": [
+                {
+                  "id": "5000000087594",
+                  "name": "Stage 1"
+                },
+                {
+                  "id": "5000000087600",
+                  "name": "Stage 2"
+                }
+              ]
+            }
+          },
+          "deadline": {
+            "stage": null,
+            "actions": [
               {
-                "id": "5000000087594",
-                "name": "Stage 1"
-              },
-              {
-                "id": "5000000087600",
-                "name": "Stage 2"
-              }
-            ]
-          }
-        },
-        "deadline": {
-          "stage": null,
-          "actions": [
-            {
-              "id": "5000000107086",
-              "action": "move_to_stage",
-              "details": {
-                "stage": {
-                  "id": "5000000024640"
+                "id": "5000000107086",
+                "action": "move_to_stage",
+                "details": {
+                  "stage": {
+                    "id": "5000000024640"
+                  }
                 }
               }
+            ],
+            "execute_on": {
+              "period": 1,
+              "time_unit": "days"
             }
-          ],
-          "execute_on": {
-            "period": 1,
-            "time_unit": "days"
-          }
-        },
-        "status": "draft",
-        "version": 1,
-        "created_time": "2024-10-12T12:59:58+05:30",
-        "modified_time": "2024-10-16T20:15:44+05:30",
-        "record_condition": false,
-        "chart_data": {
-          "builderPos": {
-            "zoomLevel": 1,
-            "top": 340,
-            "left": 755
           },
-          "floater": {
-            "top": 10,
-            "left": 30
-          },
-          "nodes": [
-            {
-              "position": {
-                "top": -150,
-                "left": 0
-              },
-              "id": "0"
+          "status": "draft",
+          "version": 1,
+          "created_time": "2024-10-12T12:59:58+05:30",
+          "modified_time": "2024-10-16T20:15:44+05:30",
+          "record_condition": false,
+          "chart_data": {
+            "builderPos": {
+              "zoomLevel": 1,
+              "top": 340,
+              "left": 755
             },
-            {
-              "position": {
-                "top": 50,
-                "left": 0
-              },
-              "id": "5000000087594"
+            "floater": {
+              "top": 10,
+              "left": 30
             },
-            {
-              "position": {
-                "top": 164,
-                "left": -216
-              },
-              "id": "5000000087600"
-            }
-          ],
-          "connections": [
-            {
-              "source": {
-                "x": 0.5,
-                "y": 1,
+            "nodes": [
+              {
+                "position": {
+                  "top": -150,
+                  "left": 0
+                },
                 "id": "0"
               },
-              "id": "connection_state_0_state_5000000087594",
-              "target": {
-                "x": 0.5,
-                "y": 0,
+              {
+                "position": {
+                  "top": 50,
+                  "left": 0
+                },
                 "id": "5000000087594"
               },
-              "points": []
-            }
-          ]
-        },
-        "created_by": {
-          "id": "5000000000911",
-          "name": "Gokul"
-        },
-        "modified_by": {
-          "id": "5000000000911",
-          "name": "Gokul"
-        },
-        "cloned_from": null,
-        "records_count": 0,
-        "group_id": "5000000087583"
-      }
-    ]
+              {
+                "position": {
+                  "top": 164,
+                  "left": -216
+                },
+                "id": "5000000087600"
+              }
+            ],
+            "connections": [
+              {
+                "source": {
+                  "x": 0.5,
+                  "y": 1,
+                  "id": "0"
+                },
+                "id": "connection_state_0_state_5000000087594",
+                "target": {
+                  "x": 0.5,
+                  "y": 0,
+                  "id": "5000000087594"
+                },
+                "points": []
+              }
+            ]
+          },
+          "created_by": {
+            "id": "5000000000911",
+            "name": "Gokul"
+          },
+          "modified_by": {
+            "id": "5000000000911",
+            "name": "Gokul"
+          },
+          "cloned_from": null,
+          "records_count": 0,
+          "group_id": "5000000087583"
+        }
+      ]
+    }
   },
   "GetTransitionsResponseExample": {
-    "transitions": [
-      {
-        "id": "668000000129005",
-        "name": "transition 1",
-        "description": "",
-        "type": "standard",
-        "from_stage": null,
-        "to_stage": {
-          "id": "668000000129001",
-          "name": "stage 1"
-        }
-      },
-      {
-        "id": "668000000135942",
-        "name": "1 Days",
-        "description": "",
-        "type": "wait",
-        "from_stage": {
-          "name": "s4",
-          "id": "668000000135008"
+    "value": {
+      "transitions": [
+        {
+          "id": "668000000129005",
+          "name": "transition 1",
+          "description": "",
+          "type": "standard",
+          "from_stage": null,
+          "to_stage": {
+            "id": "668000000129001",
+            "name": "stage 1"
+          }
         },
-        "to_stage": {
-          "name": "s5",
-          "id": "668000000135928"
-        },
-        "details": {
-          "execute_on": {
-            "period": 1,
-            "time_unit": "days"
+        {
+          "id": "668000000135942",
+          "name": "1 Days",
+          "description": "",
+          "type": "wait",
+          "from_stage": {
+            "name": "s4",
+            "id": "668000000135008"
+          },
+          "to_stage": {
+            "name": "s5",
+            "id": "668000000135928"
+          },
+          "details": {
+            "execute_on": {
+              "period": 1,
+              "time_unit": "days"
+            }
           }
         }
+      ],
+      "info": {
+        "page": 1,
+        "per_page": 200,
+        "more_records": false,
+        "count": 2
       }
-    ],
-    "info": {
-      "page": 1,
-      "per_page": 200,
-      "more_records": false,
-      "count": 2
     }
   },
   "GetTransitionDetailsResponseExample": {
-    "transitions": [
-      {
-        "id": "1000000105179",
-        "name": "transition 1",
-        "description": null,
-        "type": "standard",
-        "details": {
-          "triggers": [
-            {
-              "id": "1000000105475",
-              "criteria": {
-                "comparator": "equal",
-                "configurable_field": {
-                  "api_name": "transition_1_Trigger_OutgoingMailSent_Cc",
-                  "id": "1000000105479"
-                },
-                "value": "abc@gmail.com"
-              },
-              "signal": {
-                "api_name": "mail_sent",
-                "service_org": {
-                  "id": "1000000029503",
-                  "name": "Mark Org1"
-                }
-              },
-              "identifiers": [
-                {
-                  "id": "1000000105541",
-                  "name": "Converted Account",
-                  "type": "crm_fields",
-                  "api_name": "Leads_Converted_Account"
-                }
-              ],
-              "identifier_outer_meta": [
-                {
-                  "reference": null,
-                  "field": null,
-                  "lookup": null,
-                  "related_to": null
-                }
-              ]
-            },
-            {
-              "id": "1000000105181",
-              "criteria": null,
-              "signal": {
-                "api_name": "create",
-                "service_org": {
-                  "id": "1000000029503",
-                  "name": "Mark Org1"
-                },
-                "signal_props": {
-                  "module": {
-                    "id": "16828000000000039",
-                    "name": "Leads",
-                    "api_name": "Leads"
-                  },
-                  "layout": {
-                    "id": "16828000000000161",
-                    "name": "Standard",
-                    "api_name": "Standard__s"
-                  },
-                  "type": "specific"
-                }
-              },
-              "identifiers": [
-                {
-                  "id": "1000000105196",
-                  "name": "Email",
-                  "type": "synced_fields",
-                  "api_name": "transition_1_Trigger_RecordCreate_Email"
-                }
-              ],
-              "identifier_outer_meta": [
-                {
-                  "reference": null,
-                  "field": null,
-                  "lookup": null,
-                  "related_to": null
-                }
-              ]
-            },
-            {
-              "id": "1000000105182",
-              "criteria": null,
-              "signal": {
-                "api_name": "create",
-                "service_org": {
-                  "id": "1000000029503",
-                  "name": "Mark Org1"
-                },
-                "signal_props": {
-                  "module": {
-                    "id": "16828000000000039",
-                    "name": "Leads",
-                    "api_name": "Leads"
-                  },
-                  "layout": {
-                    "id": "16828000000000161",
-                    "name": "Standard",
-                    "api_name": "Standard__s"
-                  },
-                  "type": "specific"
-                }
-              },
-              "identifiers": [
-                {
-                  "id": "1000000105286",
-                  "name": "Email",
-                  "type": "synced_fields",
-                  "api_name": "transition_1_Trigger_RecordCreate_2_Email"
-                }
-              ],
-              "identifier_outer_meta": [
-                {
-                  "reference": null,
-                  "field": null,
-                  "lookup": null,
-                  "related_to": null
-                }
-              ]
-            }
-          ],
-          "logs": null,
-          "precedence_order": 1,
-          "transition_criteria": null
-        },
-        "from_stage": {
-          "id": "1000000104882",
-          "name": "Stage 1",
+    "value": {
+      "transitions": [
+        {
+          "id": "1000000105179",
+          "name": "transition 1",
           "description": null,
-          "type": null,
-          "end_stage": false,
-          "tp_actions": null
-        },
-        "to_stage": {
-          "id": "1000000103102",
-          "name": "Stage 2",
-          "description": null,
-          "type": null,
-          "end_stage": false,
-          "tp_actions": null
-        },
-        "execute_on": null
-      }
-    ]
+          "type": "standard",
+          "details": {
+            "triggers": [
+              {
+                "id": "1000000105475",
+                "criteria": {
+                  "comparator": "equal",
+                  "configurable_field": {
+                    "api_name": "transition_1_Trigger_OutgoingMailSent_Cc",
+                    "id": "1000000105479"
+                  },
+                  "value": "abc@gmail.com"
+                },
+                "signal": {
+                  "api_name": "mail_sent",
+                  "service_org": {
+                    "id": "1000000029503",
+                    "name": "Mark Org1"
+                  }
+                },
+                "identifiers": [
+                  {
+                    "id": "1000000105541",
+                    "name": "Converted Account",
+                    "type": "crm_fields",
+                    "api_name": "Leads_Converted_Account"
+                  }
+                ],
+                "identifier_outer_meta": [
+                  {
+                    "reference": null,
+                    "field": null,
+                    "lookup": null,
+                    "related_to": null
+                  }
+                ]
+              },
+              {
+                "id": "1000000105181",
+                "criteria": null,
+                "signal": {
+                  "api_name": "create",
+                  "service_org": {
+                    "id": "1000000029503",
+                    "name": "Mark Org1"
+                  },
+                  "signal_props": {
+                    "module": {
+                      "id": "16828000000000039",
+                      "name": "Leads",
+                      "api_name": "Leads"
+                    },
+                    "layout": {
+                      "id": "16828000000000161",
+                      "name": "Standard",
+                      "api_name": "Standard__s"
+                    },
+                    "type": "specific"
+                  }
+                },
+                "identifiers": [
+                  {
+                    "id": "1000000105196",
+                    "name": "Email",
+                    "type": "synced_fields",
+                    "api_name": "transition_1_Trigger_RecordCreate_Email"
+                  }
+                ],
+                "identifier_outer_meta": [
+                  {
+                    "reference": null,
+                    "field": null,
+                    "lookup": null,
+                    "related_to": null
+                  }
+                ]
+              },
+              {
+                "id": "1000000105182",
+                "criteria": null,
+                "signal": {
+                  "api_name": "create",
+                  "service_org": {
+                    "id": "1000000029503",
+                    "name": "Mark Org1"
+                  },
+                  "signal_props": {
+                    "module": {
+                      "id": "16828000000000039",
+                      "name": "Leads",
+                      "api_name": "Leads"
+                    },
+                    "layout": {
+                      "id": "16828000000000161",
+                      "name": "Standard",
+                      "api_name": "Standard__s"
+                    },
+                    "type": "specific"
+                  }
+                },
+                "identifiers": [
+                  {
+                    "id": "1000000105286",
+                    "name": "Email",
+                    "type": "synced_fields",
+                    "api_name": "transition_1_Trigger_RecordCreate_2_Email"
+                  }
+                ],
+                "identifier_outer_meta": [
+                  {
+                    "reference": null,
+                    "field": null,
+                    "lookup": null,
+                    "related_to": null
+                  }
+                ]
+              }
+            ],
+            "logs": null,
+            "precedence_order": 1,
+            "transition_criteria": null
+          },
+          "from_stage": {
+            "id": "1000000104882",
+            "name": "Stage 1",
+            "description": null,
+            "type": null,
+            "end_stage": false,
+            "tp_actions": null
+          },
+          "to_stage": {
+            "id": "1000000103102",
+            "name": "Stage 2",
+            "description": null,
+            "type": null,
+            "end_stage": false,
+            "tp_actions": null
+          },
+          "execute_on": null
+        }
+      ]
+    }
   },
   "GetStagesResponseExample": {
-    "stages": [
-      {
-        "id": "1000000027051",
-        "name": "Stage 34",
-        "description": "",
-        "type": "standard",
-        "end_stage": false,
-        "tp_actions": []
-      },
-      {
-        "id": "1000000027013",
-        "name": "Stage 15",
-        "description": "",
-        "type": "standard",
-        "end_stage": false,
-        "tp_actions": []
-      },
-      {
-        "id": "1000000027057",
-        "name": "Stage 37",
-        "description": "",
-        "type": "standard",
-        "end_stage": false,
-        "tp_actions": []
-      }
-    ]
+    "value": {
+      "stages": [
+        {
+          "id": "1000000027051",
+          "name": "Stage 34",
+          "description": "",
+          "type": "standard",
+          "end_stage": false,
+          "tp_actions": []
+        },
+        {
+          "id": "1000000027013",
+          "name": "Stage 15",
+          "description": "",
+          "type": "standard",
+          "end_stage": false,
+          "tp_actions": []
+        },
+        {
+          "id": "1000000027057",
+          "name": "Stage 37",
+          "description": "",
+          "type": "standard",
+          "end_stage": false,
+          "tp_actions": []
+        }
+      ]
+    }
   },
   "GetStageDetailsResponseExample": {
-    "stages": [
-      {
-        "id": "1000000028262",
-        "name": "Stage 1",
-        "description": "",
-        "type": "standard",
-        "end_stage": false,
-        "tp_actions": []
-      }
-    ]
+    "value": {
+      "stages": [
+        {
+          "id": "1000000028262",
+          "name": "Stage 1",
+          "description": "",
+          "type": "standard",
+          "end_stage": false,
+          "tp_actions": []
+        }
+      ]
+    }
   },
   "CreateStagePayloadExample": {
-    "stages": [
-      {
-        "name": "M Stage abc",
-        "description": "Valid description",
-        "type": "success",
-        "end_stage": true
-      }
-    ]
+    "value": {
+      "stages": [
+        {
+          "name": "M Stage abc",
+          "description": "Valid description",
+          "type": "success",
+          "end_stage": true
+        }
+      ]
+    }
   },
   "UpdateStagePayloadExample": {
-    "stages": [
-      {
-        "name": "Updated Stage Name",
-        "description": "This stage has been updated.",
-        "type": "success",
-        "end_stage": true
-      }
-    ]
+    "value": {
+      "stages": [
+        {
+          "name": "Updated Stage Name",
+          "description": "This stage has been updated.",
+          "type": "success",
+          "end_stage": true
+        }
+      ]
+    }
   },
   "CreateVariablePayloadExample": {
-    "variables": [
-      {
-        "name": "var 1",
-        "value": "helllo",
-        "data_type": "custom"
-      },
-      {
-        "name": "var 1",
-        "value": "${journeys(id=1000000028918).configurable_fields(id=5000000189203)}",
-        "data_type": "merge"
-      }
-    ]
+    "value": {
+      "variables": [
+        {
+          "name": "var 1",
+          "value": "helllo",
+          "data_type": "custom"
+        },
+        {
+          "name": "var 1",
+          "value": "${journeys(id=1000000028918).configurable_fields(id=5000000189203)}",
+          "data_type": "merge"
+        }
+      ]
+    }
   },
   "UpdateVariablePayloadExample": {
-    "variables": [
-      {
-        "name": "email",
-        "value": "test123@test.com",
-        "data_type": "custom"
-      }
-    ]
+    "value": {
+      "variables": [
+        {
+          "name": "email",
+          "value": "test123@test.com",
+          "data_type": "custom"
+        }
+      ]
+    }
   },
   "GetVariablesResponseExample": {
-    "variables": [
-      {
-        "id": "668000000122564",
-        "name": "id",
-        "data_type": "{string || merge}",
-        "generated_type": "{system || custom}",
-        "value": "${journeys(id=1000000000868).configurable_fields(id=100000000129001)}"
-      },
-      {
-        "id": "668000000122562",
-        "name": "name",
-        "data_type": "merge",
-        "generated_type": "system",
-        "value": "${journeys(id=1000000000868).configurable_fields(id=100000000129002)}"
-      },
-      {
-        "id": "668000000129998",
-        "name": "limit",
-        "data_type": "string",
-        "generated_type": "custom",
-        "value": "200"
+    "value": {
+      "variables": [
+        {
+          "id": "668000000122564",
+          "name": "id",
+          "data_type": "{string || merge}",
+          "generated_type": "{system || custom}",
+          "value": "${journeys(id=1000000000868).configurable_fields(id=100000000129001)}"
+        },
+        {
+          "id": "668000000122562",
+          "name": "name",
+          "data_type": "merge",
+          "generated_type": "system",
+          "value": "${journeys(id=1000000000868).configurable_fields(id=100000000129002)}"
+        },
+        {
+          "id": "668000000129998",
+          "name": "limit",
+          "data_type": "string",
+          "generated_type": "custom",
+          "value": "200"
+        }
+      ],
+      "info": {
+        "page": 1,
+        "per_page": 200,
+        "more_records": false,
+        "count": 2
       }
-    ],
-    "info": {
-      "page": 1,
-      "per_page": 200,
-      "more_records": false,
-      "count": 2
     }
   },
   "GetVariableDetailsResponseExample": {
-    "variables": [
-      {
-        "id": "1000000036044",
-        "name": "v1",
-        "value": "abc",
-        "data_type": "custom",
-        "generated_type": "custom"
-      }
-    ]
+    "value": {
+      "variables": [
+        {
+          "id": "1000000036044",
+          "name": "v1",
+          "value": "abc",
+          "data_type": "custom",
+          "generated_type": "custom"
+        }
+      ]
+    }
   },
   "LimitExceededError": {
-    "journeys": [
-      {
-        "code": "LIMIT_EXCEEDED",
-        "message": "Total journey creation limit exists for this org, please upgrade your license to create more.",
-        "details": {
-          "api_name": "journeys",
-          "limit": "5",
-          "json_path": "$.journeys[0].journeys"
-        },
-        "status": "error"
-      }
-    ]
+    "value": {
+      "journeys": [
+        {
+          "code": "LIMIT_EXCEEDED",
+          "message": "Total journey creation limit exists for this org, please upgrade your license to create more.",
+          "details": {
+            "api_name": "journeys",
+            "limit": "5",
+            "json_path": "$.journeys[0].journeys"
+          },
+          "status": "error"
+        }
+      ]
+    }
   },
   "MandatoryNotFoundError": {
-    "journeys": [
-      {
-        "code": "MANDATORY_NOT_FOUND",
-        "message": "Mandatory field not found",
-        "details": {
-          "api_name": "name",
-          "json_path": "$.journeys[0].name"
-        },
-        "status": "error"
-      }
-    ]
+    "value": {
+      "journeys": [
+        {
+          "code": "MANDATORY_NOT_FOUND",
+          "message": "Mandatory field not found",
+          "details": {
+            "api_name": "name",
+            "json_path": "$.journeys[0].name"
+          },
+          "status": "error"
+        }
+      ]
+    }
   },
   "InvalidDataError": {
-    "code": "INVALID_DATA",
-    "message": "The given field seems to be invalid",
-    "details": {
-      "resource_path_index": "1"
-    },
-    "status": "error"
+    "value": {
+      "code": "INVALID_DATA",
+      "message": "The given field seems to be invalid",
+      "details": {
+        "resource_path_index": "1"
+      },
+      "status": "error"
+    }
   },
   "NotAllowedError": {
-    "code": "NOT_ALLOWED",
-    "message": "Journey doesn't have any transitions, a journey should have at least an transition, please check and configure.",
-    "details": {
-      "resource_path_index": "1"
-    },
-    "status": "error"
+    "value": {
+      "code": "NOT_ALLOWED",
+      "message": "Journey doesn't have any transitions, a journey should have at least an transition, please check and configure.",
+      "details": {
+        "resource_path_index": "1"
+      },
+      "status": "error"
+    }
   },
   "DuplicateDataError": {
-    "journeys": [
-      {
-        "code": "DUPLICATE_DATA",
-        "message": "Journey with the same name already exists.",
-        "details": {
-          "api_name": "name",
-          "json_path": "$.journeys[0].name"
-        },
-        "status": "error"
-      }
-    ]
+    "value": {
+      "journeys": [
+        {
+          "code": "DUPLICATE_DATA",
+          "message": "Journey with the same name already exists.",
+          "details": {
+            "api_name": "name",
+            "json_path": "$.journeys[0].name"
+          },
+          "status": "error"
+        }
+      ]
+    }
   },
   "ConfigurableFieldsResponseExample": {
     "value": {
@@ -551,894 +585,916 @@
     }
   },
   "GetServiceOrgsResponseExample": {
-    "services": [
-      {
-        "id": "15506000000005047",
-        "org_id": "107231628",
-        "org_name": "test1",
-        "service": "ZohoCRM",
-        "status": "ENABLED",
-        "authenticated_by": {
-          "id": "15506000000005001",
-          "name": "MargaretA"
+    "value": {
+      "service_orgs": [
+        {
+          "id": "15506000000005047",
+          "org_id": "107231628",
+          "org_name": "test1",
+          "service": "ZohoCRM",
+          "status": "ENABLED",
+          "authenticated_by": {
+            "id": "15506000000005001",
+            "name": "MargaretA"
+          },
+          "authenticated_time": "2025-07-07T08:43:11+00:00",
+          "publisher_id": "23324000000025038",
+          "authenticatable_users_info": [
+            {
+              "id": "15506000000005001",
+              "name": "MargaretA",
+              "created_time": "2025-07-07T08:43:07+00:00",
+              "role": "Administrator"
+            }
+          ]
         },
-        "authenticated_time": "2025-07-07T08:43:11+00:00",
-        "publisher_id": "23324000000025038",
-        "authenticatable_users_info": [
-          {
+        {
+          "id": "15506000000009569",
+          "org_id": "107486932",
+          "org_name": "test1",
+          "service": "ZohoMeeting",
+          "status": "ENABLED",
+          "authenticated_by": {
             "id": "15506000000005001",
-            "name": "MargaretA",
-            "created_time": "2025-07-07T08:43:07+00:00",
-            "role": "Administrator"
-          }
-        ]
-      },
-      {
-        "id": "15506000000009569",
-        "org_id": "107486932",
-        "org_name": "test1",
-        "service": "ZohoMeeting",
-        "status": "ENABLED",
-        "authenticated_by": {
-          "id": "15506000000005001",
-          "name": "MargaretA"
+            "name": "MargaretA"
+          },
+          "authenticated_time": "2025-07-07T08:50:08+00:00",
+          "publisher_id": "23324000000025810",
+          "authenticatable_users_info": [
+            {
+              "id": "15506000000005001",
+              "name": "MargaretA",
+              "created_time": "2025-07-07T08:43:07+00:00",
+              "role": "Administrator"
+            }
+          ]
         },
-        "authenticated_time": "2025-07-07T08:50:08+00:00",
-        "publisher_id": "23324000000025810",
-        "authenticatable_users_info": [
-          {
+        {
+          "id": "15506000000009573",
+          "org_id": "107490192",
+          "org_name": "apitestbackstage",
+          "service": "zohobackstage",
+          "status": "ENABLED",
+          "authenticated_by": {
             "id": "15506000000005001",
-            "name": "MargaretA",
-            "created_time": "2025-07-07T08:43:07+00:00",
-            "role": "Administrator"
-          }
-        ]
-      },
-      {
-        "id": "15506000000009573",
-        "org_id": "107490192",
-        "org_name": "apitestbackstage",
-        "service": "zohobackstage",
-        "status": "ENABLED",
-        "authenticated_by": {
-          "id": "15506000000005001",
-          "name": "MargaretA"
+            "name": "MargaretA"
+          },
+          "authenticated_time": "2025-07-07T08:52:09+00:00",
+          "publisher_id": "23324000000025937",
+          "authenticatable_users_info": [
+            {
+              "id": "15506000000005001",
+              "name": "MargaretA",
+              "created_time": "2025-07-07T08:43:07+00:00",
+              "role": "Administrator"
+            }
+          ]
         },
-        "authenticated_time": "2025-07-07T08:52:09+00:00",
-        "publisher_id": "23324000000025937",
-        "authenticatable_users_info": [
-          {
+        {
+          "id": "15506000000009577",
+          "org_id": "107489331",
+          "org_name": "test1",
+          "service": "ZohoSupport",
+          "status": "ENABLED",
+          "authenticated_by": {
             "id": "15506000000005001",
-            "name": "MargaretA",
-            "created_time": "2025-07-07T08:43:07+00:00",
-            "role": "Administrator"
-          }
-        ]
-      },
-      {
-        "id": "15506000000009577",
-        "org_id": "107489331",
-        "org_name": "test1",
-        "service": "ZohoSupport",
-        "status": "ENABLED",
-        "authenticated_by": {
-          "id": "15506000000005001",
-          "name": "MargaretA"
+            "name": "MargaretA"
+          },
+          "authenticated_time": "2025-07-07T08:53:19+00:00",
+          "publisher_id": "23324000000024074",
+          "authenticatable_users_info": [
+            {
+              "id": "15506000000005001",
+              "name": "MargaretA",
+              "created_time": "2025-07-07T08:43:07+00:00",
+              "role": "Administrator"
+            }
+          ]
         },
-        "authenticated_time": "2025-07-07T08:53:19+00:00",
-        "publisher_id": "23324000000024074",
-        "authenticatable_users_info": [
-          {
+        {
+          "id": "15506000000009581",
+          "org_id": "107489332",
+          "org_name": "apitestsurvey",
+          "service": "ZohoSurvey",
+          "status": "ENABLED",
+          "authenticated_by": {
             "id": "15506000000005001",
-            "name": "MargaretA",
-            "created_time": "2025-07-07T08:43:07+00:00",
-            "role": "Administrator"
-          }
-        ]
-      },
-      {
-        "id": "15506000000009581",
-        "org_id": "107489332",
-        "org_name": "apitestsurvey",
-        "service": "ZohoSurvey",
-        "status": "ENABLED",
-        "authenticated_by": {
-          "id": "15506000000005001",
-          "name": "MargaretA"
+            "name": "MargaretA"
+          },
+          "authenticated_time": "2025-07-07T08:54:05+00:00",
+          "publisher_id": "23324000000024210",
+          "authenticatable_users_info": [
+            {
+              "id": "15506000000005001",
+              "name": "MargaretA",
+              "created_time": "2025-07-07T08:43:07+00:00",
+              "role": "Administrator"
+            }
+          ]
         },
-        "authenticated_time": "2025-07-07T08:54:05+00:00",
-        "publisher_id": "23324000000024210",
-        "authenticatable_users_info": [
-          {
-            "id": "15506000000005001",
-            "name": "MargaretA",
-            "created_time": "2025-07-07T08:43:07+00:00",
-            "role": "Administrator"
-          }
-        ]
-      },
-      {
-        "id": "15506000000009585",
-        "org_id": "107489334",
-        "org_name": "test1",
-        "service": "ZohoCampaigns",
-        "status": "DISABLED",
-        "authenticated_by": null,
-        "authenticated_time": null,
-        "publisher_id": null,
-        "authenticatable_users_info": [
-          {
-            "id": "15506000000005001",
-            "name": "MargaretA",
-            "created_time": "2025-07-07T08:43:07+00:00",
-            "role": "Administrator"
-          }
-        ]
-      },
-      {
-        "id": "15506000000022002",
-        "org_id": "107489332",
-        "org_name": "apitestsurvey",
-        "service": "ZohoSurvey",
-        "status": "DISABLED",
-        "authenticated_by": null,
-        "authenticated_time": null,
-        "publisher_id": null,
-        "authenticatable_users_info": [
-          {
-            "id": "15506000000005001",
-            "name": "MargaretA",
-            "created_time": "2025-07-07T08:43:07+00:00",
-            "role": "Administrator"
-          }
-        ]
-      },
-      {
-        "id": "15506000000022004",
-        "org_id": "107489331",
-        "org_name": "test1",
-        "service": "ZohoSupport",
-        "status": "DISABLED",
-        "authenticated_by": null,
-        "authenticated_time": null,
-        "publisher_id": null,
-        "authenticatable_users_info": [
-          {
-            "id": "15506000000005001",
-            "name": "MargaretA",
-            "created_time": "2025-07-07T08:43:07+00:00",
-            "role": "Administrator"
-          }
-        ]
-      },
-      {
-        "id": "15506000000022006",
-        "org_id": "107490192",
-        "org_name": "apitestbackstage",
-        "service": "zohobackstage",
-        "status": "DISABLED",
-        "authenticated_by": null,
-        "authenticated_time": null,
-        "publisher_id": null,
-        "authenticatable_users_info": [
-          {
-            "id": "155060000005001",
-            "name": "MargaretA",
-            "created_time": "2025-07-07T08:43:07+00:00",
-            "role": "Administrator"
-          }
-        ]
-      },
-      {
-        "id": "15506000000022008",
-        "org_id": "107486932",
-        "org_name": "test1",
-        "service": "ZohoMeeting",
-        "status": "DISABLED",
-        "authenticated_by": null,
-        "authenticated_time": null,
-        "publisher_id": null,
-        "authenticatable_users_info": [
-          {
-            "id": "155060000005001",
-            "name": "MargaretA",
-            "created_time": "2025-07-07T08:43:07+00:00",
-            "role": "Administrator"
-          }
-        ]
-      }
-    ]
+        {
+          "id": "15506000000009585",
+          "org_id": "107489334",
+          "org_name": "test1",
+          "service": "ZohoCampaigns",
+          "status": "DISABLED",
+          "authenticated_by": null,
+          "authenticated_time": null,
+          "publisher_id": null,
+          "authenticatable_users_info": [
+            {
+              "id": "15506000000005001",
+              "name": "MargaretA",
+              "created_time": "2025-07-07T08:43:07+00:00",
+              "role": "Administrator"
+            }
+          ]
+        },
+        {
+          "id": "15506000000022002",
+          "org_id": "107489332",
+          "org_name": "apitestsurvey",
+          "service": "ZohoSurvey",
+          "status": "DISABLED",
+          "authenticated_by": null,
+          "authenticated_time": null,
+          "publisher_id": null,
+          "authenticatable_users_info": [
+            {
+              "id": "15506000000005001",
+              "name": "MargaretA",
+              "created_time": "2025-07-07T08:43:07+00:00",
+              "role": "Administrator"
+            }
+          ]
+        },
+        {
+          "id": "15506000000022004",
+          "org_id": "107489331",
+          "org_name": "test1",
+          "service": "ZohoSupport",
+          "status": "DISABLED",
+          "authenticated_by": null,
+          "authenticated_time": null,
+          "publisher_id": null,
+          "authenticatable_users_info": [
+            {
+              "id": "15506000000005001",
+              "name": "MargaretA",
+              "created_time": "2025-07-07T08:43:07+00:00",
+              "role": "Administrator"
+            }
+          ]
+        },
+        {
+          "id": "15506000000022006",
+          "org_id": "107490192",
+          "org_name": "apitestbackstage",
+          "service": "zohobackstage",
+          "status": "DISABLED",
+          "authenticated_by": null,
+          "authenticated_time": null,
+          "publisher_id": null,
+          "authenticatable_users_info": [
+            {
+              "id": "155060000005001",
+              "name": "MargaretA",
+              "created_time": "2025-07-07T08:43:07+00:00",
+              "role": "Administrator"
+            }
+          ]
+        },
+        {
+          "id": "15506000000022008",
+          "org_id": "107486932",
+          "org_name": "test1",
+          "service": "ZohoMeeting",
+          "status": "DISABLED",
+          "authenticated_by": null,
+          "authenticated_time": null,
+          "publisher_id": null,
+          "authenticatable_users_info": [
+            {
+              "id": "155060000005001",
+              "name": "MargaretA",
+              "created_time": "2025-07-07T08:43:07+00:00",
+              "role": "Administrator"
+            }
+          ]
+        }
+      ]
+    }
   },
   "GetSignalsResponseExample": {
-    "signals": [
-      {
-        "api_name": "mail_opened_notreplied",
-        "display_name": "Outgoing mail opened not replied",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
-        },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "mail_sent_notopened",
-        "display_name": "Outgoing mail sent not opened",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
-        },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "outgoing_call_left_unattended",
-        "display_name": "Outgoing call unattended",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
-        },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "edit",
-        "display_name": "Record update",
-        "signal_condition": false,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
-        },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "layout",
-            "display_name": "layout",
-            "parent_prop": "module",
-            "data_type": "object"
+    "value": {
+      "signals": [
+        {
+          "api_name": "mail_opened_notreplied",
+          "display_name": "Outgoing mail opened not replied",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
           },
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "receiving_incoming_call",
-        "display_name": "Receiving incoming call",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
         },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "convert",
-        "display_name": "Record convert",
-        "signal_condition": false,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
-        },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "to_module",
-            "display_name": "to_module",
-            "parent_prop": "from_module",
-            "data_type": "object"
+        {
+          "api_name": "mail_sent_notopened",
+          "display_name": "Outgoing mail sent not opened",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
           },
-          {
-            "required": true,
-            "api_name": "from_module",
-            "display_name": "from_module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "mail_sent_opened",
-        "display_name": "Outgoing mail opened",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
         },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "date_or_datetime",
-        "display_name": "Date or date time field",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
-        },
-        "signal_props": [
-          {
-            "required": false,
-            "api_name": "field",
-            "display_name": "field",
-            "parent_prop": "module",
-            "data_type": "object"
+        {
+          "api_name": "outgoing_call_left_unattended",
+          "display_name": "Outgoing call unattended",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
           },
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "mail_sent_clicked",
-        "display_name": "Outgoing mail clicked",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
         },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "mail_unsubscribed",
-        "display_name": "Email unsubscribed",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
-        },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "scheduled_call_overdue",
-        "display_name": "Scheduled call overdue",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
-        },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
+        {
+          "api_name": "edit",
+          "display_name": "Record update",
+          "signal_condition": false,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
           },
-          {
-            "required": true,
-            "api_name": "execute_on",
-            "display_name": "execute_on",
-            "parent_prop": "module",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "approve",
-        "display_name": "Record approve",
-        "signal_condition": false,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "layout",
+              "display_name": "layout",
+              "parent_prop": "module",
+              "data_type": "object"
+            },
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
         },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "approval_process",
-            "display_name": "approval_process",
-            "parent_prop": "module",
-            "data_type": "array"
+        {
+          "api_name": "receiving_incoming_call",
+          "display_name": "Receiving incoming call",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
           },
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "reject",
-        "display_name": "Record reject",
-        "signal_condition": false,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
         },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "approval_process",
-            "display_name": "approval_process",
-            "parent_prop": "module",
-            "data_type": "array"
+        {
+          "api_name": "convert",
+          "display_name": "Record convert",
+          "signal_condition": false,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
           },
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "mail_sent_notreplied",
-        "display_name": "Outgoing mail sent not replied",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "to_module",
+              "display_name": "to_module",
+              "parent_prop": "from_module",
+              "data_type": "object"
+            },
+            {
+              "required": true,
+              "api_name": "from_module",
+              "display_name": "from_module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
         },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "webform_submit",
-        "display_name": "Webform submit",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
-        },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "webforms",
-            "display_name": "webforms",
-            "parent_prop": "module",
-            "data_type": "array"
+        {
+          "api_name": "mail_sent_opened",
+          "display_name": "Outgoing mail opened",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
           },
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "create",
-        "display_name": "Record create",
-        "signal_condition": false,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
         },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "layout",
-            "display_name": "layout",
-            "parent_prop": "module",
-            "data_type": "object"
+        {
+          "api_name": "date_or_datetime",
+          "display_name": "Date or date time field",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
           },
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "mail_received",
-        "display_name": "Email received",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
+          "signal_props": [
+            {
+              "required": false,
+              "api_name": "field",
+              "display_name": "field",
+              "parent_prop": "module",
+              "data_type": "object"
+            },
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
         },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "mail_resubscribed",
-        "display_name": "Email resubscribed",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
+        {
+          "api_name": "mail_sent_clicked",
+          "display_name": "Outgoing mail clicked",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
         },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "mail_sent_bounced",
-        "display_name": "Outgoing mail bounced",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
+        {
+          "api_name": "mail_unsubscribed",
+          "display_name": "Email unsubscribed",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
         },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      },
-      {
-        "api_name": "mail_sent",
-        "display_name": "Outgoing mail sent",
-        "signal_condition": true,
-        "service_org": {
-          "id": "1000000029503",
-          "name": "Untitled"
+        {
+          "api_name": "scheduled_call_overdue",
+          "display_name": "Scheduled call overdue",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            },
+            {
+              "required": true,
+              "api_name": "execute_on",
+              "display_name": "execute_on",
+              "parent_prop": "module",
+              "data_type": "object"
+            }
+          ]
         },
-        "signal_props": [
-          {
-            "required": true,
-            "api_name": "module",
-            "display_name": "module",
-            "parent_prop": "null",
-            "data_type": "object"
-          }
-        ]
-      }
-    ]
+        {
+          "api_name": "approve",
+          "display_name": "Record approve",
+          "signal_condition": false,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "approval_process",
+              "display_name": "approval_process",
+              "parent_prop": "module",
+              "data_type": "array"
+            },
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
+        },
+        {
+          "api_name": "reject",
+          "display_name": "Record reject",
+          "signal_condition": false,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "approval_process",
+              "display_name": "approval_process",
+              "parent_prop": "module",
+              "data_type": "array"
+            },
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
+        },
+        {
+          "api_name": "mail_sent_notreplied",
+          "display_name": "Outgoing mail sent not replied",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
+        },
+        {
+          "api_name": "webform_submit",
+          "display_name": "Webform submit",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "webforms",
+              "display_name": "webforms",
+              "parent_prop": "module",
+              "data_type": "array"
+            },
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
+        },
+        {
+          "api_name": "create",
+          "display_name": "Record create",
+          "signal_condition": false,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "layout",
+              "display_name": "layout",
+              "parent_prop": "module",
+              "data_type": "object"
+            },
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
+        },
+        {
+          "api_name": "mail_received",
+          "display_name": "Email received",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
+        },
+        {
+          "api_name": "mail_resubscribed",
+          "display_name": "Email resubscribed",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
+        },
+        {
+          "api_name": "mail_sent_bounced",
+          "display_name": "Outgoing mail bounced",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
+        },
+        {
+          "api_name": "mail_sent",
+          "display_name": "Outgoing mail sent",
+          "signal_condition": true,
+          "service_org": {
+            "id": "1000000029503",
+            "name": "Untitled"
+          },
+          "signal_props": [
+            {
+              "required": true,
+              "api_name": "module",
+              "display_name": "module",
+              "parent_prop": "null",
+              "data_type": "object"
+            }
+          ]
+        }
+      ]
+    }
   },
   "CreateStandardTransitionPayload": {
-    "transitions": [
-      {
-        "name": "transition 4",
-        "from_stage": {
-          "id": "1000000075554"
-        },
-        "to_stage": {
-          "id": "1000000076317"
-        },
-        "type": "standard",
-        "details": {
-          "triggers": [
-            {
-              "signal": {
-                "api_name": "create",
-                "service_org": {
-                  "id": "1000000029503"
-                },
-                "signal_props": {
-                  "module": {
-                    "id": "16828000000000039"
-                  },
-                  "layout": {
-                    "id": "16828000000000161"
-                  },
-                  "type": "any"
-                }
-              }
-            },
-            {
-              "signal": {
-                "api_name": "create",
-                "service_org": {
-                  "id": "1000000029503"
-                },
-                "signal_props": {
-                  "module": {
-                    "id": "16828000000000039"
-                  },
-                  "layout": {
-                    "id": "16828000000000161"
-                  },
-                  "type": "any"
-                }
-              }
-            },
-            {
-              "signal": {
-                "api_name": "create",
-                "service_org": {
-                  "id": "1000000029503"
-                },
-                "signal_props": {
-                  "module": {
-                    "id": "16828000000000039"
-                  },
-                  "layout": {
-                    "id": "16828000000000161"
-                  },
-                  "type": "any"
-                }
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "CreateWaitTransitionPayload": {
-    "transitions": [
-      {
-        "name": "1 Days",
-        "description": "sample",
-        "type": "wait",
-        "from_stage": {
-          "id": "668000000135008"
-        },
-        "to_stage": {
-          "id": "668000000135928"
-        },
-        "details": {
-          "execute_on": {
-            "period": 1,
-            "time_unit": "days"
-          }
-        }
-      }
-    ]
-  },
-  "UpdateStandardTransitionPayload": {
-    "transitions": [
-      {
-        "details": {
-          "triggers": [
-            {
-              "id": "1000000078072",
-              "criteria": {
-                "group_operator": "AND",
-                "group": [
-                  {
-                    "comparator": "equal",
-                    "configurable_field": {
-                      "api_name": "Transition_2_Trigger_OutgoingMailSent_Cc"
-                    },
-                    "value": "San Frekaros"
-                  },
-                  {
-                    "comparator": "equal",
-                    "configurable_field": {
-                      "api_name": "Transition_2_Trigger_OutgoingMailSent_Module"
-                    },
-                    "value": "12312"
-                  }
-                ]
-              },
-              "identifiers": [
-                {
-                  "type": "synced_fields",
-                  "id": "1000000077964",
-                  "api_name": "Transition_2_Trigger_RecordUpdate_Full_Name"
-                }
-              ]
-            },
-            {
-              "signal": {
-                "api_name": "webform_submit",
-                "service_org": {
-                  "id": "1000000029503"
-                },
-                "signal_props": {
-                  "module": {
-                    "id": "16828000000000039"
-                  }
-                }
-              }
-            }
-          ],
-          "logs": [
-            {
-              "name": "hello 1",
-              "type": "custom",
-              "value": "1231312"
-            },
-            {
-              "name": "hello 1",
-              "type": "merge",
-              "value": "${journeys(id=1000000087855).configurable_fields(id=5000000175024)}"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "UpdateWaitTransitionPayload": {
-    "transitions": [
-      {
-        "name": "9 days",
-        "description": "Sample Description",
-        "to_stage": {
-          "name": "s5",
-          "id": "668000000135928"
-        },
-        "details": {
-          "period": 1,
-          "time_unit": "9"
-        }
-      }
-    ]
-  },
-  "InvalidDataListError": {
-    "journeys": [
-      {
-        "code": "INVALID_DATA",
-        "message": "The given field is of an invalid data type",
-        "details": {
-          "api_name": "name",
-          "json_path": "$.journeys[0].name"
-        },
-        "status": "error"
-      }
-    ]
-  },
-  "DependentFieldMissingError": {
-    "journeys": [
-      {
-        "code": "DEPENDENT_FIELD_MISSING",
-        "details": {
-          "dependee": {
-            "api_name": "stages",
-            "json_path": "goal.details"
+    "value": {
+      "transitions": [
+        {
+          "name": "transition 4",
+          "from_stage": {
+            "id": "1000000075554"
           },
-          "api_name": "type",
-          "json_path": "$.journeys[0].goal.type"
-        },
-        "message": "The dependent field is missing from the request.",
-        "status": "error"
-      }
-    ]
-  },
-  "LimitExceededExtendedError": {
-    "transitions": [
-      {
-        "code": "LIMIT_EXCEEDED",
-        "details": {
-          "api_name": "type",
-          "limit": "1",
-          "limit_due_to": [
-            {
-              "api_name": "from_stage",
-              "json_path": "from_stage"
-            },
-            {
-              "api_name": "to_stage",
-              "json_path": "to_stage"
-            }
-          ],
-          "json_path": "$.transitions[0].type",
-          "error_message": "Seems, the same type transition is already configured bewtween the stages."
-        },
-        "message": "Seems, the same type transition is already configured bewtween the stages.",
-        "status": "error"
-      }
-    ]
-  },
-  "CreateJourneyPayloadExample": {
-    "journeys": [
-      {
-        "name": "JJ1",
-        "description": "A valid one"
-      }
-    ]
-  },
-  "UpdateJourneyPayload": {
-    "journeys": [
-      {
-        "name": "A Journey",
-        "description": "a brief one",
-        "deadline": {
-          "execute_on": {
-            "period": 5,
-            "time_unit": "days"
+          "to_stage": {
+            "id": "1000000076317"
           },
-          "stage": {
-            "id": "null"
-          },
-          "actions": [
-            {
-              "action": "move_to_stage",
-              "id": "1000000024660",
-              "details": {
-                "stage": {
-                  "id": "1000000024640"
-                }
-              }
-            }
-          ]
-        },
-        "goal": {
-          "type": "reach",
+          "type": "standard",
           "details": {
-            "stages": [
+            "triggers": [
               {
-                "id": "1000000024640"
+                "signal": {
+                  "api_name": "create",
+                  "service_org": {
+                    "id": "1000000029503"
+                  },
+                  "signal_props": {
+                    "module": {
+                      "id": "16828000000000039"
+                    },
+                    "layout": {
+                      "id": "16828000000000161"
+                    },
+                    "type": "any"
+                  }
+                }
+              },
+              {
+                "signal": {
+                  "api_name": "create",
+                  "service_org": {
+                    "id": "1000000029503"
+                  },
+                  "signal_props": {
+                    "module": {
+                      "id": "16828000000000039"
+                    },
+                    "layout": {
+                      "id": "16828000000000161"
+                    },
+                    "type": "any"
+                  }
+                }
+              },
+              {
+                "signal": {
+                  "api_name": "create",
+                  "service_org": {
+                    "id": "1000000029503"
+                  },
+                  "signal_props": {
+                    "module": {
+                      "id": "16828000000000039"
+                    },
+                    "layout": {
+                      "id": "16828000000000161"
+                    },
+                    "type": "any"
+                  }
+                }
               }
             ]
           }
         }
-      }
-    ]
+      ]
+    }
+  },
+  "CreateWaitTransitionPayload": {
+    "value": {
+      "transitions": [
+        {
+          "name": "1 Days",
+          "description": "sample",
+          "type": "wait",
+          "from_stage": {
+            "id": "668000000135008"
+          },
+          "to_stage": {
+            "id": "668000000135928"
+          },
+          "details": {
+            "execute_on": {
+              "period": 1,
+              "time_unit": "days"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "UpdateStandardTransitionPayload": {
+    "value": {
+      "transitions": [
+        {
+          "details": {
+            "triggers": [
+              {
+                "id": "1000000078072",
+                "criteria": {
+                  "group_operator": "AND",
+                  "group": [
+                    {
+                      "comparator": "equal",
+                      "configurable_field": {
+                        "api_name": "Transition_2_Trigger_OutgoingMailSent_Cc"
+                      },
+                      "value": "San Frekaros"
+                    },
+                    {
+                      "comparator": "equal",
+                      "configurable_field": {
+                        "api_name": "Transition_2_Trigger_OutgoingMailSent_Module"
+                      },
+                      "value": "12312"
+                    }
+                  ]
+                },
+                "identifiers": [
+                  {
+                    "type": "synced_fields",
+                    "id": "1000000077964",
+                    "api_name": "Transition_2_Trigger_RecordUpdate_Full_Name"
+                  }
+                ]
+              },
+              {
+                "signal": {
+                  "api_name": "webform_submit",
+                  "service_org": {
+                    "id": "1000000029503"
+                  },
+                  "signal_props": {
+                    "module": {
+                      "id": "16828000000000039"
+                    }
+                  }
+                }
+              }
+            ],
+            "logs": [
+              {
+                "name": "hello 1",
+                "type": "custom",
+                "value": "1231312"
+              },
+              {
+                "name": "hello 1",
+                "type": "merge",
+                "value": "${journeys(id=1000000087855).configurable_fields(id=5000000175024)}"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "UpdateWaitTransitionPayload": {
+    "value": {
+      "transitions": [
+        {
+          "name": "9 days",
+          "description": "Sample Description",
+          "to_stage": {
+            "name": "s5",
+            "id": "668000000135928"
+          },
+          "details": {
+            "period": 1,
+            "time_unit": "9"
+          }
+        }
+      ]
+    }
+  },
+  "InvalidDataListError": {
+    "value": {
+      "journeys": [
+        {
+          "code": "INVALID_DATA",
+          "message": "The given field is of an invalid data type",
+          "details": {
+            "api_name": "name",
+            "json_path": "$.journeys[0].name"
+          },
+          "status": "error"
+        }
+      ]
+    }
+  },
+  "DependentFieldMissingError": {
+    "value": {
+      "journeys": [
+        {
+          "code": "DEPENDENT_FIELD_MISSING",
+          "details": {
+            "dependee": {
+              "api_name": "stages",
+              "json_path": "goal.details"
+            },
+            "api_name": "type",
+            "json_path": "$.journeys[0].goal.type"
+          },
+          "message": "The dependent field is missing from the request.",
+          "status": "error"
+        }
+      ]
+    }
+  },
+  "LimitExceededExtendedError": {
+    "value": {
+      "transitions": [
+        {
+          "code": "LIMIT_EXCEEDED",
+          "details": {
+            "api_name": "type",
+            "limit": "1",
+            "limit_due_to": [
+              {
+                "api_name": "from_stage",
+                "json_path": "from_stage"
+              },
+              {
+                "api_name": "to_stage",
+                "json_path": "to_stage"
+              }
+            ],
+            "json_path": "$.transitions[0].type",
+            "error_message": "Seems, the same type transition is already configured bewtween the stages."
+          },
+          "message": "Seems, the same type transition is already configured bewtween the stages.",
+          "status": "error"
+        }
+      ]
+    }
+  },
+  "CreateJourneyPayloadExample": {
+    "value": {
+      "journeys": [
+        {
+          "name": "JJ1",
+          "description": "A valid one"
+        }
+      ]
+    }
+  },
+  "UpdateJourneyPayload": {
+    "value": {
+      "journeys": [
+        {
+          "name": "A Journey",
+          "description": "a brief one",
+          "deadline": {
+            "execute_on": {
+              "period": 5,
+              "time_unit": "days"
+            },
+            "stage": {
+              "id": "null"
+            },
+            "actions": [
+              {
+                "action": "move_to_stage",
+                "id": "1000000024660",
+                "details": {
+                  "stage": {
+                    "id": "1000000024640"
+                  }
+                }
+              }
+            ]
+          },
+          "goal": {
+            "type": "reach",
+            "details": {
+              "stages": [
+                {
+                  "id": "1000000024640"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
   },
   "CreateStagePayload": {
     "value": {
