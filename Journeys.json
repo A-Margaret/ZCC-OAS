@@ -941,10 +941,10 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/SuccessResponse"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/SuccessResponse"
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/SuccessResponse"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/SuccessResponse"
             }
           }
         }
@@ -956,31 +956,31 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataListError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataListError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DuplicateDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/DuplicateDataError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/LimitExceededError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/MandatoryNotFoundError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/MandatoryNotFoundError"
                 }
               ]
             },
             "examples": {
               "LimitExceededError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/LimitExceededError"
               },
               "MandatoryNotFoundError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/MandatoryNotFoundError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/MandatoryNotFoundError"
               },
               "InvalidDataListError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataListError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataListError"
               },
               "DuplicateDataError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/DuplicateDataError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/DuplicateDataError"
               }
             }
           }
@@ -993,49 +993,49 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataListError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataListError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/MandatoryNotFoundError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/MandatoryNotFoundError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DuplicateDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/DuplicateDataError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/LimitExceededError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/NotAllowedError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/NotAllowedError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DependentFieldMissingError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/DependentFieldMissingError"
                 }
               ]
             },
             "examples": {
               "LimitExceededError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/LimitExceededError"
               },
               "MandatoryNotFoundError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/MandatoryNotFoundError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/MandatoryNotFoundError"
               },
               "InvalidDataError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataError"
               },
               "InvalidDataListError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataListError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataListError"
               },
               "DuplicateDataError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/DuplicateDataError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/DuplicateDataError"
               },
               "NotAllowedError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/NotAllowedError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/NotAllowedError"
               },
               "DependentFieldMissingError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/DependentFieldMissingError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/DependentFieldMissingError"
               }
             }
           }
@@ -1049,7 +1049,7 @@
               "$ref": "#/components/schemas/GetJourneysResponse"
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetJourneysResponse"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetJourneysResponse"
             }
           }
         }
@@ -1062,7 +1062,7 @@
               "$ref": "#/components/schemas/GetJourneyDetailsSchema"
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetJourneyDetailsResponseExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetJourneyDetailsResponseExample"
             }
           }
         }
@@ -1074,25 +1074,25 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/LimitExceededError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/MandatoryNotFoundError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/MandatoryNotFoundError"
                 }
               ]
             },
             "examples": {
               "InvalidDataError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataError"
               },
               "LimitExceededError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/LimitExceededError"
               },
               "MandatoryNotFoundError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/MandatoryNotFoundError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/MandatoryNotFoundError"
               }
             }
           }
@@ -1105,19 +1105,19 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/NotAllowedError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/NotAllowedError"
                 }
               ]
             },
             "examples": {
               "InvalidDataError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataError"
               },
               "NotAllowedError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/NotAllowedError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/NotAllowedError"
               }
             }
           }
@@ -1131,7 +1131,7 @@
               "$ref": "#/components/schemas/ConfigurableFieldsResponse"
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetConfigurableFieldsResponse"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetConfigurableFieldsResponse"
             }
           }
         }
@@ -1143,55 +1143,55 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataListError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataListError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededExtendedError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/LimitExceededExtendedError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/MandatoryNotFoundError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/MandatoryNotFoundError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DuplicateDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/DuplicateDataError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/LimitExceededError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/NotAllowedError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/NotAllowedError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DependentFieldMissingError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/DependentFieldMissingError"
                 }
               ]
             },
             "examples": {
               "LimitExceededError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/LimitExceededError"
               },
               "MandatoryNotFoundError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/MandatoryNotFoundError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/MandatoryNotFoundError"
               },
               "InvalidDataListError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataListError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataListError"
               },
               "LimitExceededExtendedError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededExtendedError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/LimitExceededExtendedError"
               },
               "DuplicateDataError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/DuplicateDataError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/DuplicateDataError"
               },
               "NotAllowedError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/NotAllowedError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/NotAllowedError"
               },
               "InvalidDataError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataError"
               },
               "DependentFieldMissingError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/DependentFieldMissingError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/DependentFieldMissingError"
               }
             }
           }
@@ -1205,7 +1205,7 @@
               "$ref": "#/components/schemas/GetTransitionsResponse"
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetTransitionsResponseExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetTransitionsResponseExample"
             }
           }
         }
@@ -1226,7 +1226,7 @@
               }
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetTransitionDetailsResponseExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetTransitionDetailsResponseExample"
             }
           }
         }
@@ -1247,7 +1247,7 @@
               }
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetStagesResponseExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetStagesResponseExample"
             }
           }
         }
@@ -1268,7 +1268,7 @@
               }
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetStageDetailsResponseExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetStageDetailsResponseExample"
             }
           }
         }
@@ -1280,37 +1280,37 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/MandatoryNotFoundError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/MandatoryNotFoundError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/LimitExceededError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/LimitExceededError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataListError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataListError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DuplicateDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/DuplicateDataError"
                 }
               ]
             },
             "examples": {
               "LimitExceededError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/LimitExceededError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/LimitExceededError"
               },
               "MandatoryNotFoundError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/MandatoryNotFoundError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/MandatoryNotFoundError"
               },
               "InvalidDataError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataError"
               },
               "InvalidDataListError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataListError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataListError"
               },
               "DuplicateDataError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/DuplicateDataError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/DuplicateDataError"
               }
             }
           }
@@ -1335,7 +1335,7 @@
               }
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetVariablesResponseExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetVariablesResponseExample"
             }
           }
         }
@@ -1356,7 +1356,7 @@
               }
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetVariableDetailsResponseExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetVariableDetailsResponseExample"
             }
           }
         }
@@ -1368,25 +1368,25 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/InvalidDataListError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/InvalidDataListError"
                 },
                 {
-                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Errors.json#/components/schemas/DuplicateDataError"
+                  "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Errors.json#/components/schemas/DuplicateDataError"
                 }
               ]
             },
             "examples": {
               "InvalidDataError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataError"
               },
               "DuplicateDataError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/DuplicateDataError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/DuplicateDataError"
               },
               "InvalidDataListError": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/InvalidDataListError"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/InvalidDataListError"
               }
             }
           }
@@ -1411,7 +1411,7 @@
               ]
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetServiceOrgsResponseExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetServiceOrgsResponseExample"
             }
           }
         }
@@ -1424,7 +1424,7 @@
               "$ref": "#/components/schemas/SignalsResponse"
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/GetSignalsResponseExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/GetSignalsResponseExample"
             }
           }
         }
@@ -2062,14 +2062,7 @@
             "description": "Unique identifier of the object or entity."
           },
           "criteria": {
-            "type": "object",
-            "description": "Defines the logical structure of conditions used to evaluate a trigger. Set to null to delete.",
-            "properties": {
-              "criteria": {
-                "$ref": "#/components/schemas/Criteria",
-                "description": "Defines the logical structure of conditions used to evaluate a trigger. Set to null to delete."
-              }
-            }
+              "$ref": "#/components/schemas/Criteria"                       
           },
           "identifiers": {
             "type": "array",
@@ -2145,9 +2138,7 @@
             "description": ""
           },
           "from_stage": {
-            "$ref": "#/components/schemas/StageSchema",
-            "nullable": true,
-            "description": "ID reference to the starting stage of the transition. Nullable except for WaitTransition and WaitUpdateTransition."
+            "$ref": "#/components/schemas/StageSchema"           
           },
           "to_stage": {
             "$ref": "#/components/schemas/StageSchema"
@@ -2899,7 +2890,7 @@
               "$ref": "#/components/schemas/CreateJourneyPayload"
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/CreateJourneyPayloadExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/CreateJourneyPayloadExample"
             }
           }
         }
@@ -2913,7 +2904,7 @@
               "$ref": "#/components/schemas/UpdateJourneyPayload"
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/UpdateJourneyPayload"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/UpdateJourneyPayload"
             }
           }
         }
@@ -2927,10 +2918,10 @@
             },
             "examples": {
               "UpdateStandardTransitionPayload": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/UpdateStandardTransitionPayload"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/UpdateStandardTransitionPayload"
               },
               "UpdateWaitTransitionPayload": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/UpdateWaitTransitionPayload"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/UpdateWaitTransitionPayload"
               }
             }
           }
@@ -2945,10 +2936,10 @@
             },
             "examples": {
               "CreateStandardTransitionPayload": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/CreateStandardTransitionPayload"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/CreateStandardTransitionPayload"
               },
               "CreateWaitTransitionPayload": {
-                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/CreateWaitTransitionPayload"
+                "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/CreateWaitTransitionPayload"
               }
             }
           }
@@ -2973,7 +2964,7 @@
               }
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/CreateStagePayloadExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/CreateStagePayloadExample"
             }
           }
         }
@@ -2997,7 +2988,7 @@
               }
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/UpdateStagePayloadExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/UpdateStagePayloadExample"
             }
           }
         }
@@ -3010,7 +3001,7 @@
               "$ref": "#/components/schemas/CreateVariableSchema"
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/CreateVariablePayloadExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/CreateVariablePayloadExample"
             }
           }
         }
@@ -3023,7 +3014,7 @@
               "$ref": "#/components/schemas/UpdateVariableSchema"
             },
             "example": {
-              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/main/Examples.json#/components/examples/UpdateVariablePayloadExample"
+              "$ref": "https://raw.githubusercontent.com/A-Margaret/ZCC-OAS/refs/heads/CC_OAS/Examples.json#/UpdateVariablePayloadExample"
             }
           }
         }
