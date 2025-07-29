@@ -2463,30 +2463,10 @@
             "nullable": true
           },
           "lookup": {
-            "type": "object",
-            "properties": {
-              "module": {
-                "type": "object",
-                "properties": {
-                  "api_name": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/LookUpSchema"
           },
           "related_to": {
-            "type": "object",
-            "properties": {
-              "module": {
-                "type": "object",
-                "properties": {
-                  "api_name": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/LookUpSchema"
           }
         }
       },
